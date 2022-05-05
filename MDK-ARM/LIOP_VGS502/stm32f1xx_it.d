@@ -1,4 +1,4 @@
-liop_vgs502\stm32f1xx_it.o: ../Core/Src/stm32f1xx_it.c
+liop_vgs502\stm32f1xx_it.o: ..\Core\Src\stm32f1xx_it.c
 liop_vgs502\stm32f1xx_it.o: ../Core/Inc/main.h
 liop_vgs502\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 liop_vgs502\stm32f1xx_it.o: ../Core/Inc/stm32f1xx_hal_conf.h
@@ -28,4 +28,18 @@ liop_vgs502\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_fl
 liop_vgs502\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 liop_vgs502\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 liop_vgs502\stm32f1xx_it.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+liop_vgs502\stm32f1xx_it.o: ../Core/Inc/AllHeader.h
+liop_vgs502\stm32f1xx_it.o: ../Core/Inc/typedef.h
+liop_vgs502\stm32f1xx_it.o: ../Core/Inc/main.h
+liop_vgs502\stm32f1xx_it.o: ../Core/Inc/bootloader.h
+liop_vgs502\stm32f1xx_it.o: ../Core/Inc/AllHeader.h
+liop_vgs502\stm32f1xx_it.o: ../Core/Inc/canopen.h
+liop_vgs502\stm32f1xx_it.o: ../Core/Inc/Canbus.h
+liop_vgs502\stm32f1xx_it.o: ../Core/Inc/Display.h
+liop_vgs502\stm32f1xx_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+liop_vgs502\stm32f1xx_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+liop_vgs502\stm32f1xx_it.o: ../Core/Inc/PicMain.h
+liop_vgs502\stm32f1xx_it.o: ../Core/Inc/dict.h
+liop_vgs502\stm32f1xx_it.o: ../Core/Inc/version.h
+liop_vgs502\stm32f1xx_it.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 liop_vgs502\stm32f1xx_it.o: ../Core/Inc/stm32f1xx_it.h

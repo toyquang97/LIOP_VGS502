@@ -1,2 +1,6 @@
 ARROR DOWN 0X38 0x00
 ARROR UP   0xc8 0x00
+
+timer 2: 500ms
+timer 3: 3ms
+timer 4: 2ms

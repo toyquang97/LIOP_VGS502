@@ -1,6 +1,9 @@
 --cpu Cortex-M3
 "liop_vgs502\startup_stm32f103xb.o"
 "liop_vgs502\display.o"
+"liop_vgs502\version.o"
+"liop_vgs502\canbus.o"
+"liop_vgs502\dict.o"
 "liop_vgs502\main.o"
 "liop_vgs502\stm32f1xx_it.o"
 "liop_vgs502\stm32f1xx_hal_msp.o"
@@ -18,7 +21,7 @@
 "liop_vgs502\stm32f1xx_hal_exti.o"
 "liop_vgs502\stm32f1xx_hal_tim.o"
 "liop_vgs502\stm32f1xx_hal_tim_ex.o"
-"liop_vgs502\system_stm32f1xx.o"
+"liop_vgs502\system_stm32f1xx_1.o"
 --strict --scatter "LIOP_VGS502\LIOP_VGS502.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

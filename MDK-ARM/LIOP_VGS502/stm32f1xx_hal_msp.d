@@ -28,3 +28,17 @@ liop_vgs502\stm32f1xx_hal_msp.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_h
 liop_vgs502\stm32f1xx_hal_msp.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 liop_vgs502\stm32f1xx_hal_msp.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 liop_vgs502\stm32f1xx_hal_msp.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+liop_vgs502\stm32f1xx_hal_msp.o: ../Core/Inc/AllHeader.h
+liop_vgs502\stm32f1xx_hal_msp.o: ../Core/Inc/typedef.h
+liop_vgs502\stm32f1xx_hal_msp.o: ../Core/Inc/main.h
+liop_vgs502\stm32f1xx_hal_msp.o: ../Core/Inc/bootloader.h
+liop_vgs502\stm32f1xx_hal_msp.o: ../Core/Inc/AllHeader.h
+liop_vgs502\stm32f1xx_hal_msp.o: ../Core/Inc/canopen.h
+liop_vgs502\stm32f1xx_hal_msp.o: ../Core/Inc/Canbus.h
+liop_vgs502\stm32f1xx_hal_msp.o: ../Core/Inc/Display.h
+liop_vgs502\stm32f1xx_hal_msp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+liop_vgs502\stm32f1xx_hal_msp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+liop_vgs502\stm32f1xx_hal_msp.o: ../Core/Inc/PicMain.h
+liop_vgs502\stm32f1xx_hal_msp.o: ../Core/Inc/dict.h
+liop_vgs502\stm32f1xx_hal_msp.o: ../Core/Inc/version.h
+liop_vgs502\stm32f1xx_hal_msp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
