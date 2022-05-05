@@ -127,10 +127,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		//if (rc)
-    //{
+		if (rc)
+    {
       read_rx();
-    //}
+    }
 
   }
   /* USER CODE END 3 */

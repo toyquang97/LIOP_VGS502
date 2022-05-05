@@ -31,17 +31,17 @@ Note: source file '../Core/Src/system_stm32f1xx.c' - object file renamed from 'L
 compiling CanBus.c...
 ../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
   const struct _dict
-..\Core\Src\CanBus.c(37): warning:  #223-D: function "memcpy" declared implicitly
-  				memcpy((void *)&rx[ri][2], Can1RxData, Can1RxHeader.DLC);
-..\Core\Src\CanBus.c(97): warning:  #223-D: function "memcpy" declared implicitly
+..\Core\Src\CanBus.c(139): warning:  #223-D: function "memcpy" declared implicitly
+  			memcpy((void *)&rx[ri][2], Can1RxData, Can1RxHeader.DLC);
+..\Core\Src\CanBus.c(202): warning:  #223-D: function "memcpy" declared implicitly
   		memcpy(CanTxData, (void *)(tx[to] + 2), 8);
-..\Core\Src\CanBus.c(403): warning:  #177-D: variable "cte"  was declared but never referenced
+..\Core\Src\CanBus.c(356): warning:  #177-D: variable "cte"  was declared but never referenced
   	static BYTE cte = 0;
-..\Core\Src\CanBus.c(797): warning:  #223-D: function "memcpy" declared implicitly
+..\Core\Src\CanBus.c(749): warning:  #223-D: function "memcpy" declared implicitly
   	memcpy(CanTxData_t, (void *)(tx[to] + 2), 8);
 ..\Core\Src\CanBus.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=13208 RO-data=860 RW-data=176 ZI-data=2680  
+Program Size: Code=13120 RO-data=860 RW-data=160 ZI-data=2680  
 FromELF: creating hex file...
 "LIOP_VGS502\LIOP_VGS502.axf" - 0 Error(s), 5 Warning(s).
 

@@ -83,7 +83,7 @@ I (../Core/Inc/PicMain.h)(0x62732FFD)
 I (../Core/Inc/dict.h)(0x62732FFD)
 I (../Core/Inc/version.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x60253188)
-F (..\Core\Src\CanBus.c)(0x62738A27)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\canbus.o --omf_browse liop_vgs502\canbus.crf --depend liop_vgs502\canbus.d)
+F (..\Core\Src\CanBus.c)(0x6273A0AB)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\canbus.o --omf_browse liop_vgs502\canbus.crf --depend liop_vgs502\canbus.d)
 I (../Core/Inc/CanBus.h)(0x62732FFD)
 I (../Core/Inc/AllHeader.h)(0x62732FFD)
 I (../Core/Inc/typedef.h)(0x62708422)
@@ -165,7 +165,7 @@ I (../Core/Inc/PicMain.h)(0x62732FFD)
 I (../Core/Inc/dict.h)(0x62732FFD)
 I (../Core/Inc/version.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x60253188)
-F (../Core/Src/main.c)(0x62736B3A)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\main.o --omf_browse liop_vgs502\main.crf --depend liop_vgs502\main.d)
+F (../Core/Src/main.c)(0x62738CAE)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\main.o --omf_browse liop_vgs502\main.crf --depend liop_vgs502\main.d)
 I (../Core/Inc/main.h)(0x62732FFD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x61F6093A)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x62732A77)
