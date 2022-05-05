@@ -4,7 +4,6 @@
 
 #include "CanBus.h"
 
-
 /************************************************************************************************/
 /* High priority interrupt routine																*/
 /************************************************************************************************/
@@ -12,12 +11,11 @@ extern CAN_HandleTypeDef hcan;
 extern uint8_t Callstatus[8];
 extern uint8_t Callstatus_old[8];
 extern uint8_t Arrow_state;
-
-
+uint8_t Can1RxData[8] = {0};
+CAN_RxHeaderTypeDef Can1RxHeader;
 void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-	uint8_t Can1RxData[8] = {0};
-	CAN_RxHeaderTypeDef Can1RxHeader;
+	
 	if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO1, &Can1RxHeader, Can1RxData) != HAL_OK)
 	{
 		/* Reception Error */
@@ -64,6 +62,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	}
 	else
 	{
+
 		if (((CanRxHeader.StdId >> 3) & 0xF0) == 0)
 		{
 			hsetime = HSETIME;
@@ -83,20 +82,20 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 uint32_t pTxMailbox;
 
 uint16_t mallbox[3] = {0};
-uint16_t txmallbox =0;
-uint16_t txmallbox_request =0;
+uint16_t txmallbox = 0;
+uint16_t txmallbox_request = 0;
 void CAN_transmit_Interrupt(void)
 {
-	if (tc)											// more messages to send
+	if (tc) // more messages to send
 	{
 		CAN_TxHeaderTypeDef CanTxHeader;
 		uint8_t CanTxData[8] = {0};
-		CanTxHeader.StdId = ((tx[to][0] & 0xF0)<<3) + tx[to][1] ;
-		CanTxHeader.DLC   = tx[to][0] & 0x0F;		//read data lenght code
-		CanTxHeader.IDE   = CAN_ID_STD;
-		CanTxHeader.RTR	= CAN_RTR_DATA;
-		memcpy(CanTxData,(void *)(tx[to]+2),8);
-		if(HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, CanTxData, &pTxMailbox) == HAL_OK)
+		CanTxHeader.StdId = ((tx[to][0] & 0xF0) << 3) + tx[to][1];
+		CanTxHeader.DLC = tx[to][0] & 0x0F; // read data lenght code
+		CanTxHeader.IDE = CAN_ID_STD;
+		CanTxHeader.RTR = CAN_RTR_DATA;
+		memcpy(CanTxData, (void *)(tx[to] + 2), 8);
+		if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader, CanTxData, &pTxMailbox) == HAL_OK)
 		{
 			txmallbox++;
 		}
@@ -104,8 +103,8 @@ void CAN_transmit_Interrupt(void)
 		{
 			Error_Handler();
 		}
-		tc--;														//decrement TX message counter
-		if (to == (TX_SIZE-1))					//increment TX message read pointer
+		tc--;					 // decrement TX message counter
+		if (to == (TX_SIZE - 1)) // increment TX message read pointer
 			to = 0;
 		else
 			to++;
@@ -128,7 +127,6 @@ void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan)
 	CAN_transmit_Interrupt();
 }
 
-
 void Init_Can(void)
 {
 	uint8_t i, j;
@@ -149,30 +147,36 @@ void Init_Can(void)
 		for (j = 0; j < 10; j++)
 			tx[i][j] = 0;
 	}
+
+
 	CAN_FilterTypeDef sFilterConfig;
+	
+
+
+	//CAN_FilterTypeDef sFilterConfig;
 	sFilterConfig.FilterBank = 0;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
-	sFilterConfig.FilterIdHigh = ((HEARTBEAT << 3) + HSE_ID) << 5;
+	sFilterConfig.FilterIdHigh = LSS << 8 ;
 	sFilterConfig.FilterIdLow = 0x00;
-	sFilterConfig.FilterMaskIdHigh = ((HEARTBEAT << 3) + HSE_ID) << 5;
+	sFilterConfig.FilterMaskIdHigh = LSS << 8;
 	sFilterConfig.FilterMaskIdLow = 0x0000;
-	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
-	sFilterConfig.FilterActivation = ENABLE;
+	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO1;
+	sFilterConfig.FilterActivation = CAN_FILTER_ENABLE;
 	sFilterConfig.SlaveStartFilterBank = 14;
-
 	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
 	{
 		/* Filter configuration Error */
 		Error_Handler();
 	}
+
+	
 	sFilterConfig.FilterBank = 1;
 	sFilterConfig.FilterIdHigh = PDO_OUT << 8;
 	sFilterConfig.FilterIdLow = 0x00;
 	sFilterConfig.FilterMaskIdHigh = 0xF000;
 	sFilterConfig.FilterMaskIdLow = 0x0000;
 	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO1;
-
 	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
 	{
 		/* Filter configuration Error */
@@ -222,11 +226,18 @@ void Init_Can(void)
 		/* Filter configuration Error */
 		Error_Handler();
 	}
-	sFilterConfig.FilterBank = 6;
-	sFilterConfig.FilterIdHigh = (FC_3 << 3 | POS_ID) << 5;
+
+	sFilterConfig.FilterBank = 10;
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
+	sFilterConfig.FilterIdHigh = ((HEARTBEAT << 3) + HSE_ID) << 5;
 	sFilterConfig.FilterIdLow = 0x00;
-	sFilterConfig.FilterMaskIdHigh = 0xF000;
+	sFilterConfig.FilterMaskIdHigh = ((HEARTBEAT << 3) + HSE_ID) << 5;
 	sFilterConfig.FilterMaskIdLow = 0x0000;
+	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
+	sFilterConfig.FilterActivation = CAN_FILTER_ENABLE;
+	sFilterConfig.SlaveStartFilterBank = 14;
+
 
 	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
 	{
@@ -234,18 +245,7 @@ void Init_Can(void)
 		Error_Handler();
 	}
 
-	sFilterConfig.FilterBank = 7;
-	sFilterConfig.FilterIdHigh = LSS << 8;
-	sFilterConfig.FilterIdLow = 0x00;
-	sFilterConfig.FilterMaskIdHigh = 0xF000;
-	sFilterConfig.FilterMaskIdLow = 0x0000;
-
-	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
-	{
-		/* Filter configuration Error */
-		Error_Handler();
-	}
-
+	
 	if (HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_RX_FIFO1_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK)
 	{
 	}
@@ -253,106 +253,117 @@ void Init_Can(void)
 }
 
 // abort SDO transfer
-void abort_sdo (uint32_t errorcode){
-	while (tc == TX_SIZE);								/* wait for TX buffer free				*/
+void abort_sdo(uint32_t errorcode)
+{
+	while (tc == TX_SIZE)
+		; /* wait for TX buffer free				*/
 
-	tx[ti][0] = TSDO + 8; 								/* write function code + data length	*/
-	tx[ti][1] = node_id;								/* write node id of UEA					*/
-	tx[ti][2] = ABORT_REQ;								/* write command specifier				*/
-	tx[ti][3] = sdo_index;								/* Index of last RX SDO					*/
+	tx[ti][0] = TSDO + 8;  /* write function code + data length	*/
+	tx[ti][1] = node_id;   /* write node id of UEA					*/
+	tx[ti][2] = ABORT_REQ; /* write command specifier				*/
+	tx[ti][3] = sdo_index; /* Index of last RX SDO					*/
 	tx[ti][4] = sdo_index >> 8;
-	tx[ti][5] = sdo_subindex;							/* Sub-index last RX SDO				*/
-	tx[ti][6] = errorcode;								/* errorcode (reason for abort request	*/
-	tx[ti][7] = errorcode >>  8;
+	tx[ti][5] = sdo_subindex; /* Sub-index last RX SDO				*/
+	tx[ti][6] = errorcode;	  /* errorcode (reason for abort request	*/
+	tx[ti][7] = errorcode >> 8;
 	tx[ti][8] = errorcode >> 16;
 	tx[ti][9] = errorcode >> 24;
-	can_transmit ();									/* transmit message						*/
+	can_transmit(); /* transmit message						*/
 }
 
 // SDO response
-void sdo_response (uint8_t command, uint16_t index, uint8_t subindex, uint32_t value){
-	while (tc == TX_SIZE); 								/* wait for TX buffer free				*/
+void sdo_response(uint8_t command, uint16_t index, uint8_t subindex, uint32_t value)
+{
+	while (tc == TX_SIZE)
+		; /* wait for TX buffer free				*/
 
-	tx[ti][0] = TSDO + 8; 								/* write function code + data length	*/
-	tx[ti][1] = node_id;								/* write node id of UEA					*/
-	tx[ti][2] = command;								/* write command specifier				*/
-	tx[ti][3] = index;									/* write index 							*/
+	tx[ti][0] = TSDO + 8; /* write function code + data length	*/
+	tx[ti][1] = node_id;  /* write node id of UEA					*/
+	tx[ti][2] = command;  /* write command specifier				*/
+	tx[ti][3] = index;	  /* write index 							*/
 	tx[ti][4] = index >> 8;
-	tx[ti][5] = subindex;								/* write sub-index						*/
-	tx[ti][6] = value;									/* write value							*/
-	tx[ti][7] = value >>  8;
+	tx[ti][5] = subindex; /* write sub-index						*/
+	tx[ti][6] = value;	  /* write value							*/
+	tx[ti][7] = value >> 8;
 	tx[ti][8] = value >> 16;
 	tx[ti][9] = value >> 24;
-	can_transmit ();									/* transmit message						*/
+	can_transmit(); /* transmit message						*/
 }
 
-//SDO segment
-void sdo_segment (uint8_t command, uint8_t size, uint8_t *value){
+// SDO segment
+void sdo_segment(uint8_t command, uint8_t size, uint8_t *value)
+{
 	uint8_t i;
-	while (tc == TX_SIZE); 								/* wait for TX buffer free				*/
-	tx[ti][0] = TSDO + 8; 								/* write function code + data length	*/
-	tx[ti][1] = node_id;								/* write node id of UEA					*/
-	tx[ti][2] = command;								/* write command specifier				*/
+	while (tc == TX_SIZE)
+		;				  /* wait for TX buffer free				*/
+	tx[ti][0] = TSDO + 8; /* write function code + data length	*/
+	tx[ti][1] = node_id;  /* write node id of UEA					*/
+	tx[ti][2] = command;  /* write command specifier				*/
 	for (i = 0; i < size; i++)
-		tx[ti][3 + i] = *value++;						/* write value 							*/
+		tx[ti][3 + i] = *value++; /* write value 							*/
 	for (i = size; i < 7; i++)
-		tx[ti][3 + i] = 0;								/* set unused data bytes to 0			*/
-	can_transmit ();									/* transmit message						*/
+		tx[ti][3 + i] = 0; /* set unused data bytes to 0			*/
+	can_transmit();		   /* transmit message						*/
 }
 
-//LSS response
-void lss_response (uint8_t command, uint8_t value){
+// LSS response
+void lss_response(uint8_t command, uint8_t value)
+{
 	uint8_t i;
-	while (tc == TX_SIZE); 								/* wait for TX buffer free				*/
-	tx[ti][0] = LSS + 8; 								/* write function code + data length	*/
-	tx[ti][1] = LSS_RES_ID;								/* write node id part of identifier		*/
-	tx[ti][2] = command;								/* write command specifier				*/
-	tx[ti][3] = value;									/* write index 							*/
+	while (tc == TX_SIZE)
+		;					/* wait for TX buffer free				*/
+	tx[ti][0] = LSS + 8;	/* write function code + data length	*/
+	tx[ti][1] = LSS_RES_ID; /* write node id part of identifier		*/
+	tx[ti][2] = command;	/* write command specifier				*/
+	tx[ti][3] = value;		/* write index 							*/
 	for (i = 4; i <= 9; i++)
-		tx[ti][i] = 0;									/* set unused data bytes to 0			*/
-	can_transmit ();									/* transmit message						*/
+		tx[ti][i] = 0; /* set unused data bytes to 0			*/
+	can_transmit();	   /* transmit message						*/
 }
 
 // transmit emergency message
-void transmit_error (void){
+void transmit_error(void)
+{
 	uint8_t i;
-	while (tc == TX_SIZE); 								/* wait for TX buffer free				*/
-	tx[ti][0] = EMERGENCY + 8;							/* write function code + data length	*/
-	tx[ti][1] = node_id;								/* write node id of UEA					*/
-	tx[ti][2] = errorcode;								/* write error code						*/
-	tx[ti][3] = errorcode >> 8;							/* write error code						*/
-	tx[ti][4] = errorregister;							/* write error register					*/
+	while (tc == TX_SIZE)
+		;						/* wait for TX buffer free				*/
+	tx[ti][0] = EMERGENCY + 8;	/* write function code + data length	*/
+	tx[ti][1] = node_id;		/* write node id of UEA					*/
+	tx[ti][2] = errorcode;		/* write error code						*/
+	tx[ti][3] = errorcode >> 8; /* write error code						*/
+	tx[ti][4] = errorregister;	/* write error register					*/
 	for (i = 5; i <= 9; i++)
-		tx[ti][i] = 0;									/* manufacture specific part not used	*/
-	can_transmit ();									/* transmit message						*/
+		tx[ti][i] = 0; /* manufacture specific part not used	*/
+	can_transmit();	   /* transmit message						*/
 }
 
-//ransmit special inputs and calls
- void transmit_in (uint8_t *input){
+// ransmit special inputs and calls
+void transmit_in(uint8_t *input)
+{
 	uint8_t i;
-	while (tc == TX_SIZE); 								/* wait for TX buffer free				*/
-	tx[ti][0] = PDO_IN + MAX_IO_TYPE; 					/* write function code + data length	*/
-	tx[ti][1] = node_id;								/* write node id of UEA					*/
+	while (tc == TX_SIZE)
+		;							  /* wait for TX buffer free				*/
+	tx[ti][0] = PDO_IN + MAX_IO_TYPE; /* write function code + data length	*/
+	tx[ti][1] = node_id;			  /* write node id of UEA					*/
 	for (i = 0; i < MAX_IO_TYPE; i++)
-		tx[ti][2 + i] = *input++;						/* write input function					*/
-	can_transmit ();									/* transmit message						*/
-
+		tx[ti][2 + i] = *input++; /* write input function					*/
+	can_transmit();				  /* transmit message						*/
 }
 
+void CAN_transmit_heartbeat(void)
+{
+	while (tc == TX_SIZE)
+		; /* wait for TX buffer free				*/
 
- void CAN_transmit_heartbeat(void)
- {
- 	while (tc == TX_SIZE);								/* wait for TX buffer free				*/
-
- 	tx[ti][0] = HEARTBEAT + 1; 								/* write function code + data length	*/
- 	tx[ti][1] = node_id;								/* write node id of UEA					*/
- 	tx[ti][2] = nmtstate;								/* write command specifier				*/
- 	can_transmit ();									/* transmit message						*/
- // 	TXB1SIDH 			= HEARTBEAT + (node_id >> 3);	// write ID bit 10 ... 3 for HEARTBEAT
- //	TXB1SIDL 			= node_id << 5;		// write ID bit  2 ... 0 for HEARTBEAT
- //	TXB1DLC	 			= 1;							// write data lenght code
- //	TXB1D0   			= nmtstate;				// write data uint8_t for HEARTBEAT
- }
+	tx[ti][0] = HEARTBEAT + 1; /* write function code + data length	*/
+	tx[ti][1] = node_id;	   /* write node id of UEA					*/
+	tx[ti][2] = nmtstate;	   /* write command specifier				*/
+	can_transmit();			   /* transmit message						*/
+							   // 	TXB1SIDH 			= HEARTBEAT + (node_id >> 3);	// write ID bit 10 ... 3 for HEARTBEAT
+							   //	TXB1SIDL 			= node_id << 5;		// write ID bit  2 ... 0 for HEARTBEAT
+							   //	TXB1DLC	 			= 1;							// write data lenght code
+							   //	TXB1D0   			= nmtstate;				// write data uint8_t for HEARTBEAT
+}
 
 void read_rx(void)
 {
@@ -369,6 +380,63 @@ void read_rx(void)
 
 	switch (rx[ro][0]) /* message function code				*/
 	{
+	case (LSS): /* LSS message for initialization		*/
+		if (LSS_REQ_ID == rx[ro][1])
+		{
+			type = rx[ro][2]; /* read LSS service type				*/
+			switch (type)
+			{
+			case (SET_NODE_ID):
+				setid_mode = 2;
+				setid_mode_old = 0;
+				node_id = rx[ro][3];
+				id_buff[BUF_ARROW] = rx[ro][6];
+				id_buff[BUF_TEN] = rx[ro][4];
+				id_buff[BUF_UNIT] = rx[ro][5];
+				if (hardware_version == G_741_LCD)
+					id_buff[BUF_ARROW] = NO_ARROW;
+				else if (id_buff[BUF_ARROW] <= 0x20)
+					id_buff[BUF_ARROW] = NO_ARROW;
+				if (id_buff[BUF_TEN] <= 0x20)
+					id_buff[BUF_TEN] = NO_FLOOR + '0';
+				if (id_buff[BUF_UNIT] <= 0x20)
+					id_buff[BUF_UNIT] = NO_FLOOR + '0';
+				break;
+
+			case (DISP_NODE_ID):
+				setid_mode = 3;
+				disp_id = 0;
+				id_buff[BUF_ARROW] = NO_ARROW;
+				if (node_id >= ESE_ID && (node_id < ESE_ID + MAX_ESE))
+				{
+					id_buff[BUF_TEN] = ((node_id - ESE_ID + 1) / 10) + '0';
+					id_buff[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + '0';
+				}
+				else
+				{
+					id_buff[BUF_TEN] = A_BETR + '0';
+					id_buff[BUF_UNIT] = A_BETR + '0';
+				}
+				break;
+
+			case (SET_NODE_ID2):
+				setid_mode = 4;
+				setid_mode_old = 0;
+				break;
+
+			case (ABORT_NODE_ID):
+				merker = ID_MERKER;
+				if (setid_mode == 2)
+				{
+					nmtstate = PRE_OP;
+					node_id = preset_node_id;
+				}
+				setid_mode = 0;
+				setid_mode_old = 0;
+				break;
+			}
+		}
+		break;
 	case (PDO_OUT):			  /* receive PDO virtual output			*/
 		index = rx[ro][2];	  /* read function code					*/
 		subindex = rx[ro][3]; // FLOOR
@@ -602,7 +670,7 @@ void read_rx(void)
 				CANCON = CAN_MODE_CONFIG; /* set CAN configuration mode			*/
 				Reset();				  /* force a software reset				*/
 #else
-				HAL_NVIC_SystemReset();
+				// HAL_NVIC_SystemReset();
 #endif
 				break;
 
@@ -632,64 +700,6 @@ void read_rx(void)
 			case (RESET_COMM):	/* reset node							*/
 			default:
 				break; /* do nothing (not implemented)			*/
-			}
-		}
-		break;
-
-	case (LSS): /* LSS message for initialization		*/
-		if (LSS_REQ_ID == rx[ro][1])
-		{
-			type = rx[ro][2]; /* read LSS service type				*/
-			switch (type)
-			{
-			case (SET_NODE_ID):
-				setid_mode = 2;
-				setid_mode_old = 0;
-				node_id = rx[ro][3];
-				id_buff[BUF_ARROW] = rx[ro][6];
-				id_buff[BUF_TEN] = rx[ro][4];
-				id_buff[BUF_UNIT] = rx[ro][5];
-				if (hardware_version == G_741_LCD)
-					id_buff[BUF_ARROW] = NO_ARROW;
-				else if (id_buff[BUF_ARROW] <= 0x20)
-					id_buff[BUF_ARROW] = NO_ARROW;
-				if (id_buff[BUF_TEN] <= 0x20)
-					id_buff[BUF_TEN] = NO_FLOOR + '0';
-				if (id_buff[BUF_UNIT] <= 0x20)
-					id_buff[BUF_UNIT] = NO_FLOOR + '0';
-				break;
-
-			case (DISP_NODE_ID):
-				setid_mode = 3;
-				disp_id = 0;
-				id_buff[BUF_ARROW] = NO_ARROW;
-				if (node_id >= ESE_ID && (node_id < ESE_ID + MAX_ESE))
-				{
-					id_buff[BUF_TEN] = ((node_id - ESE_ID + 1) / 10) + '0';
-					id_buff[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + '0';
-				}
-				else
-				{
-					id_buff[BUF_TEN] = A_BETR + '0';
-					id_buff[BUF_UNIT] = A_BETR + '0';
-				}
-				break;
-
-			case (SET_NODE_ID2):
-				setid_mode = 4;
-				setid_mode_old = 0;
-				break;
-
-			case (ABORT_NODE_ID):
-				merker = ID_MERKER;
-				if (setid_mode == 2)
-				{
-					nmtstate = PRE_OP;
-					node_id = preset_node_id;
-				}
-				setid_mode = 0;
-				setid_mode_old = 0;
-				break;
 			}
 		}
 		break;
@@ -737,35 +747,34 @@ void read_rx(void)
 	}
 }
 
-
-uint32_t timeeeee ;
-void can_transmit (void){
+uint32_t timeeeee;
+void can_transmit(void)
+{
 	txmallbox_request++;
-	if ((!hse_heartbeat) || (merker == BS_MERKER))		// û��MCU����������busoff�������κ���Ϣ
+	if ((!hse_heartbeat) || (merker == BS_MERKER)) // û��MCU����������busoff�������κ���Ϣ
 		return;
 
-	if (ti == (TX_SIZE-1))								/* increment TX message write pointer	*/
+	if (ti == (TX_SIZE - 1)) /* increment TX message write pointer	*/
 		ti = 0;
 	else
 		ti++;
-	if (HAL_CAN_DeactivateNotification(&hcan,CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK)
+	if (HAL_CAN_DeactivateNotification(&hcan, CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK)
 	{
-
 	}
 	CAN_TxHeaderTypeDef CanTxHeader_t;
 	uint8_t CanTxData_t[8] = {0};
 	uint32_t Txmallbox;
-	//INTCONbits.GIEH	= 0;								/* global interrupts disable			*/
-	CanTxHeader_t.StdId = ((tx[to][0] & 0xF0)<<3) + tx[to][1];
-	CanTxHeader_t.DLC   = tx[to][0] & 0x0F;		//read data lenght code
-	CanTxHeader_t.IDE   = CAN_ID_STD;
-	CanTxHeader_t.RTR	= CAN_RTR_DATA;
+	// INTCONbits.GIEH	= 0;								/* global interrupts disable			*/
+	CanTxHeader_t.StdId = ((tx[to][0] & 0xF0) << 3) + tx[to][1];
+	CanTxHeader_t.DLC = tx[to][0] & 0x0F; // read data lenght code
+	CanTxHeader_t.IDE = CAN_ID_STD;
+	CanTxHeader_t.RTR = CAN_RTR_DATA;
 
-	memcpy(CanTxData_t,(void *)(tx[to]+2),8);
-	if(HAL_CAN_AddTxMessage(&hcan, &CanTxHeader_t, CanTxData_t, &Txmallbox) == HAL_OK)
+	memcpy(CanTxData_t, (void *)(tx[to] + 2), 8);
+	if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader_t, CanTxData_t, &Txmallbox) == HAL_OK)
 	{
 		txmallbox++;
-		if (to == (TX_SIZE-1))							/* increment TX message read pointer	*/
+		if (to == (TX_SIZE - 1)) /* increment TX message read pointer	*/
 			to = 0;
 		else
 			to++;
@@ -774,14 +783,10 @@ void can_transmit (void){
 	{
 		tc++;
 	}
-	if (HAL_CAN_ActivateNotification(&hcan,CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK)
+	if (HAL_CAN_ActivateNotification(&hcan, CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK)
 	{
-
 	}
-
-
 }
-
 
 BYTE check_for_call(BYTE value)
 {
@@ -866,7 +871,7 @@ void set_output(BYTE *virt)
 	{
 		if ((virt[IO_LIFT] == disp_lift) && (!setid_mode)) /* display message is for this lift 	*/
 		{
-			//PIE1bits.TMR1IE = 0;			/* disable Timer 2 interrupt			*/
+			// PIE1bits.TMR1IE = 0;			/* disable Timer 2 interrupt			*/
 			buf[BUF_TEN] = virt[IO_DOOR];	/* 1. digit; not CANopen compatible		*/
 			buf[BUF_UNIT] = virt[IO_STATE]; /* 2. digit; not CANopen compatible		*/
 			for (i = 0; i < STANDER_FLOOR_NUM + THREE_FLOOR_NUM + 10; i++)
@@ -904,12 +909,12 @@ void set_output(BYTE *virt)
 				display[BUF_TEN] = A_BETR;
 				display[BUF_UNIT] = A_BETR;
 			}
-			//PIE1bits.TMR1IE = 1; /* enable Timer 2 interrupt				*/
+			// PIE1bits.TMR1IE = 1; /* enable Timer 2 interrupt				*/
 		}
 	}
 	else if ((iotype == DIRECTION_IND) && (virt[IO_LIFT] == disp_lift) && (!setid_mode))
 	{
-		//PIE1bits.TMR1IE = 0;
+		// PIE1bits.TMR1IE = 0;
 		if (!virt[IO_STATE] & 0x01)
 			display[BUF_ARROW] = 0;
 		else
@@ -922,7 +927,7 @@ void set_output(BYTE *virt)
 			scroll = (virt[IO_SUB_FUNC] >> 4) & 0x03;
 		display[BUF_ARROW] += NO_ARROW; /* set to ASCII 62 - 64 				*/
 		flashcontent = display[BUF_ARROW];
-		//PIE1bits.TMR1IE = 1;
+		// PIE1bits.TMR1IE = 1;
 	}
 	else if ((iotype == HALL_LANTERN) || (iotype == LIGHT_FUNC))
 	{
@@ -1154,7 +1159,6 @@ void set_output(BYTE *virt)
 	}
 }
 
-
 void set_io_config(void)
 {
 	BYTE i;
@@ -1173,7 +1177,7 @@ void set_io_config(void)
 			case (DOOR_STOP):
 				bit_set(outpush, i);
 				break;
-			default : 
+			default:
 				bit_reset(outpush, i);
 				break;
 			}

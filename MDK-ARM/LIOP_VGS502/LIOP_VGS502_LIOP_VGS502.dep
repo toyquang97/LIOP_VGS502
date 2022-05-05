@@ -2,10 +2,10 @@ Dependencies for Project 'LIOP_VGS502', Target 'LIOP_VGS502': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
 F (startup_stm32f103xb.s)(0x62732A7B)(--cpu Cortex-M3 -g --apcs=interwork -I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"--pd "__UVISION_VERSION SETA 536" --pd "_RTE_ SETA 1" --pd "STM32F10X_MD SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f103xb.lst --xref -o liop_vgs502\startup_stm32f103xb.o --depend liop_vgs502\startup_stm32f103xb.d)
 F (..\Core\Src\Display.c)(0x62708422)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\display.o --omf_browse liop_vgs502\display.crf --depend liop_vgs502\display.d)
-I (../Core/Inc/Display.h)(0x62708422)
-I (../Core/Inc/AllHeader.h)(0x62721C69)
+I (../Core/Inc/Display.h)(0x62732FFD)
+I (../Core/Inc/AllHeader.h)(0x62732FFD)
 I (../Core/Inc/typedef.h)(0x62708422)
-I (../Core/Inc/main.h)(0x62721D07)
+I (../Core/Inc/main.h)(0x62732FFD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x61F6093A)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x62732A77)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x61F6093A)
@@ -33,20 +33,20 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x61F6093A)
-I (../Core/Inc/bootloader.h)(0x62721CDD)
-I (../Core/Inc/canopen.h)(0x620AFCA0)
-I (../Core/Inc/Canbus.h)(0x62722652)
+I (../Core/Inc/bootloader.h)(0x62732FFD)
+I (../Core/Inc/canopen.h)(0x62732FFD)
+I (../Core/Inc/Canbus.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
-I (../Core/Inc/PicMain.h)(0x62721D14)
-I (../Core/Inc/dict.h)(0x6271F609)
-I (../Core/Inc/version.h)(0x6271E667)
+I (../Core/Inc/PicMain.h)(0x62732FFD)
+I (../Core/Inc/dict.h)(0x62732FFD)
+I (../Core/Inc/version.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x60253188)
-F (..\Core\Src\version.c)(0x5EEEC1EC)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\version.o --omf_browse liop_vgs502\version.crf --depend liop_vgs502\version.d)
+F (..\Core\Src\version.c)(0x62732FFD)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\version.o --omf_browse liop_vgs502\version.crf --depend liop_vgs502\version.d)
 I (../Core/Inc/typedef.h)(0x62708422)
-I (../Core/Inc/bootloader.h)(0x62721CDD)
-I (../Core/Inc/AllHeader.h)(0x62721C69)
-I (../Core/Inc/main.h)(0x62721D07)
+I (../Core/Inc/bootloader.h)(0x62732FFD)
+I (../Core/Inc/AllHeader.h)(0x62732FFD)
+I (../Core/Inc/main.h)(0x62732FFD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x61F6093A)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x62732A77)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x61F6093A)
@@ -74,20 +74,20 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x61F6093A)
-I (../Core/Inc/canopen.h)(0x620AFCA0)
-I (../Core/Inc/Canbus.h)(0x62722652)
-I (../Core/Inc/Display.h)(0x62708422)
+I (../Core/Inc/canopen.h)(0x62732FFD)
+I (../Core/Inc/Canbus.h)(0x62732FFD)
+I (../Core/Inc/Display.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
-I (../Core/Inc/PicMain.h)(0x62721D14)
-I (../Core/Inc/dict.h)(0x6271F609)
-I (../Core/Inc/version.h)(0x6271E667)
+I (../Core/Inc/PicMain.h)(0x62732FFD)
+I (../Core/Inc/dict.h)(0x62732FFD)
+I (../Core/Inc/version.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x60253188)
-F (..\Core\Src\CanBus.c)(0x62722E9E)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\canbus.o --omf_browse liop_vgs502\canbus.crf --depend liop_vgs502\canbus.d)
-I (../Core/Inc/CanBus.h)(0x62722652)
-I (../Core/Inc/AllHeader.h)(0x62721C69)
+F (..\Core\Src\CanBus.c)(0x62738A27)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\canbus.o --omf_browse liop_vgs502\canbus.crf --depend liop_vgs502\canbus.d)
+I (../Core/Inc/CanBus.h)(0x62732FFD)
+I (../Core/Inc/AllHeader.h)(0x62732FFD)
 I (../Core/Inc/typedef.h)(0x62708422)
-I (../Core/Inc/main.h)(0x62721D07)
+I (../Core/Inc/main.h)(0x62732FFD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x61F6093A)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x62732A77)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x61F6093A)
@@ -115,19 +115,19 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x61F6093A)
-I (../Core/Inc/bootloader.h)(0x62721CDD)
-I (../Core/Inc/canopen.h)(0x620AFCA0)
-I (../Core/Inc/Display.h)(0x62708422)
+I (../Core/Inc/bootloader.h)(0x62732FFD)
+I (../Core/Inc/canopen.h)(0x62732FFD)
+I (../Core/Inc/Display.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
-I (../Core/Inc/PicMain.h)(0x62721D14)
-I (../Core/Inc/dict.h)(0x6271F609)
-I (../Core/Inc/version.h)(0x6271E667)
+I (../Core/Inc/PicMain.h)(0x62732FFD)
+I (../Core/Inc/dict.h)(0x62732FFD)
+I (../Core/Inc/version.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x60253188)
-F (..\Core\Src\dict.c)(0x62722125)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\dict.o --omf_browse liop_vgs502\dict.crf --depend liop_vgs502\dict.d)
-I (../Core/Inc/AllHeader.h)(0x62721C69)
+F (..\Core\Src\dict.c)(0x62732FFD)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\dict.o --omf_browse liop_vgs502\dict.crf --depend liop_vgs502\dict.d)
+I (../Core/Inc/AllHeader.h)(0x62732FFD)
 I (../Core/Inc/typedef.h)(0x62708422)
-I (../Core/Inc/main.h)(0x62721D07)
+I (../Core/Inc/main.h)(0x62732FFD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x61F6093A)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x62732A77)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x61F6093A)
@@ -155,18 +155,18 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x61F6093A)
-I (../Core/Inc/bootloader.h)(0x62721CDD)
-I (../Core/Inc/canopen.h)(0x620AFCA0)
-I (../Core/Inc/Canbus.h)(0x62722652)
-I (../Core/Inc/Display.h)(0x62708422)
+I (../Core/Inc/bootloader.h)(0x62732FFD)
+I (../Core/Inc/canopen.h)(0x62732FFD)
+I (../Core/Inc/Canbus.h)(0x62732FFD)
+I (../Core/Inc/Display.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
-I (../Core/Inc/PicMain.h)(0x62721D14)
-I (../Core/Inc/dict.h)(0x6271F609)
-I (../Core/Inc/version.h)(0x6271E667)
+I (../Core/Inc/PicMain.h)(0x62732FFD)
+I (../Core/Inc/dict.h)(0x62732FFD)
+I (../Core/Inc/version.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x60253188)
-F (../Core/Src/main.c)(0x62732B52)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\main.o --omf_browse liop_vgs502\main.crf --depend liop_vgs502\main.d)
-I (../Core/Inc/main.h)(0x62721D07)
+F (../Core/Src/main.c)(0x62736B3A)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\main.o --omf_browse liop_vgs502\main.crf --depend liop_vgs502\main.d)
+I (../Core/Inc/main.h)(0x62732FFD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x61F6093A)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x62732A77)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x61F6093A)
@@ -194,20 +194,20 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x61F6093A)
-I (../Core/Inc/AllHeader.h)(0x62721C69)
+I (../Core/Inc/AllHeader.h)(0x62732FFD)
 I (../Core/Inc/typedef.h)(0x62708422)
-I (../Core/Inc/bootloader.h)(0x62721CDD)
-I (../Core/Inc/canopen.h)(0x620AFCA0)
-I (../Core/Inc/Canbus.h)(0x62722652)
-I (../Core/Inc/Display.h)(0x62708422)
+I (../Core/Inc/bootloader.h)(0x62732FFD)
+I (../Core/Inc/canopen.h)(0x62732FFD)
+I (../Core/Inc/Canbus.h)(0x62732FFD)
+I (../Core/Inc/Display.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
-I (../Core/Inc/PicMain.h)(0x62721D14)
-I (../Core/Inc/dict.h)(0x6271F609)
-I (../Core/Inc/version.h)(0x6271E667)
+I (../Core/Inc/PicMain.h)(0x62732FFD)
+I (../Core/Inc/dict.h)(0x62732FFD)
+I (../Core/Inc/version.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x60253188)
-F (..\Core\Src\stm32f1xx_it.c)(0x62732A76)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\stm32f1xx_it.o --omf_browse liop_vgs502\stm32f1xx_it.crf --depend liop_vgs502\stm32f1xx_it.d)
-I (../Core/Inc/main.h)(0x62721D07)
+F (..\Core\Src\stm32f1xx_it.c)(0x62732FFD)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\stm32f1xx_it.o --omf_browse liop_vgs502\stm32f1xx_it.crf --depend liop_vgs502\stm32f1xx_it.d)
+I (../Core/Inc/main.h)(0x62732FFD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x61F6093A)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x62732A77)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x61F6093A)
@@ -235,21 +235,21 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x61F6093A)
-I (../Core/Inc/AllHeader.h)(0x62721C69)
+I (../Core/Inc/AllHeader.h)(0x62732FFD)
 I (../Core/Inc/typedef.h)(0x62708422)
-I (../Core/Inc/bootloader.h)(0x62721CDD)
-I (../Core/Inc/canopen.h)(0x620AFCA0)
-I (../Core/Inc/Canbus.h)(0x62722652)
-I (../Core/Inc/Display.h)(0x62708422)
+I (../Core/Inc/bootloader.h)(0x62732FFD)
+I (../Core/Inc/canopen.h)(0x62732FFD)
+I (../Core/Inc/Canbus.h)(0x62732FFD)
+I (../Core/Inc/Display.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
-I (../Core/Inc/PicMain.h)(0x62721D14)
-I (../Core/Inc/dict.h)(0x6271F609)
-I (../Core/Inc/version.h)(0x6271E667)
+I (../Core/Inc/PicMain.h)(0x62732FFD)
+I (../Core/Inc/dict.h)(0x62732FFD)
+I (../Core/Inc/version.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x60253188)
-I (../Core/Inc/stm32f1xx_it.h)(0x62732A76)
-F (../Core/Src/stm32f1xx_hal_msp.c)(0x62732A77)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\stm32f1xx_hal_msp.o --omf_browse liop_vgs502\stm32f1xx_hal_msp.crf --depend liop_vgs502\stm32f1xx_hal_msp.d)
-I (../Core/Inc/main.h)(0x62721D07)
+I (../Core/Inc/stm32f1xx_it.h)(0x62732FFD)
+F (../Core/Src/stm32f1xx_hal_msp.c)(0x62732FFD)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\stm32f1xx_hal_msp.o --omf_browse liop_vgs502\stm32f1xx_hal_msp.crf --depend liop_vgs502\stm32f1xx_hal_msp.d)
+I (../Core/Inc/main.h)(0x62732FFD)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x61F6093A)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x62732A77)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x61F6093A)
@@ -277,17 +277,58 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x61F6093A)
-I (../Core/Inc/AllHeader.h)(0x62721C69)
+I (../Core/Inc/AllHeader.h)(0x62732FFD)
 I (../Core/Inc/typedef.h)(0x62708422)
-I (../Core/Inc/bootloader.h)(0x62721CDD)
-I (../Core/Inc/canopen.h)(0x620AFCA0)
-I (../Core/Inc/Canbus.h)(0x62722652)
-I (../Core/Inc/Display.h)(0x62708422)
+I (../Core/Inc/bootloader.h)(0x62732FFD)
+I (../Core/Inc/canopen.h)(0x62732FFD)
+I (../Core/Inc/Canbus.h)(0x62732FFD)
+I (../Core/Inc/Display.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
-I (../Core/Inc/PicMain.h)(0x62721D14)
-I (../Core/Inc/dict.h)(0x6271F609)
-I (../Core/Inc/version.h)(0x6271E667)
+I (../Core/Inc/PicMain.h)(0x62732FFD)
+I (../Core/Inc/dict.h)(0x62732FFD)
+I (../Core/Inc/version.h)(0x62732FFD)
+I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x60253188)
+F (..\Core\Src\interrupt.c)(0x62733A18)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\interrupt.o --omf_browse liop_vgs502\interrupt.crf --depend liop_vgs502\interrupt.d)
+I (../Core/Inc/AllHeader.h)(0x62732FFD)
+I (../Core/Inc/typedef.h)(0x62708422)
+I (../Core/Inc/main.h)(0x62732FFD)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x61F6093A)
+I (../Core/Inc/stm32f1xx_hal_conf.h)(0x62732A77)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h)(0x61F6093A)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h)(0x61F6093A)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h)(0x61F6093A)
+I (../Drivers/CMSIS/Include/core_cm3.h)(0x61F6092C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025318E)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x61F6092C)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x61F6092C)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x61F6092C)
+I (../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x61F6093A)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025318E)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x61F6093A)
+I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x61F6093A)
+I (../Core/Inc/bootloader.h)(0x62732FFD)
+I (../Core/Inc/canopen.h)(0x62732FFD)
+I (../Core/Inc/Canbus.h)(0x62732FFD)
+I (../Core/Inc/Display.h)(0x62732FFD)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
+I (../Core/Inc/PicMain.h)(0x62732FFD)
+I (../Core/Inc/dict.h)(0x62732FFD)
+I (../Core/Inc/version.h)(0x62732FFD)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x60253188)
 F (../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c)(0x61F6093A)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\stm32f1xx_hal_gpio_ex.o --omf_browse liop_vgs502\stm32f1xx_hal_gpio_ex.crf --depend liop_vgs502\stm32f1xx_hal_gpio_ex.d)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x61F6093A)

@@ -28,26 +28,22 @@ Project File Date:  05/05/2022
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'LIOP_VGS502'
 Note: source file '../Core/Src/system_stm32f1xx.c' - object file renamed from 'LIOP_VGS502\system_stm32f1xx.o' to 'LIOP_VGS502\system_stm32f1xx_1.o'.
-compiling main.c...
+compiling CanBus.c...
 ../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
   const struct _dict
-../Core/Src/main.c(232): warning:  #188-D: enumerated type mixed with another type
-    hcan.Init.TimeTriggeredMode = DISABLE;
-../Core/Src/main.c(233): warning:  #188-D: enumerated type mixed with another type
-    hcan.Init.AutoBusOff = DISABLE;
-../Core/Src/main.c(234): warning:  #188-D: enumerated type mixed with another type
-    hcan.Init.AutoWakeUp = DISABLE;
-../Core/Src/main.c(235): warning:  #188-D: enumerated type mixed with another type
-    hcan.Init.AutoRetransmission = DISABLE;
-../Core/Src/main.c(236): warning:  #188-D: enumerated type mixed with another type
-    hcan.Init.ReceiveFifoLocked = DISABLE;
-../Core/Src/main.c(237): warning:  #188-D: enumerated type mixed with another type
-    hcan.Init.TransmitFifoPriority = DISABLE;
-../Core/Src/main.c: 7 warnings, 0 errors
+..\Core\Src\CanBus.c(37): warning:  #223-D: function "memcpy" declared implicitly
+  				memcpy((void *)&rx[ri][2], Can1RxData, Can1RxHeader.DLC);
+..\Core\Src\CanBus.c(97): warning:  #223-D: function "memcpy" declared implicitly
+  		memcpy(CanTxData, (void *)(tx[to] + 2), 8);
+..\Core\Src\CanBus.c(403): warning:  #177-D: variable "cte"  was declared but never referenced
+  	static BYTE cte = 0;
+..\Core\Src\CanBus.c(797): warning:  #223-D: function "memcpy" declared implicitly
+  	memcpy(CanTxData_t, (void *)(tx[to] + 2), 8);
+..\Core\Src\CanBus.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=12096 RO-data=732 RW-data=140 ZI-data=2652  
+Program Size: Code=13208 RO-data=860 RW-data=176 ZI-data=2680  
 FromELF: creating hex file...
-"LIOP_VGS502\LIOP_VGS502.axf" - 0 Error(s), 7 Warning(s).
+"LIOP_VGS502\LIOP_VGS502.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 

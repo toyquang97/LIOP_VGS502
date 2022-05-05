@@ -69,40 +69,6 @@ static void MX_TIM4_Init(void);
 
 
 
-unsigned char matrixHex[][4] = {
-  0x1b, 0x11, 0x11, 0x1b,										// 0
-  0x10, 0x10, 0x18, 0x10,                   //1
-  0x4, 0x4, 0x8, 0xA,										// 7
-	0x0b, 0x1, 0x1, 0x0b,                     // C
-  0x0b, 0x1, 0x1, 0x01,                     // L
-  0x0e, 0x4, 0x4, 0x0e,                     // I
-  0x1b, 0x11, 0x10, 0x10,                     // J
-  0x4, 0x4, 0x4, 0x0e,                     // T
-  0x1B, 0x19, 0x11, 0x1B,                     // Q
-  0x11, 0x11, 0x1B, 0x11,                     // M
-  0x11, 0x19, 0x13, 0x11,                     // N
-  0x01, 0x03, 0x09, 0x01,                     // V
-  0x11, 0x1B, 0x11, 0x11,                     // W
-  0x1B, 0x11, 0x11, 0x11,                     // U
-  0x00, 0x0A, 0x0A, 0x00,                     // X
-  0x04, 0x04, 0x0A, 0x00,                     // Y
-  0x0A, 0x02, 0x08, 0x0A,                     // Z
-	0xC8, 0xC8, 0xC8, 0xC8,											// UP
-	0x38, 0x38, 0x38, 0x38,											// UP
-};
-
-
-
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
- {
-	if (htim->Instance == htim2.Instance)
-	{
-
-	}
-}	
-
-
 /* USER CODE END 0 */
 
 /**
@@ -140,9 +106,10 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	Init_Can();
 	 HAL_TIM_Base_Start_IT(&htim2);
+	 HAL_TIM_Base_Start_IT(&htim3);
+	 HAL_TIM_Base_Start_IT(&htim4);
 	 
-  HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, GPIO_PIN_SET);
+
   HAL_GPIO_WritePin(R1_GPIO_Port, R1_Pin, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(R2_GPIO_Port, R2_Pin, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(R3_GPIO_Port, R3_Pin, GPIO_PIN_RESET);
@@ -160,10 +127,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		if (rc)
-    {
+		//if (rc)
+    //{
       read_rx();
-    }
+    //}
 
   }
   /* USER CODE END 3 */

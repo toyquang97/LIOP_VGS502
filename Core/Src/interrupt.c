@@ -4,14 +4,219 @@
 /************************************************************************************************/
 /* Low priority interrupt routine																*/
 /************************************************************************************************/
-
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim4;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
- {
+{
+	BYTE i, j;
+	SBYTE pos;
+	BYTE buf[2];
+	static BYTE timer_100ms = 0;
+	static BYTE count = 0;
+	static BYTE timer_cnt = 0;
 	if (htim->Instance == htim2.Instance)
 	{
+		bTime.Time_500ms = 1;
+		if (sdo_timer) /* check for SDO transfer time out		*/
+			sdo_timer--;
+		if (hsetime)
+			hsetime--;
+		if (!hsetime)	  /* HSE heartbeat time out 				*/
+			hsecheck = 1; /* HSE check necessary					*/
+		if (can_inittime)
+			--can_inittime;
+		if (heartbeat) /* decrement heartbeat timer			*/
+			heartbeat--;
+		if (flashtimer)
+			flashtimer--;
+		if (landingcalltimer) /* timer for misuse of landing calls	*/
+			landingcalltimer--;
+		if (display_timer)
+			display_timer--;
+		if (can_passive_time)
+			--can_passive_time;
+		com_can_work++;
+		timer_cnt++;
+		if (display[BUF_ARROW] == NO_ARROW)
+		{
+			if ((backlight_time_count++ > backlight_off_time) && (light_para_ok))
+				u8Start_Dark = 1;
+		}
+		else
+		{
+			backlight_time_count = 0;
+			u8Start_Dark = 0;
+		}
 
+		for (i = 0; i < MAX_IO; i++) /* search output parameter list			*/
+		{
+			if (outpar[i][IO_BASIC_FUNC] == ARRIVAL_INDICATION)
+				if (outpar[i][IO_ACK]) /* arrival indication is on				*/
+				{
+					outpar[i][IO_ACK]--;	/* decrement time counter				*/
+					if (!outpar[i][IO_ACK]) /* time out								*/
+					{
+						bit_reset(out, i); /* switch off output					*/
+						outpar[i][IO_STATE] = 0;
+					}
+				}
+		}
+		if (arrowflash & 0x01)
+		{
+			if (scroll)
+			{
+				if (arrowflash & 0x80)
+				{
+					arrowflash &= ~0x80;
+					display[BUF_ARROW] = NO_ARROW;
+				}
+				else
+				{
+					arrowflash |= 0x80;
+					display[BUF_ARROW] = flashcontent;
+				}
+			}
+			else
+				display[BUF_ARROW] = flashcontent;
+		}
 	}
-}	
+	if (htim->Instance == htim3.Instance)
+	{
+		if (!nmtstate) /* only during Boot up					*/
+		{
+			if (nmtwait) /* waiting time for first heartbeat		*/
+				nmtwait--;
+		}
+		if (!input_detect)
+		{
+			input[2] = input[1]; /* shift input variables				*/
+			input[1] = input[0];
+			input[0] = (BYTE)(GPIOB->IDR >> 11) & 0x0F;
+			input[0] = (input[0] ^ 0x0F) & 0x0F; //
+			// input[0] = PORTC & 0x0F;
+			// input[0] = (input[0] ^ 0xF0) & 0x0F;  //
+			for (i = 0; i < 8; i++)
+			{
+				j = 0x01 << i;
+				if (((input[2] & j) == (input[1] & j)) &&
+					((input[1] & j) == (input[0] & j)))
+				{
+					in &= ~j; /* set input valid						*/
+					in |= (input[2] & j);
+				}
+			}
+		}
+		++input_detect;
+		if (input_detect == INPUT_DETECT_INTERVAL)
+			input_detect = 0;
+
+		i = out ^ out_polarity; /* invert output if desired				*/
+		HAL_GPIO_WritePin(UO_GPIO_Port, UO_Pin, i & 0x01);
+		HAL_GPIO_WritePin(DO_GPIO_Port, DO_Pin, bit_select(i, 1));
+		// LATBbits.LATB0 = bit_select(i, 1); /* set outputs							*/
+		// LATBbits.LATB1 = i & 0x01;
+		// LATBbits.LATB4 = bit_select(i, 3);
+		// LATBbits.LATB5 = bit_select(i, 2);
+	}
+	if (htim->Instance == htim4.Instance)
+	{
+		++count;
+		if (hardware_version == G_742_LED)
+		{
+			if ((count % 50) == 0)
+			{
+				display_scantimer = 1;
+				timer_100ms = 1;
+			}
+			if (row < 4) // increment row number
+				row++;
+			else
+			{
+				row = 0;
+				if (arrowtype == 0)
+				{ //����
+					if (scrolltimer < 8)
+						scrolltimer++;
+					else
+						scrolltimer = 0;
+					if (!scrolltimer)
+					{					 // 8ms ����һ��
+						if (scroll == 1) // scroll display up
+						{
+							if (scrollpos < 8) // set scroll position
+								scrollpos++;
+							else
+								scrollpos = -8;
+						}
+						else if (scroll == 2) // scroll display down
+						{
+							if (scrollpos > -8) // set scroll position
+								scrollpos--;
+							else
+								scrollpos = 8;
+						}
+						else
+							scrollpos = 0;
+					}
+				}
+				else
+					scrollpos = 0;
+			}
+			buf[0] = (sign[display[BUF_UNIT]][row] << 3) | 0x07;
+			pos = scrollpos + row;
+			if ((pos >= 0) && (pos < 7))
+				buf[0] &= (((sign[display[BUF_ARROW]][pos] & 0x18) >> 2) | 0xF8);
+			else
+				buf[0] &= 0xF8;
+
+			//ʮλ�Լ���ͷ1-3��
+			buf[1] = (sign[display[BUF_TEN]][row] << 3) | 0x07;
+			if ((pos >= 0) && (pos < 7))
+				buf[1] &= ((sign[display[BUF_ARROW]][pos] & 0x07) | 0xF8);
+			else
+				buf[1] &= 0xF8;
+
+			HC959_SEl = 0;
+			// SPI_SendOneByte(((buf[0] >> 3) & 0x3)  );
+			// SPI_SendOneByte((buf[0]|(buf[0] << 5) & 0xE0) );
+			SPI_SendOneByte(buf[0]);
+			SPI_SendOneByte(buf[1]);
+			i = (0x01 << row);
+			GPIOB->ODR &= 0xfff0;
+			HC959_SEl = 1;
+			__NOP();
+			__NOP();
+			__NOP();
+			__NOP();
+			HC959_SEl = 0;
+			__NOP();
+			__NOP();
+			__NOP();
+			__NOP();
+			GPIOB->ODR |= (i & 0xFFFF);
+		}
+		if (timer_100ms)
+		{
+			if (mLongKeyTime)
+			{
+				if (--mLongKeyTime == 0)
+					bKey_Fg.LongKeyEn = true;
+			}
+			if (keytimer)
+			{
+				if (--keytimer == 0)
+				{
+					setid_mode = 0;
+					arrowflash = arrowflash_old;
+					keytimer = 0;
+					nmtstate = PRE_OP;
+				}
+			}
+			timer_100ms = 0;
+		}
+	}
+}
 #if 0
 void interrupt low_priority InterruptHandlerLow(void)
 {
