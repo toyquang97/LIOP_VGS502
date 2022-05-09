@@ -3,6 +3,7 @@
         "canbus.h": "c",
         "allheader.h": "c",
         "main.h": "c",
-        "picmain.h": "c"
+        "picmain.h": "c",
+        "display.h": "c"
     }
 }

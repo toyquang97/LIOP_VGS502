@@ -13,6 +13,7 @@ extern uint8_t Arrow_state;
 
 void Init_Can(void)
 {
+
 	uint8_t i, j;
 
 	rc = 0; // clear all CAN variables
@@ -32,9 +33,8 @@ void Init_Can(void)
 			tx[i][j] = 0;
 	}
 
-	CAN_FilterTypeDef sFilterConfig;
-	/* -----------------Filter bank 0---------------*/
 
+		CAN_FilterTypeDef sFilterConfig;
 	/*------------filter bank 1----------*/
 	sFilterConfig.FilterBank = 1;
 	sFilterConfig.FilterIdHigh = PDO_OUT << 8;
@@ -45,67 +45,35 @@ void Init_Can(void)
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 	sFilterConfig.FilterActivation = CAN_FILTER_ENABLE;
 	sFilterConfig.SlaveStartFilterBank = 14;
-	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO1;
+	sFilterConfig.FilterFIFOAssignment = CAN_FilterFIFO1;
 	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
 	{
 		Error_Handler();
 	}
 
-	sFilterConfig.FilterBank = 6;
-	sFilterConfig.FilterIdHigh = LSS << 8;
-	sFilterConfig.FilterIdLow = 0x00;
-	sFilterConfig.FilterMaskIdHigh = 0xF000;
-	sFilterConfig.FilterMaskIdLow = 0x0000;
-
-	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
-	{
-		/* Filter configuration Error */
-		Error_Handler();
-	}
-
+	sFilterConfig.FilterFIFOAssignment = CAN_FilterFIFO1;
 	sFilterConfig.FilterBank = 2;
-	sFilterConfig.FilterIdHigh = (MPDO << 8) + (EMS_ID << 5);
+	sFilterConfig.FilterIdHigh = ((RSDO | (node_id >> 3)) << 8) + (node_id << 5);
 	sFilterConfig.FilterIdLow = 0x00;
 	sFilterConfig.FilterMaskIdHigh = 0xF000;
 	sFilterConfig.FilterMaskIdLow = 0x0000;
-
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
+	sFilterConfig.FilterActivation = CAN_FILTER_ENABLE;
+	sFilterConfig.SlaveStartFilterBank = 14;
 	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
 	{
 		/* Filter configuration Error */
 		Error_Handler();
 	}
-
+	sFilterConfig.FilterFIFOAssignment = CAN_FilterFIFO1;
 	sFilterConfig.FilterBank = 3;
-	sFilterConfig.FilterIdHigh = RSDO << 8;
-	sFilterConfig.FilterIdLow = 0x00;
-	sFilterConfig.FilterMaskIdHigh = 0xF000;
-	sFilterConfig.FilterMaskIdLow = 0x0000;
-
-	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
-	{
-		/* Filter configuration Error */
-		Error_Handler();
-	}
-
-	sFilterConfig.FilterBank = 4;
 	sFilterConfig.FilterIdHigh = NMT << 8;
 	sFilterConfig.FilterIdLow = 0x00;
 	sFilterConfig.FilterMaskIdHigh = 0xF000;
 	sFilterConfig.FilterMaskIdLow = 0x0000;
-
-	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
-	{
-		/* Filter configuration Error */
-		Error_Handler();
-	}
-	sFilterConfig.FilterBank = 10;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
-	sFilterConfig.FilterIdHigh = ((HEARTBEAT << 3) + HSE_ID) << 5;
-	sFilterConfig.FilterIdLow = 0x00;
-	sFilterConfig.FilterMaskIdHigh = ((HEARTBEAT << 3) + HSE_ID) << 5;
-	sFilterConfig.FilterMaskIdLow = 0x0000;
-	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
 	sFilterConfig.FilterActivation = CAN_FILTER_ENABLE;
 	sFilterConfig.SlaveStartFilterBank = 14;
 	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
@@ -114,8 +82,194 @@ void Init_Can(void)
 		Error_Handler();
 	}
 
+	sFilterConfig.FilterBank = 4;
+	sFilterConfig.FilterIdHigh = (MPDO << 8) + (EMS_ID << 5);
+	sFilterConfig.FilterIdLow = 0x00;
+	sFilterConfig.FilterMaskIdHigh = 0xF000;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
+	sFilterConfig.FilterActivation = CAN_FILTER_ENABLE;
+	sFilterConfig.SlaveStartFilterBank = 14;
+	sFilterConfig.FilterFIFOAssignment = CAN_FilterFIFO1;
+
+	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
+	{
+		Error_Handler();
+	}
+
+	
+
+	sFilterConfig.FilterFIFOAssignment = CAN_FilterFIFO1;
+	sFilterConfig.FilterBank = 5;
+	sFilterConfig.FilterIdHigh = LSS << 8;
+	sFilterConfig.FilterIdLow = 0x00;
+	sFilterConfig.FilterMaskIdHigh = 0xF000;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
+	sFilterConfig.FilterActivation = CAN_FILTER_ENABLE;
+	sFilterConfig.SlaveStartFilterBank = 14;
+
+	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
+	{
+		/* Filter configuration Error */
+		Error_Handler();
+	}
+
+	
+	/* -----------------Filter bank 0---------------*/
+	sFilterConfig.FilterBank = 10;
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
+	sFilterConfig.FilterIdHigh = ((HEARTBEAT << 3) + HSE_ID) << 5;
+	sFilterConfig.FilterIdLow = 0x00;
+	sFilterConfig.FilterMaskIdHigh = ((HEARTBEAT << 3) + HSE_ID) << 5;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
+	sFilterConfig.FilterFIFOAssignment = CAN_FilterFIFO0;
+	sFilterConfig.FilterActivation = CAN_FILTER_ENABLE;
+	sFilterConfig.SlaveStartFilterBank = 14;
+	HAL_CAN_ConfigFilter(&hcan, &sFilterConfig);
+
 	HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_RX_FIFO1_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY);
 	HAL_CAN_Start(&hcan);
+	
+	#if 0
+	uint8_t i, j;
+
+	rc = 0;       							  //clear all CAN variables
+	ri = 0;
+	ro = 0;
+	tc = 0;
+	ti = 0;
+	to = 0;
+	for (i = 0; i < RX_SIZE; i++)	//clear rx buffer
+		{
+			for (j = 0; j < 10; j++)
+				rx[i][j] = 0;
+		}
+	for (i = 0; i < TX_SIZE; i++)	//clear tx buffer
+		{
+			for (j = 0; j < 10; j++)
+				tx[i][j] = 0;
+		}
+	CAN_FilterTypeDef  sFilterConfig;
+	sFilterConfig.FilterBank = 0;
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
+	sFilterConfig.FilterIdHigh =((HEARTBEAT<<3)+HSE_ID)<<5;
+	sFilterConfig.FilterIdLow = 0x00;
+	sFilterConfig.FilterMaskIdHigh =((HEARTBEAT<<3)+HSE_ID)<<5;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
+	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
+	sFilterConfig.FilterActivation = ENABLE;
+	sFilterConfig.SlaveStartFilterBank = 14;
+
+	if(HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
+	{
+	/* Filter configuration Error */
+		Error_Handler();
+	}
+	sFilterConfig.FilterBank = 1;
+	sFilterConfig.FilterIdHigh =PDO_OUT<<8;
+	sFilterConfig.FilterIdLow = 0x00;
+	sFilterConfig.FilterMaskIdHigh =0xF000;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
+	sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO1;
+
+	if(HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
+	{
+	/* Filter configuration Error */
+		Error_Handler();
+	}
+	sFilterConfig.FilterBank = 2;
+	sFilterConfig.FilterIdHigh = ((RSDO | (node_id >> 3)) << 8) + (node_id <<5);
+	sFilterConfig.FilterIdLow = 0x00;
+	sFilterConfig.FilterMaskIdHigh =0xF000;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
+
+	if(HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
+	{
+	/* Filter configuration Error */
+		Error_Handler();
+	}
+	sFilterConfig.FilterBank = 3;
+	sFilterConfig.FilterIdHigh = NMT <<8;
+	sFilterConfig.FilterIdLow = 0x00;
+	sFilterConfig.FilterMaskIdHigh =0xF000;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
+
+	if(HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
+	{
+	/* Filter configuration Error */
+		Error_Handler();
+	}
+	sFilterConfig.FilterBank = 4;
+	sFilterConfig.FilterIdHigh = (MPDO << 8) +(EMS_ID << 5);
+	sFilterConfig.FilterIdLow = 0x00;
+	sFilterConfig.FilterMaskIdHigh =0xF000;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
+
+	if(HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
+	{
+	/* Filter configuration Error */
+		Error_Handler();
+	}
+
+
+
+
+#if 0
+	RXB0CON 	= 0x20;		//ֻ���մ��б�׼��ʶ������Ч����
+	RXB1CON 	= 0x20;		//ֻ���մ��б�׼��ʶ������Ч����
+
+	//���չ�����0��1����� HSE ����
+	RXF0SIDL	= HSE_ID << 5;			//Set acceptance filter 0 for buffer 0
+	RXF0SIDH	= HEARTBEAT;			//buffer 0 only for Heartbeat HSE
+	RXF1SIDL	= HSE_ID << 5;			//Set acceptance filter 1 for buffer 1
+	RXF1SIDH	= HEARTBEAT;			//buffer 1 only for Heartbeat HSE
+	RXM0SIDL		= 0x00;
+	RXM0SIDH		= 0xFE;					//Set acceptance mask for buffer 0
+
+	//���չ�����2����� LSS ���� PDO_OUT
+	RXF2SIDL			= 0;					// Set acceptance filter 2 for buffer 1
+	RXF2SIDH		= PDO_OUT;		// buffer 1 for virtual output messages
+
+	//���չ�����3����� RSDO
+	RXF3SIDL			= node_id << 5;	// Set acceptance filter 3 for buffer 1
+	RXF3SIDH			= RSDO | (node_id >> 3);		// buffer 1 for receive SDO's
+
+	//���չ�����4����� NMT
+	RXF4SIDL			= 0x00;							// Set acceptance filter 4 for buffer 1
+	RXF4SIDH			= NMT;							// buffer 1 for network management
+
+	//���չ�����5����� TIME
+	RXF5SIDL		= EMS_ID << 5;				// Set acceptance filter 5 for buffer 1
+	RXF5SIDH		= MPDO;		//buffer 1 for time stamp message
+	RXM1SIDL		= 0x00;		//Set acceptance mask for buffer 1
+	RXM1SIDH		= 0xF0;		//use only function code for filtering
+
+	CANCON  			= CAN_MODE_NORMAL1;				// set CAN normal mode
+	while ((CANSTAT & CAN_MODE_BITS) != CAN_MODE_NORMAL1);	//wait till normal mode is set
+ 	TXB1SIDH 			= HEARTBEAT + (node_id >> 3);	// write ID bit 10 ... 3 for HEARTBEAT
+	TXB1SIDL 			= node_id << 5;		// write ID bit  2 ... 0 for HEARTBEAT
+	TXB1DLC	 			= 1;							// write data lenght code
+	TXB1D0   			= nmtstate;				// write data uint8_t for HEARTBEAT
+	PIR3 				= 0;								// clear all interrupt flags
+	PIE3 				= 0x27;							// enable Error,TXB0 and RXB0 interrupt
+	IPR3 				= 0xFF;							// all CAN interrupts high priority
+
+	INTCONbits.GIEH		= 1;					// low priority interrupts enable
+#else
+	#warning  add filter and enbale interrupt
+
+	if (HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING|CAN_IT_RX_FIFO1_MSG_PENDING|CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK)
+	{
+
+	}
+	HAL_CAN_Start(&hcan);
+#endif
+#endif
 }
 
 uint8_t Can1RxData[8] = {0};
@@ -153,15 +307,14 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 
 	HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &CanRxHeader, CanRxData);
 
-	if (((CanRxHeader.StdId >> 3) & 0xF0) == 0)
+	if (((CanRxHeader.StdId >> 3) & 0xF0) == HEARTBEAT)
 	{
-		hsetime = HSETIME;
-	}
-	if (((CanRxHeader.StdId & 0x7F) - 1) < MAX_LIFT) // Heartbeat from HSE
-		hsetime = HSETIME;							 // reset HSE supervisor time
-	else
-	{
-		hsetime = HSETIME - 10;
+		if (((CanRxHeader.StdId & 0x7F) - 1) < MAX_LIFT) // Heartbeat from HSE
+			hsetime = HSETIME;							 // reset HSE supervisor time
+		else
+		{
+			hsetime = HSETIME - 10;
+		}
 	}
 	hse_heartbeat = 1;
 	// rx[ri][0] = (Can1RxHeader.StdId >> 3) & 0xF0; // read function code
@@ -218,14 +371,17 @@ void CAN_transmit_Interrupt(void)
 
 void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan)
 {
+	mallbox[0]++;
 	CAN_transmit_Interrupt();
 }
 void HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef *hcan)
 {
+	mallbox[1]++;
 	CAN_transmit_Interrupt();
 }
 void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan)
 {
+	mallbox[2]++;
 	CAN_transmit_Interrupt();
 }
 
@@ -327,7 +483,7 @@ void transmit_in(uint8_t *input)
 	can_transmit();				  /* transmit message						*/
 }
 
-void CAN_transmit_heartbeat(void)
+void sent_heartbeat(void)
 {
 	while (tc == TX_SIZE)
 		; /* wait for TX buffer free				*/
@@ -395,7 +551,7 @@ void read_rx(void)
 						{
 							if (arrowtype == ARROW_SCROLL)
 							{
-								if (hardware_version == G_741_LCD)
+								if (hardware_version == VGS_502)
 									arrowflash = 0x01;
 								else
 									arrowflash = 0x00;
@@ -511,7 +667,7 @@ void read_rx(void)
 				case (DEVICE_NAME): /* device name							*/
 					for (i = 0; i < DV_SIZE; i++)
 					{
-						if (hardware_version == G_741_LCD)
+						if (hardware_version == VGS_502)
 							buffer[i] = device_name_G741[i];
 						else
 							buffer[i] = device_name_G742[i];
@@ -522,7 +678,7 @@ void read_rx(void)
 				case (HW_VERSION): /* hardware version						*/
 					for (i = 0; i < 6; i++)
 					{
-						if (hardware_version == G_741_LCD)
+						if (hardware_version == VGS_502)
 							buffer[i] = hardware_uea_G741[i];
 						else
 							buffer[i] = hardware_uea_G742[i];
@@ -533,7 +689,7 @@ void read_rx(void)
 				case (SW_VERSION): /* software version						*/
 					for (i = 0; i < 6; i++)
 					{
-						if (hardware_version == G_741_LCD)
+						if (hardware_version == VGS_502)
 							buffer[i] = version_uea_G741[i];
 						else
 							buffer[i] = version_uea_G742[i];
@@ -590,7 +746,7 @@ void read_rx(void)
 				CANCON = CAN_MODE_CONFIG; /* set CAN configuration mode			*/
 				Reset();				  /* force a software reset				*/
 #else
-				// HAL_NVIC_SystemReset();
+				HAL_NVIC_SystemReset();
 #endif
 				break;
 
@@ -600,7 +756,7 @@ void read_rx(void)
 				break;
 
 			case VERSION_NODE:
-				if (hardware_version == G_741_LCD)
+				if (hardware_version == VGS_502)
 				{
 					display[BUF_TEN] = version_uea_G741[1] - '0';
 					display[BUF_UNIT] = version_uea_G741[3] - '0';
@@ -636,7 +792,7 @@ void read_rx(void)
 				id_buff[BUF_ARROW] = rx[ro][6];
 				id_buff[BUF_TEN] = rx[ro][4];
 				id_buff[BUF_UNIT] = rx[ro][5];
-				if (hardware_version == G_741_LCD)
+				if (hardware_version == VGS_502)
 					id_buff[BUF_ARROW] = NO_ARROW;
 				else if (id_buff[BUF_ARROW] <= 0x20)
 					id_buff[BUF_ARROW] = NO_ARROW;
@@ -657,8 +813,8 @@ void read_rx(void)
 				}
 				else
 				{
-					id_buff[BUF_TEN] = A_BETR + '0';
-					id_buff[BUF_UNIT] = A_BETR + '0';
+					id_buff[BUF_TEN] = A_BETR_TEN + '0';
+					id_buff[BUF_UNIT] = A_BETR_UNIT + '0';
 				}
 				break;
 
@@ -724,6 +880,7 @@ void read_rx(void)
 }
 
 uint32_t timeeeee;
+uint8_t CanTxData_t[8] = {0};
 void can_transmit(void)
 {
 	txmallbox_request++;
@@ -738,13 +895,14 @@ void can_transmit(void)
 	{
 	}
 	CAN_TxHeaderTypeDef CanTxHeader_t;
-	uint8_t CanTxData_t[8] = {0};
+	
 	uint32_t Txmallbox;
 	// INTCONbits.GIEH	= 0;								/* global interrupts disable			*/
 	CanTxHeader_t.StdId = ((tx[to][0] & 0xF0) << 3) + tx[to][1];
 	CanTxHeader_t.DLC = tx[to][0] & 0x0F; // read data lenght code
 	CanTxHeader_t.IDE = CAN_ID_STD;
 	CanTxHeader_t.RTR = CAN_RTR_DATA;
+
 
 	memcpy(CanTxData_t, (void *)(tx[to] + 2), 8);
 	if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader_t, CanTxData_t, &Txmallbox) == HAL_OK)
@@ -882,8 +1040,8 @@ void set_output(BYTE *virt)
 			}
 			if (display[BUF_UNIT] == NO_FLOOR) // lift out of work
 			{
-				display[BUF_TEN] = A_BETR;
-				display[BUF_UNIT] = A_BETR;
+				display[BUF_TEN] = A_BETR_TEN;
+				display[BUF_UNIT] = A_BETR_UNIT;
 			}
 			// PIE1bits.TMR1IE = 1; /* enable Timer 2 interrupt				*/
 		}

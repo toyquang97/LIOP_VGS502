@@ -90,12 +90,12 @@ enum {NotUsed, KEYVALUE_UP, KEYVALUE_DOWN, KEYVALUE_SYSSET};
 //�����
 #define	OPEN_BL()	           	//LATAbits.LATA3 = 1
 #define	CLOSE_BL()	          	//LATAbits.LATA3 = 0
-#define	OPEN_FULL()	         	//LATEbits.LATE0 = 1
-#define	CLOSE_FULL()	        //LATEbits.LATE0 = 0
+#define	OPEN_FULL()	         	HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET)               //LATEbits.LATE0 = 1
+#define	CLOSE_FULL()	        HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET)				//LATEbits.LATE0 = 0
 #define	OPEN_FIRE()	         	//LATEbits.LATE1 = 1
 #define	CLOSE_FIRE()	        //LATEbits.LATE1 = 0
-#define	OPEN_OUT_OF_ORDER()	 	//LATEbits.LATE1 = 1
-#define	CLOSE_OUT_OF_ORDER()	//LATEbits.LATE1 = 0
+#define	OPEN_OUT_OF_ORDER()	 	HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, GPIO_PIN_SET) //LATEbits.LATE1 = 1
+#define	CLOSE_OUT_OF_ORDER()	HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, GPIO_PIN_RESET) //LATEbits.LATE1 = 0
 #define	OPEN_INUSE()	        //LATEbits.LATE2 = 1
 #define	CLOSE_INUSE()	       	//LATEbits.LATE2 = 0
 

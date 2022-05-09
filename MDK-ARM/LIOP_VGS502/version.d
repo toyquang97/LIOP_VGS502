@@ -39,6 +39,7 @@ liop_vgs502\version.o: ../Core/Inc/Display.h
 liop_vgs502\version.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 liop_vgs502\version.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 liop_vgs502\version.o: ../Core/Inc/PicMain.h
+liop_vgs502\version.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 liop_vgs502\version.o: ../Core/Inc/dict.h
 liop_vgs502\version.o: ../Core/Inc/version.h
 liop_vgs502\version.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

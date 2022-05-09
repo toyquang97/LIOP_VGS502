@@ -7,11 +7,14 @@
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim4;
+	
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	BYTE i, j;
-	SBYTE pos;
+	static BYTE a = 0;
 	BYTE buf[2];
+	SBYTE pos;
 	static BYTE timer_100ms = 0;
 	static BYTE count = 0;
 	static BYTE timer_cnt = 0;
@@ -122,8 +125,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim->Instance == htim4.Instance)
 	{
 		++count;
-		if (hardware_version == G_742_LED)
+		if (hardware_version == VGS_502)
 		{
+			
 			if ((count % 50) == 0)
 			{
 				display_scantimer = 1;
@@ -134,52 +138,52 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			else
 			{
 				row = 0;
-				if (arrowtype == 0)
-				{ //����
-					if (scrolltimer < 8)
-						scrolltimer++;
-					else
-						scrolltimer = 0;
-					if (!scrolltimer)
-					{					 // 8ms ����һ��
-						if (scroll == 1) // scroll display up
-						{
-							if (scrollpos < 8) // set scroll position
-								scrollpos++;
-							else
-								scrollpos = -8;
-						}
-						else if (scroll == 2) // scroll display down
-						{
-							if (scrollpos > -8) // set scroll position
-								scrollpos--;
-							else
-								scrollpos = 8;
-						}
-						else
-							scrollpos = 0;
-					}
-				}
-				else
-					scrollpos = 0;
+				scrollpos = 0;
 			}
-			buf[0] = (sign[display[BUF_UNIT]][row] << 3) | 0x07;
-			pos = scrollpos + row;
-			if ((pos >= 0) && (pos < 7))
-				buf[0] &= (((sign[display[BUF_ARROW]][pos] & 0x18) >> 2) | 0xF8);
+			// Buffer for Ten
+			if (display[BUF_TEN] < 13)
+			{
+				buf[0] = sign[38][row];
+			}
+			else if (display[BUF_TEN] > 12 && display[BUF_TEN] < 16)
+			{
+				buf[0] = sign[41][row];
+			}
+			else if (display[BUF_TEN] == 16)
+			{
+				buf[0] = sign[40][row];
+			}
 			else
-				buf[0] &= 0xF8;
+				buf[0] = 0;
 
-			//ʮλ�Լ���ͷ1-3��
-			buf[1] = (sign[display[BUF_TEN]][row] << 3) | 0x07;
-			if ((pos >= 0) && (pos < 7))
-				buf[1] &= ((sign[display[BUF_ARROW]][pos] & 0x07) | 0xF8);
+			// Buffer for Unit
+			if (display[BUF_UNIT] < 13)
+			{
+				buf[0] |= sign[39][row];
+			}
+			else if (display[BUF_UNIT] > 12 && display[BUF_UNIT] < 16)
+			{
+				buf[0] |= sign[43][row];
+			}
+			else if (display[BUF_UNIT] == 16)
+			{
+				buf[0] |= sign[42][row];
+			}
 			else
-				buf[1] &= 0xF8;
+				buf[0] |= 0;
+
+			// process data
+			buf[0] |= ((sign[display[BUF_UNIT]][row] >> 3) |  sign[display[BUF_ARROW]][row]); 
+
+			// pos = scrollpos + row;
+			// if ((pos >= 0) && (pos < 4))
+			// 	buf[0] &= (sign[display[BUF_ARROW]][pos]  | 0x07);
+			// else
+			// 	buf[0] &= 0x07;
+			
+			buf[1] = (sign[display[BUF_TEN]][row] | ((sign[display[BUF_UNIT]][row] << 5) & 0xE0));  /// 5bit of Ten and 3 bit of unit
 
 			HC959_SEl = 0;
-			// SPI_SendOneByte(((buf[0] >> 3) & 0x3)  );
-			// SPI_SendOneByte((buf[0]|(buf[0] << 5) & 0xE0) );
 			SPI_SendOneByte(buf[0]);
 			SPI_SendOneByte(buf[1]);
 			i = (0x01 << row);
@@ -195,6 +199,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			__NOP();
 			__NOP();
 			GPIOB->ODR |= (i & 0xFFFF);
+
 		}
 		if (timer_100ms)
 		{

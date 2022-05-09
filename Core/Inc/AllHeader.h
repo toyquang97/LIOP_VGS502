@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "PicMain.h"
+#include "string.h"
 
 #include "dict.h"
 //#include "eeprom.h"

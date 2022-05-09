@@ -13,13 +13,13 @@ DWORD const identyty[ID_NUMS] =
 	0x00000000,
 };
 
-// ×¢Òâ:Èí¼þ°æ±¾µÄ¸ñÊ½Îª "vX.XX",ÔÚ²âÊÔÒÇ¼°Ó²¼þ²âÊÔÖÐÊ¹ÓÃ,²»¿ÉËæÒâ¸ü¸Ä
-BYTE const version_uea_G741[SW_SIZE] = "V2.0C";
+// ×¢ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½Ä¸ï¿½Ê½Îª "vX.XX",ï¿½Ú²ï¿½ï¿½ï¿½ï¿½Ç¼ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+BYTE const version_uea_G741[SW_SIZE] = "V1.0A";
 BYTE const version_uea_G742[SW_SIZE] = "V1.4B";
 
 BYTE const hardware_uea_G741[HW_SIZE] = "V1.3";	
 BYTE const device_name_G741[DV_SIZE] = {
-	'G', '-', '7', '4', '1',
+	'V', 'G', 'S', '5', '0', '2'
 };
 
 BYTE const hardware_uea_G742[HW_SIZE] = "V1.1";	

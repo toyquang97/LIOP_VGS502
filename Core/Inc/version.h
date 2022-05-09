@@ -3,6 +3,7 @@
 #define	_VERSION_H_
 
 #define	G_741_LCD		0
+#define	VGS_502		    0
 #define	G_742_LED		1
 
 extern DWORD const identyty[];
