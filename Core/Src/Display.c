@@ -28,10 +28,11 @@ uint8_t SPI_SendOneByte(uint8_t dat)
 /************************************************************************************************/
 /* 	Set node ID												                        			*/
 /************************************************************************************************/
+
 void SetNodeId(void)
 {
 	static uint8_t buffer[3] = {0, 0, 0};
-
+	uint8_t bufferShowSetNodeId[4] = {0};
 	if ((disp_id != node_id) || (setid_mode_old != setid_mode))
 	{
 		if ((setid_mode == 1) || (setid_mode == 4))
@@ -40,8 +41,21 @@ void SetNodeId(void)
 			display[BUF_MESSAGE] = 0;
 			if (node_id >= ESE_ID && node_id < ESE_ID + MAX_ESE)
 			{
-				display[BUF_TEN] = (((node_id - ESE_ID + 1) / 10) % 10);
-				display[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10);
+				// display[BUF_TEN] = (((node_id - ESE_ID + 1) / 10) % 10);
+				// display[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10);
+				bufferShowSetNodeId[BUF_TEN] = (((node_id - ESE_ID + 1) / 10) % 10) + 48;
+				bufferShowSetNodeId[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + 48;
+				for (uint8_t i = 0; i < 36; i++)
+				{
+					if (bufferShowSetNodeId[BUF_TEN] == tDisp_FloorAscii[i])
+					{
+						display[BUF_TEN] = i;
+					}
+					if (bufferShowSetNodeId[BUF_UNIT] == tDisp_FloorAscii[i])
+					{
+						display[BUF_UNIT] = i;
+					}
+				}
 				if ((node_id - ESE_ID + 1) >= 100)
 				{
 					if (hardware_version == G_741_LCD)
@@ -52,8 +66,8 @@ void SetNodeId(void)
 			}
 			else
 			{
-				display[BUF_TEN] = A_BETR_TEN;
-				display[BUF_UNIT] = A_BETR_UNIT;
+				display[BUF_TEN] = 33; //x
+				display[BUF_UNIT] = 33; // x
 			}
 		}
 		else
@@ -61,8 +75,8 @@ void SetNodeId(void)
 			display[BUF_ARROW] = id_buff[BUF_ARROW];
 			// display[BUF_TEN] = id_buff[BUF_TEN] - '0';
 			// display[BUF_UNIT] = id_buff[BUF_UNIT] - '0';
-			display[BUF_TEN] = showNodeId[BUF_TEN] ;
-			display[BUF_UNIT] = showNodeId[BUF_UNIT] ;
+			display[BUF_TEN] = showNodeId[BUF_TEN];
+			display[BUF_UNIT] = showNodeId[BUF_UNIT];
 			display[BUF_MESSAGE] = 0;
 		}
 		disp_id = node_id;
@@ -74,8 +88,8 @@ void SetNodeId(void)
 
 	if (!flashtimer)
 	{
-		//INTCONbits.TMR0IE = 0;
-		//HAL_TIM_Base_Stop_IT(&htim2);
+		// INTCONbits.TMR0IE = 0;
+		// HAL_TIM_Base_Stop_IT(&htim2);
 
 		flashtimer = 3;
 		if ((display[BUF_ARROW] != NO_ARROW) || (display[BUF_TEN] != NO_ARROW) || (display[BUF_UNIT] != NO_ARROW))
@@ -92,9 +106,8 @@ void SetNodeId(void)
 			display[BUF_UNIT] = buffer[BUF_UNIT];
 			display[BUF_MESSAGE] = 0;
 		}
-		//INTCONbits.TMR0IE = 1;
-		//HAL_TIM_Base_Start_IT(&htim2);
-		
+		// INTCONbits.TMR0IE = 1;
+		// HAL_TIM_Base_Start_IT(&htim2);
 	}
 }
 
@@ -108,7 +121,8 @@ void TestMode(void)
 
 	if (timer_1S5)
 	{
-		if (HAL_GPIO_ReadPin(NODE_ID_GPIO_Port,NODE_ID_Pin));
+		if (HAL_GPIO_ReadPin(NODE_ID_GPIO_Port, NODE_ID_Pin))
+			;
 		{ //���԰汾��
 			if (hardware_version == G_741_LCD)
 			{
@@ -135,7 +149,7 @@ void TestMode(void)
 					if (in & (1 << i))
 					{
 						// PIE1bits.TMR1IE = 0;
-						//HAL_TIM_Base_Stop_IT(&htim4);
+						// HAL_TIM_Base_Stop_IT(&htim4);
 						scroll = 0;
 						display_timer = 10;
 						out = 1 << i;
@@ -168,7 +182,7 @@ void TestMode(void)
 							break;
 						}
 						// PIE1bits.TMR1IE	= 1;
-						//HAL_TIM_Base_Start_IT(&htim4);
+						// HAL_TIM_Base_Start_IT(&htim4);
 					}
 					else
 					{
@@ -196,8 +210,8 @@ void Display_test(void)
 		number = 37;
 	else
 		number = 13;
-	//HAL_TIM_Base_Stop_IT(&htim4);
-	//PIE1bits.TMR1IE = 0;
+	// HAL_TIM_Base_Stop_IT(&htim4);
+	// PIE1bits.TMR1IE = 0;
 	if (testno < number)
 	{
 		if (hardware_version == G_741_LCD)
@@ -227,9 +241,9 @@ void Display_test(void)
 		}
 		else
 		{
-			//display[BUF_ARROW] = testdisplay[testno][2];
-			//display[BUF_TEN] = testdisplay[testno][0];
-			//display[BUF_UNIT] = testdisplay[testno][1];
+			// display[BUF_ARROW] = testdisplay[testno][2];
+			// display[BUF_TEN] = testdisplay[testno][0];
+			// display[BUF_UNIT] = testdisplay[testno][1];
 		}
 		if (testno == number - 1)
 			display_timer = 10;
@@ -275,7 +289,7 @@ void Display_test(void)
 	testno++;
 	flashcontent = display[BUF_ARROW];
 	// PIE1bits.TMR1IE = 1;
-	//HAL_TIM_Base_Start_IT(&htim4);
+	// HAL_TIM_Base_Start_IT(&htim4);
 }
 
 void KeyScan(void)

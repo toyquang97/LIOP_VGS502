@@ -1,8 +1,8 @@
 Dependencies for Project 'LIOP_VGS502', Target 'LIOP_VGS502': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
 F (startup_stm32f103xb.s)(0x6279D20C)(--cpu Cortex-M3 -g --apcs=interwork -I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"--pd "__UVISION_VERSION SETA 536" --pd "_RTE_ SETA 1" --pd "STM32F10X_MD SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f103xb.lst --xref -o liop_vgs502\startup_stm32f103xb.o --depend liop_vgs502\startup_stm32f103xb.d)
-F (..\Core\Src\Display.c)(0x627A24E3)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\display.o --omf_browse liop_vgs502\display.crf --depend liop_vgs502\display.d)
-I (../Core/Inc/Display.h)(0x627A2588)
+F (..\Core\Src\Display.c)(0x627A345A)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\display.o --omf_browse liop_vgs502\display.crf --depend liop_vgs502\display.d)
+I (../Core/Inc/Display.h)(0x627A2E7E)
 I (../Core/Inc/AllHeader.h)(0x627873A5)
 I (../Core/Inc/typedef.h)(0x6279D83A)
 I (../Core/Inc/main.h)(0x62732FFD)
@@ -79,7 +79,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x61F6093A)
 I (../Core/Inc/canopen.h)(0x62732FFD)
 I (../Core/Inc/Canbus.h)(0x6279D7B9)
-I (../Core/Inc/Display.h)(0x627A2588)
+I (../Core/Inc/Display.h)(0x627A2E7E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
 I (../Core/Inc/PicMain.h)(0x6279D7D0)
@@ -87,7 +87,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025318E)
 I (../Core/Inc/dict.h)(0x6279D7D0)
 I (../Core/Inc/version.h)(0x6279D7D0)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x60253188)
-F (..\Core\Src\CanBus.c)(0x627A25C8)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\canbus.o --omf_browse liop_vgs502\canbus.crf --depend liop_vgs502\canbus.d)
+F (..\Core\Src\CanBus.c)(0x627A30DA)(--c99 -c --cpu Cortex-M3 -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_LIOP_VGS502-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include"-I"C:\Users\Ha Thien Quang\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.0\Device\Include"-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o liop_vgs502\canbus.o --omf_browse liop_vgs502\canbus.crf --depend liop_vgs502\canbus.d)
 I (../Core/Inc/CanBus.h)(0x6279D7B9)
 I (../Core/Inc/AllHeader.h)(0x627873A5)
 I (../Core/Inc/typedef.h)(0x6279D83A)
@@ -122,7 +122,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x61F6093A)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x61F6093A)
 I (../Core/Inc/bootloader.h)(0x62732FFD)
 I (../Core/Inc/canopen.h)(0x62732FFD)
-I (../Core/Inc/Display.h)(0x627A2588)
+I (../Core/Inc/Display.h)(0x627A2E7E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
 I (../Core/Inc/PicMain.h)(0x6279D7D0)
@@ -165,7 +165,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x61F6093A)
 I (../Core/Inc/bootloader.h)(0x62732FFD)
 I (../Core/Inc/canopen.h)(0x62732FFD)
 I (../Core/Inc/Canbus.h)(0x6279D7B9)
-I (../Core/Inc/Display.h)(0x627A2588)
+I (../Core/Inc/Display.h)(0x627A2E7E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
 I (../Core/Inc/PicMain.h)(0x6279D7D0)
@@ -208,7 +208,7 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x61F6093A)
 I (../Core/Inc/bootloader.h)(0x62732FFD)
 I (../Core/Inc/canopen.h)(0x62732FFD)
 I (../Core/Inc/Canbus.h)(0x6279D7B9)
-I (../Core/Inc/Display.h)(0x627A2588)
+I (../Core/Inc/Display.h)(0x627A2E7E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
 I (../Core/Inc/PicMain.h)(0x6279D7D0)
@@ -251,7 +251,7 @@ I (../Core/Inc/typedef.h)(0x6279D83A)
 I (../Core/Inc/bootloader.h)(0x62732FFD)
 I (../Core/Inc/canopen.h)(0x62732FFD)
 I (../Core/Inc/Canbus.h)(0x6279D7B9)
-I (../Core/Inc/Display.h)(0x627A2588)
+I (../Core/Inc/Display.h)(0x627A2E7E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
 I (../Core/Inc/PicMain.h)(0x6279D7D0)
@@ -294,7 +294,7 @@ I (../Core/Inc/typedef.h)(0x6279D83A)
 I (../Core/Inc/bootloader.h)(0x62732FFD)
 I (../Core/Inc/canopen.h)(0x62732FFD)
 I (../Core/Inc/Canbus.h)(0x6279D7B9)
-I (../Core/Inc/Display.h)(0x627A2588)
+I (../Core/Inc/Display.h)(0x627A2E7E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
 I (../Core/Inc/PicMain.h)(0x6279D7D0)
@@ -338,7 +338,7 @@ I (../Core/Inc/typedef.h)(0x6279D83A)
 I (../Core/Inc/bootloader.h)(0x62732FFD)
 I (../Core/Inc/canopen.h)(0x62732FFD)
 I (../Core/Inc/Canbus.h)(0x6279D7B9)
-I (../Core/Inc/Display.h)(0x627A2588)
+I (../Core/Inc/Display.h)(0x627A2E7E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60253184)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60253184)
 I (../Core/Inc/PicMain.h)(0x6279D7D0)

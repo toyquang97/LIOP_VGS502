@@ -835,14 +835,25 @@ void read_rx(void)
 				id_buff[BUF_ARROW] = rx[ro][6];
 				id_buff[BUF_TEN] = rx[ro][4];
 				id_buff[BUF_UNIT] = rx[ro][5];
+				for (uint8_t i = 0; i < 38; i++)
+				{
+					if (id_buff[BUF_TEN] == tDisp_FloorAscii[i])
+					{
+						showNodeId[BUF_TEN] = i;
+					}
+					if (id_buff[BUF_UNIT] == tDisp_FloorAscii[i])
+					{
+						showNodeId[BUF_UNIT] = i;
+					}
+				}
 				if (hardware_version == VGS_502)
 					id_buff[BUF_ARROW] = NO_ARROW;
 				else if (id_buff[BUF_ARROW] <= 0x20)
 					id_buff[BUF_ARROW] = NO_ARROW;
 				if (id_buff[BUF_TEN] <= 0x20)
-					id_buff[BUF_TEN] = NO_FLOOR + '0';
+					id_buff[BUF_TEN] = 36 ;
 				if (id_buff[BUF_UNIT] <= 0x20)
-					id_buff[BUF_UNIT] = NO_FLOOR + '0';
+					id_buff[BUF_UNIT] = 36 ;
 				break;
 
 			case (DISP_NODE_ID):
