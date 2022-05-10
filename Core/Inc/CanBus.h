@@ -41,56 +41,63 @@
 
 #ifdef _CAN_C_
 
-BYTE volatile rc;			// RX message counter
-BYTE volatile tc;			// TX message counter
-BYTE volatile ro;			// pointer for FIFO read
-BYTE volatile ri;			// pointer for FIFO write
-BYTE volatile to;			// pointer for TX FIFO read
-BYTE volatile ti;			// pointer for TX FIFO write
-BYTE volatile tr;			// Senden fertig
+uint8_t volatile rc;			// RX message counter
+uint8_t volatile tc;			// TX message counter
+uint8_t volatile ro;			// pointer for FIFO read
+uint8_t volatile ri;			// pointer for FIFO write
+uint8_t volatile to;			// pointer for TX FIFO read
+uint8_t volatile ti;			// pointer for TX FIFO write
+uint8_t volatile tr;			// Senden fertig
 
-BYTE volatile rx[RX_SIZE][10];	// RX message buffer
-BYTE volatile tx[TX_SIZE][10];	// TX message buffer
+uint8_t volatile rx[RX_SIZE][10];	// RX message buffer
+uint8_t volatile tx[TX_SIZE][10];	// TX message buffer
+
+
+
+
 
 
 void Init_Can (void);
-void can_transmit (void);
-void transmit_in (BYTE * input);
-void sdo_response (uint8_t command, uint16_t index, uint8_t subindex, uint32_t value);
-void sdo_segment (BYTE command, BYTE size, BYTE * value);
-void abort_sdo (uint32_t errorcode);
-void lss_response (BYTE command, BYTE value);
-void transmit_error (void);
+void abort_sdo(uint32_t errorcode);
+void sdo_response(uint8_t command, uint16_t index, uint8_t subindex, uint32_t value);
+void sdo_segment(uint8_t command, uint8_t size, uint8_t *value);
+void lss_response(uint8_t command, uint8_t value);
+void transmit_error(void);
+void transmit_in(uint8_t *input);
 void transmit_load (void);
-void read_rx (void);
-
-BYTE check_for_call (BYTE value);
-void set_output (BYTE *virt);
+uint8_t check_for_call (uint8_t value);
+void can_transmit (void);
+void sent_heartbeat(void);
+void read_rx(void);
+void set_output (uint8_t *virt);
 void set_io_config (void);
 
 #else
-extern BYTE volatile rc;
-extern BYTE volatile tc;
-extern BYTE volatile ro;
-extern BYTE volatile ri;
-extern BYTE volatile to;
-extern BYTE volatile ti;
-extern BYTE volatile tr;
-extern BYTE volatile rx[RX_SIZE][10];
-extern BYTE volatile tx[TX_SIZE][10];
+extern uint8_t volatile rc;
+extern uint8_t volatile tc;
+extern uint8_t volatile ro;
+extern uint8_t volatile ri;
+extern uint8_t volatile to;
+extern uint8_t volatile ti;
+extern uint8_t volatile tr;
+extern uint8_t volatile rx[RX_SIZE][10];
+extern uint8_t volatile tx[TX_SIZE][10];
 
 
-extern	void Init_Can (void);
-extern	void read_rx (void);
-extern	void abort_sdo (uint32_t errorcode);
-extern	void transmit_error (void);
-extern	void transmit_in (BYTE * input);
-extern	void transmit_load (void);
-extern	void lss_response (BYTE command, BYTE value);
-extern	void ListenCAN(BYTE baudrate);
-extern	BYTE check_for_call (BYTE value);
-extern	void set_io_config (void);
-extern	void sent_heartbeat(void);
+extern void Init_Can (void);
+extern void abort_sdo(uint32_t errorcode);
+extern void sdo_response(uint8_t command, uint16_t index, uint8_t subindex, uint32_t value);
+extern void sdo_segment(uint8_t command, uint8_t size, uint8_t *value);
+extern void lss_response(uint8_t command, uint8_t value);
+extern void transmit_error(void);
+extern void transmit_in(uint8_t *input);
+extern void transmit_load (void);
+extern uint8_t check_for_call (uint8_t value);
+extern void can_transmit (void);
+extern void sent_heartbeat(void);
+extern void read_rx(void);
+extern void set_output (uint8_t *virt);
+extern void set_io_config (void);
 
 
 #endif

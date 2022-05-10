@@ -5,7 +5,7 @@
 /* Structure for object dictionary																*/
 /************************************************************************************************/
 const struct _dict dict[] = {
-/*	WORD object,		BYTE sub,		BYTE access,	BYTE size,				void *pointer,				*/
+/*	uint16_t object,		uint8_t sub,		uint8_t access,	uint8_t size,				void *pointer,				*/
 	{DEVICE_TYPE, 		0,				0,				4,						(void*)&device_type,		},
 	{ERROR_REGISTER,	0,				0,				1,						(void*)&errorregister,		},
 	{DEVICE_NAME,		0,				0,				6,						(void*)device_name_G741,			},
@@ -38,11 +38,11 @@ const struct _dict dict[] = {
 /************************************************************************************************/
 /* Read object dictionary																		*/
 /************************************************************************************************/
-DWORD read_dict (BYTE pos, BYTE subindex){
-	BYTE address;
-	BYTE i;
-	BYTE value[4];
-	BYTE size;
+uint32_t read_dict (uint8_t pos, uint8_t subindex){
+	uint8_t address;
+	uint8_t i;
+	uint8_t value[4];
+	uint8_t size;
 	size = dict[pos].size;
 
 	if (subindex)										/* more than 1 subindex					*/
@@ -53,23 +53,23 @@ DWORD read_dict (BYTE pos, BYTE subindex){
 		{
 			case (INPUT_PARA3):
 			case (OUTPUT_PARA3):
-				return (((DWORD)bit_select (*((BYTE *)dict[pos].pointer), subindex - 1)) << 15);
+				return (((uint32_t)bit_select (*((uint8_t *)dict[pos].pointer), subindex - 1)) << 15);
 
 			case (INPUT_PARA4):
-				return (*((BYTE *)dict[pos].pointer + (subindex - 1) * MAX_IO_TYPE));
+				return (*((uint8_t *)dict[pos].pointer + (subindex - 1) * MAX_IO_TYPE));
 				
 			case (OUTPUT_PARA4):
-				return (*((BYTE *)dict[pos].pointer + (subindex - 1) * (MAX_IO_TYPE + 1)));
+				return (*((uint8_t *)dict[pos].pointer + (subindex - 1) * (MAX_IO_TYPE + 1)));
 
 			case (CONS_HB_TIME):
-				return ((((DWORD)subindex) << 16) + (HSETIME * 500));
+				return ((((uint32_t)subindex) << 16) + (HSETIME * 500));
 			default:
-				*(DWORD *)value = 0;						/* clear variable						*/
+				*(uint32_t *)value = 0;						/* clear variable						*/
 				if (dict[pos].pointer)				/* object in RAM						*/
 					{
 						for (i = 0; i < size; i++)
-		        	value[i] = *((BYTE *)dict[pos].pointer + address + i);
-						return (*(DWORD *)value);
+		        	value[i] = *((uint8_t *)dict[pos].pointer + address + i);
+						return (*(uint32_t *)value);
 					}
 				else return (0);
 		}
@@ -78,11 +78,11 @@ DWORD read_dict (BYTE pos, BYTE subindex){
 /************************************************************************************************/
 /* Write object dictionary																		*/
 /************************************************************************************************/
-BYTE write_dict (BYTE pos, BYTE subindex, DWORD value){
-	BYTE i;
-	BYTE j;
-	BYTE address;
-	BYTE size;
+uint8_t write_dict (uint8_t pos, uint8_t subindex, uint32_t value){
+	uint8_t i;
+	uint8_t j;
+	uint8_t address;
+	uint8_t size;
 	
 	size = dict[pos].size;
 
@@ -94,7 +94,7 @@ BYTE write_dict (BYTE pos, BYTE subindex, DWORD value){
 		{
 			case (INPUT_PARA3):
 			case (OUTPUT_PARA3):
-				i = *((BYTE *)dict[pos].pointer);
+				i = *((uint8_t *)dict[pos].pointer);
 				j = (value >> 15) & 1;
 				if (((i >> (subindex - 1)) & 1) != j)
 					{
@@ -103,20 +103,20 @@ BYTE write_dict (BYTE pos, BYTE subindex, DWORD value){
 						else
 							bit_reset (i, subindex - 1);
 					}
-				*((BYTE *)dict[pos].pointer) = i;
+				*((uint8_t *)dict[pos].pointer) = i;
 				return (0);
 				
 			case (INPUT_PARA4):
 				if (dict[pos].pointer)
 					{
-						*((BYTE *)dict[pos].pointer + (subindex - 1) * MAX_IO_TYPE) = (BYTE)value;
+						*((uint8_t *)dict[pos].pointer + (subindex - 1) * MAX_IO_TYPE) = (uint8_t)value;
 					}
 				break;
 				
 			case (OUTPUT_PARA4):
 				if (dict[pos].pointer)
 					{
-						*((BYTE *)dict[pos].pointer + (subindex - 1) * (MAX_IO_TYPE + 1)) = (BYTE)value;
+						*((uint8_t *)dict[pos].pointer + (subindex - 1) * (MAX_IO_TYPE + 1)) = (uint8_t)value;
 					}
 				break;
 				
@@ -124,12 +124,12 @@ BYTE write_dict (BYTE pos, BYTE subindex, DWORD value){
 				if (dict[pos].pointer)						/* object in RAM						*/
 					{
 						for (i = 0; i < size; i++)
-		        	*((BYTE *)dict[pos].pointer + address + i) = *((BYTE *)&value+i);
+		        	*((uint8_t *)dict[pos].pointer + address + i) = *((uint8_t *)&value+i);
 					}
 				if(dict[pos].object == BACKLIGHT_MODE)
 					{
 						backlight_func = (backlight_mode >> 4) & 0x03;
-						backlight_off_time = ((WORD)backlight_mode & 0x0F) * NO_SIGNAL_TIMEOUT;
+						backlight_off_time = ((uint16_t)backlight_mode & 0x0F) * NO_SIGNAL_TIMEOUT;
 						light_para_ok = 1;
 						display_STN_mode = (backlight_mode >> 6) & 0x03;
 					}
@@ -141,11 +141,11 @@ BYTE write_dict (BYTE pos, BYTE subindex, DWORD value){
 /************************************************************************************************/
 /* Search object dictionary for an entry														*/
 /************************************************************************************************/
-DWORD search_dict (WORD index, BYTE subindex, BYTE type, BYTE * pos){
-	BYTE i;
-	BYTE index_exists;
-	BYTE subindex_exists;
-	BYTE size;
+uint32_t search_dict (uint16_t index, uint8_t subindex, uint8_t type, uint8_t * pos){
+	uint8_t i;
+	uint8_t index_exists;
+	uint8_t subindex_exists;
+	uint8_t size;
 	i = 0;
 	index_exists = 0;
 	subindex_exists = 0;

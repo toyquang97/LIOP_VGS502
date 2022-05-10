@@ -133,13 +133,13 @@
 #ifdef _DISPLAY_C_
 //���庯���ͱ���
 
-BYTE volatile display[4];
+uint8_t volatile display[4];
 //[0]: Arrow
 //[1]: ten
 //[2]: unit
 //[3]: message
 #if 0
-BYTE const tDisp_FloorAscii[] = {//����¥���ASCII��
+uint8_t const tDisp_FloorAscii[] = {//����¥���ASCII��
 	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
 	'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
@@ -153,8 +153,11 @@ BYTE const tDisp_FloorAscii[] = {//����¥���ASCII��
 //	! #  $	%  &	(  )	*  '	,  :	;  <	>  =	@  [	]  {	}  |
 };
 #endif
-
-BYTE const tDisp_FloorAscii[] = {
+uint8_t showNodeId[4];
+char test[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+			   'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+			
+uint8_t const tDisp_FloorAscii[] = {
 	//����¥���ASCII��
 	'2', '3', '4', '5', '6', '8', '9', 'A', 'E', 'F', 'H', 'P', 'R',
 	/* ------------*/
@@ -169,7 +172,7 @@ BYTE const tDisp_FloorAscii[] = {
 	//	! #  $	%  &	(  )	*  '	,  :	;  <	>  =	@  [	]  {	}  |
 };
 
-WORD const tFloor_Tab[] = {
+uint16_t const tFloor_Tab[] = {
 	//�˱����� LED ���ַ�����Ӧ
 	//	Char0,		Char1_LEFT,Char2,	Char3,		Char4,		Char5,		Char6,			Char7,		Char8,		Char9,		//0-9
 	Char0,
@@ -306,7 +309,7 @@ WORD const tFloor_Tab[] = {
 	0xFFFF,
 };
 
-BYTE const sign[][4] = {
+uint8_t const sign[][4] = {
 
 	/* ------------ -- ----------------*/ // 2 3 4 5 6 8 9 A B E F G H K P R + -
 	0X0B, 0X01, 0X10, 0X1A,				  // 2           //0
@@ -353,7 +356,7 @@ BYTE const sign[][4] = {
 	0x00, 0x00, 0x00, 0x00, //            //36
 	0x00, 0x00, 0x00, 0x00, //            //37
 
-							/*---------------- -- ----------------*/
+	/*---------------- -- ----------------*/
 	0x00, 0x00, 0x04, 0x04, // --        //38
 	0x04, 0x04, 0x00, 0x00, //   --      //39
 	0x00, 0x00, 0x00, 0x04, // -         //40
@@ -406,10 +409,9 @@ BYTE const sign[][4] = {
 	0xC8, 0xC8, 0xC8, 0xC8, // UP        //86
 	0x38, 0x38, 0x38, 0x38, // DOWN      //87
 
-
 };
 #if 0
-BYTE const sign[][7] = {
+uint8_t const sign[][7] = {
 	0b11101110, 	// 0
 	0b11110001,
 	0b11110001,
@@ -1241,7 +1243,7 @@ BYTE const sign[][7] = {
 /************************************************************************************************/
 /* display for test mode																		*/
 /************************************************************************************************/
-BYTE const testdisplay[][3] = {
+uint8_t const testdisplay[][3] = {
 	90, 90, 90,
 	91, 91, 91,
 	92, 92, 92,
@@ -1327,24 +1329,26 @@ BYTE const testdisplay[][3] = {
 #endif
 
 void init_SPI(void);
-BYTE SPI_SendOneByte(BYTE dat);
+uint8_t SPI_SendOneByte(uint8_t dat);
 void Display_test(void);
 void TestMode(void);
 void read_switch(void);
 
 #else
-extern BYTE volatile display[];
-extern BYTE const tDisp_FloorAscii[];
-extern WORD const tFloor_Tab[];
-extern BYTE const sign[][4];
+extern uint8_t volatile display[];
+extern uint8_t const tDisp_FloorAscii[];
+extern uint16_t const tFloor_Tab[];
+extern uint8_t const sign[][4];
+extern char test[];
+extern uint8_t showNodeId[4];
 
 extern void init_SPI(void);
-extern BYTE SPI_SendOneByte(BYTE dat);
+extern uint8_t SPI_SendOneByte(uint8_t dat);
 extern void Display_test(void);
 extern void TestMode(void);
 extern void SetNodeId(void);
 extern void KeyScan(void);
-extern void KeyProg(const BYTE value);
+extern void KeyProg(const uint8_t value);
 extern void check_key_buttom(void);
 extern void key_buttom_output(void);
 extern void peak_led_out(void);

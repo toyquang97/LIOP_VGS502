@@ -101,226 +101,226 @@ enum {NotUsed, KEYVALUE_UP, KEYVALUE_DOWN, KEYVALUE_SYSSET};
 
 #ifdef _MAIN_C_
 
-BYTE merker;					// variable for restart
+uint8_t merker;					// variable for restart
 
-BYTE node_id = 0;					// node id of CAN
-BYTE disp_id = 0;
-BYTE disp_lift = 0;				// ift number assigned to display
-BYTE nmtstate;					// network management state
-BYTE setid_mode;				// set liop can ID mode
-BYTE setid_mode_old;				// set liop can ID mode
-BYTE preset_node_id = 0;
+uint8_t node_id = 0;					// node id of CAN
+uint8_t disp_id = 0;
+uint8_t disp_lift = 0;				// ift number assigned to display
+uint8_t nmtstate;					// network management state
+uint8_t setid_mode;				// set liop can ID mode
+uint8_t setid_mode_old;				// set liop can ID mode
+uint8_t preset_node_id = 0;
 
-BYTE id_buff[4];
-WORD volatile nmtwait;			// waiting time for 1. heartbeat
+uint8_t id_buff[4];
+uint16_t volatile nmtwait;			// waiting time for 1. heartbeat
 
-WORD volatile sdo_index = 0;
-BYTE volatile sdo_subindex = 0;
-BYTE sdo_timer = 0;				// timer for SDO segment transfer
-BYTE errorregister = 0;			// error register
-WORD errorcode = 0;				// error code
-DWORD device_type;				// Device type and profile number
-WORD virtual_device[3];			// Virtual device types + profile number
+uint16_t volatile sdo_index = 0;
+uint8_t volatile sdo_subindex = 0;
+uint8_t sdo_timer = 0;				// timer for SDO segment transfer
+uint8_t errorregister = 0;			// error register
+uint16_t errorcode = 0;				// error code
+uint32_t device_type;				// Device type and profile number
+uint16_t virtual_device[3];			// Virtual device types + profile number
 
-BYTE volatile input[3];			// input variables for debouncing
-BYTE volatile in;				// variable for input after debouncing
-BYTE inold;						// variable to save old input state
-BYTE volatile out;				// output state
-BYTE volatile inpush;			// push button inputs
-BYTE volatile outpush;			// push button indication
-BYTE in_polarity;				// input is inverted / not inverted
-BYTE out_polarity;				// output is inverted / not inverted
+uint8_t volatile input[3];			// input variables for debouncing
+uint8_t volatile in;				// variable for input after debouncing
+uint8_t inold;						// variable to save old input state
+uint8_t volatile out;				// output state
+uint8_t volatile inpush;			// push button inputs
+uint8_t volatile outpush;			// push button indication
+uint8_t in_polarity;				// input is inverted / not inverted
+uint8_t out_polarity;				// output is inverted / not inverted
 
-BYTE		row 			= 0;				// row to switch on 				
-BYTE		scroll		= 0;				// 1 : UP 	2: DN 	other: NO_Arrow 
+uint8_t		row 			= 0;				// row to switch on 				
+uint8_t		scroll		= 0;				// 1 : UP 	2: DN 	other: NO_Arrow 
 SBYTE 	scrollpos 	= 0;			// 1 more value to transmit 	
-BYTE		scrolltimer = 0;			// timer for scrolling arrows 	
+uint8_t		scrolltimer = 0;			// timer for scrolling arrows 	
 
-BYTE heartbeat;					// timer for transmitting heartbeat
-BYTE input_detect = 0;
+uint8_t heartbeat;					// timer for transmitting heartbeat
+uint8_t input_detect = 0;
 
-BYTE landingcalltimer = 0;		// timer for landing call misuse
-BYTE landingcallfloor = 0;		// flor marker for landing call misuse
-BYTE direction_ind_mode = 0;
+uint8_t landingcalltimer = 0;		// timer for landing call misuse
+uint8_t landingcallfloor = 0;		// flor marker for landing call misuse
+uint8_t direction_ind_mode = 0;
 
-BYTE virt_in[MAX_IO_TYPE];				// virtual input (last changed)
-BYTE virt_out[MAX_IO_TYPE];				// virtual output (last changed)
-BYTE inpar[MAX_IO][MAX_IO_TYPE];			// input parameter
-BYTE outpar[MAX_IO][MAX_IO_TYPE + 1];			// output parameter
+uint8_t virt_in[MAX_IO_TYPE];				// virtual input (last changed)
+uint8_t virt_out[MAX_IO_TYPE];				// virtual output (last changed)
+uint8_t inpar[MAX_IO][MAX_IO_TYPE];			// input parameter
+uint8_t outpar[MAX_IO][MAX_IO_TYPE + 1];			// output parameter
 
-BYTE arrowtype = 0;				// arrow type
-BYTE arrowflash = 0;
-BYTE arrowflash_old = 0;
-BYTE flashcontent = 0;
-BYTE mSwitch_code = 0;
-BYTE	baudrate = 0;
+uint8_t arrowtype = 0;				// arrow type
+uint8_t arrowflash = 0;
+uint8_t arrowflash_old = 0;
+uint8_t flashcontent = 0;
+uint8_t mSwitch_code = 0;
+uint8_t	baudrate = 0;
 
-BYTE volatile hsetime;
-BYTE volatile hsecheck = 0;
-BYTE volatile hse_heartbeat = 0;
-BYTE volatile can_inittime = 0;
-BYTE can_passive_time = 0;
-BYTE display_scantimer = 0;
-BYTE hardware_version = 0;
-BYTE timer1_countH = 0;
-BYTE timer1_countL = 0;
-BYTE com_can_work = 0;
-BYTE keytimer = 0;
-BYTE flashtimer = 0;
+uint8_t volatile hsetime;
+uint8_t volatile hsecheck = 0;
+uint8_t volatile hse_heartbeat = 0;
+uint8_t volatile can_inittime = 0;
+uint8_t can_passive_time = 0;
+uint8_t display_scantimer = 0;
+uint8_t hardware_version = 0;
+uint8_t timer1_countH = 0;
+uint8_t timer1_countL = 0;
+uint8_t com_can_work = 0;
+uint8_t keytimer = 0;
+uint8_t flashtimer = 0;
 
-BYTE mKeyValue = 0;
-BYTE mKeyValue_Back = 0;
-BYTE mLongKeyTime = 0;
-BYTE timer_1S5 = 0;
-BYTE display_timer = 0;
-BYTE testno = 0;
+uint8_t mKeyValue = 0;
+uint8_t mKeyValue_Back = 0;
+uint8_t mLongKeyTime = 0;
+uint8_t timer_1S5 = 0;
+uint8_t display_timer = 0;
+uint8_t testno = 0;
 
-BYTE u8Start_Dark = 0;
-BYTE u8PWM_Count = 0;
-BYTE backlight_mode = 0;
-BYTE backlight_func = 0;			
-WORD backlight_off_time = 0;
-WORD backlight_time_count = 0;
-BYTE light_para_ok = 0;
-BYTE display_STN_mode = 0;
+uint8_t u8Start_Dark = 0;
+uint8_t u8PWM_Count = 0;
+uint8_t backlight_mode = 0;
+uint8_t backlight_func = 0;			
+uint16_t backlight_off_time = 0;
+uint16_t backlight_time_count = 0;
+uint8_t light_para_ok = 0;
+uint8_t display_STN_mode = 0;
 	// 0-->�������µ�¥�㲼��ͼ��ʾ,   ����"1"���ұ�
 	// 1 -->�Ľ�"17"����ʾ¥�㣬����"1"����ߣ�"17"��1���ұ�
 	// 2��3-->��������
 
-BYTE recei_monitor[8];
+uint8_t recei_monitor[8];
 
-BYTE const tKeyCode[] = {
+uint8_t const tKeyCode[] = {
 	KEYCODE_UP	, KEYCODE_DOWN, KEYCODE_SYSSET, NO_KEY,
 };
 
 struct{
-	BYTE KeyScanEn 	:1; 	//����ɨ��������־
-	BYTE KeyTrue 		:1; 	//������Ч��־
-	BYTE LKeyScanEnd :1; 	//������ɨ�������־
-	BYTE LongKeyEn 	:1; 	//��������Ч��־
-	BYTE KeyAnswer 	:1; 	//������Ӧ��־
-	BYTE KeyRepeat 	:1; 	//�ظ�����ʱ
-	BYTE KeyRepeatEn :1; 	//��ס��1��������ظ�
+	uint8_t KeyScanEn 	:1; 	//����ɨ��������־
+	uint8_t KeyTrue 		:1; 	//������Ч��־
+	uint8_t LKeyScanEnd :1; 	//������ɨ�������־
+	uint8_t LongKeyEn 	:1; 	//��������Ч��־
+	uint8_t KeyAnswer 	:1; 	//������Ӧ��־
+	uint8_t KeyRepeat 	:1; 	//�ظ�����ʱ
+	uint8_t KeyRepeatEn :1; 	//��ס��1��������ظ�
 }bKey_Fg;
 
 struct {
-	BYTE Time_10ms: 1;		//10ms ��־
-	BYTE Time_100ms: 1;		//100ms ��־
-	BYTE Time_500ms: 1;		//500ms ��־
-	BYTE Time_2s: 1;
-	BYTE Time_5s: 1;
-	BYTE Time_alarm_fg: 1;		//˾��������������־
+	uint8_t Time_10ms: 1;		//10ms ��־
+	uint8_t Time_100ms: 1;		//100ms ��־
+	uint8_t Time_500ms: 1;		//500ms ��־
+	uint8_t Time_2s: 1;
+	uint8_t Time_5s: 1;
+	uint8_t Time_alarm_fg: 1;		//˾��������������־
 }bTime;
 
 #else
 
-extern	BYTE input_detect;
+extern	uint8_t input_detect;
 
-extern BYTE merker;
-extern BYTE scroll;
+extern uint8_t merker;
+extern uint8_t scroll;
 
-extern BYTE node_id;
-extern BYTE disp_id;
-extern BYTE disp_lift;
-extern BYTE nmtstate;
-extern BYTE setid_mode;
-extern BYTE setid_mode_old;				// set liop can ID mode
-extern BYTE preset_node_id;
+extern uint8_t node_id;
+extern uint8_t disp_id;
+extern uint8_t disp_lift;
+extern uint8_t nmtstate;
+extern uint8_t setid_mode;
+extern uint8_t setid_mode_old;				// set liop can ID mode
+extern uint8_t preset_node_id;
 
-extern BYTE id_buff[];
-extern WORD volatile nmtwait;
+extern uint8_t id_buff[];
+extern uint16_t volatile nmtwait;
 
-extern WORD volatile sdo_index;
-extern BYTE volatile sdo_subindex;
-extern BYTE sdo_timer;
-extern BYTE errorregister;
-extern WORD errorcode;
-extern DWORD device_type;
-extern WORD virtual_device[];
+extern uint16_t volatile sdo_index;
+extern uint8_t volatile sdo_subindex;
+extern uint8_t sdo_timer;
+extern uint8_t errorregister;
+extern uint16_t errorcode;
+extern uint32_t device_type;
+extern uint16_t virtual_device[];
 
-extern BYTE volatile input[];
-extern BYTE volatile in;
-extern BYTE inold;
-extern BYTE volatile input[];
-extern BYTE volatile in;
-extern BYTE inold;
-extern BYTE virt_in[];
-extern BYTE virt_out[];
-extern BYTE volatile out;
-extern BYTE volatile inpush;
-extern BYTE volatile outpush;
-extern BYTE in_polarity;
-extern BYTE out_polarity;
-extern BYTE landingcalltimer;
-extern BYTE landingcallfloor;
-extern BYTE direction_ind_mode;
+extern uint8_t volatile input[];
+extern uint8_t volatile in;
+extern uint8_t inold;
+extern uint8_t volatile input[];
+extern uint8_t volatile in;
+extern uint8_t inold;
+extern uint8_t virt_in[];
+extern uint8_t virt_out[];
+extern uint8_t volatile out;
+extern uint8_t volatile inpush;
+extern uint8_t volatile outpush;
+extern uint8_t in_polarity;
+extern uint8_t out_polarity;
+extern uint8_t landingcalltimer;
+extern uint8_t landingcallfloor;
+extern uint8_t direction_ind_mode;
 
-extern BYTE inpar[MAX_IO][MAX_IO_TYPE];
-extern BYTE outpar[MAX_IO][MAX_IO_TYPE + 1];
+extern uint8_t inpar[MAX_IO][MAX_IO_TYPE];
+extern uint8_t outpar[MAX_IO][MAX_IO_TYPE + 1];
 
-extern BYTE volatile display[];
-extern BYTE arrowtype;
-extern BYTE arrowflash;
-extern BYTE arrowflash_old;
-extern BYTE flashcontent;
-extern BYTE mSwitch_code;
+extern uint8_t volatile display[];
+extern uint8_t arrowtype;
+extern uint8_t arrowflash;
+extern uint8_t arrowflash_old;
+extern uint8_t flashcontent;
+extern uint8_t mSwitch_code;
 
-extern BYTE		row;				// row to switch on 				
-extern BYTE		scroll;				// 1 : UP 	2: DN 	other: NO_Arrow 
+extern uint8_t		row;				// row to switch on 				
+extern uint8_t		scroll;				// 1 : UP 	2: DN 	other: NO_Arrow 
 extern SBYTE 	scrollpos;			// 1 more value to transmit 	
-extern BYTE		scrolltimer;			// timer for scrolling arrows 	
+extern uint8_t		scrolltimer;			// timer for scrolling arrows 	
 
-extern BYTE heartbeat;
+extern uint8_t heartbeat;
 
-extern BYTE volatile hsetime;
-extern BYTE volatile hsecheck;
-extern	BYTE volatile hse_heartbeat;
-extern	BYTE volatile can_inittime;
-extern	BYTE can_passive_time;
-extern	BYTE display_scantimer;
+extern uint8_t volatile hsetime;
+extern uint8_t volatile hsecheck;
+extern	uint8_t volatile hse_heartbeat;
+extern	uint8_t volatile can_inittime;
+extern	uint8_t can_passive_time;
+extern	uint8_t display_scantimer;
 
-extern	BYTE mKeyValue;
-extern	BYTE mKeyValue_Back;
-extern	BYTE mLongKeyTime;
+extern	uint8_t mKeyValue;
+extern	uint8_t mKeyValue_Back;
+extern	uint8_t mLongKeyTime;
 
-extern	BYTE hardware_version;
-extern	BYTE timer1_countH;
-extern	BYTE timer1_countL;
-extern	BYTE com_can_work;
-extern	BYTE keytimer;
-extern	BYTE flashtimer;
-extern	BYTE timer_1S5;
-extern	BYTE display_timer;
-extern	BYTE testno;
-extern	BYTE u8Start_Dark;
-extern	BYTE u8PWM_Count;
-extern	BYTE backlight_mode;
-extern	BYTE backlight_func;			
-extern	WORD backlight_time_count;
-extern	WORD backlight_off_time;
-extern	BYTE light_para_ok;
+extern	uint8_t hardware_version;
+extern	uint8_t timer1_countH;
+extern	uint8_t timer1_countL;
+extern	uint8_t com_can_work;
+extern	uint8_t keytimer;
+extern	uint8_t flashtimer;
+extern	uint8_t timer_1S5;
+extern	uint8_t display_timer;
+extern	uint8_t testno;
+extern	uint8_t u8Start_Dark;
+extern	uint8_t u8PWM_Count;
+extern	uint8_t backlight_mode;
+extern	uint8_t backlight_func;			
+extern	uint16_t backlight_time_count;
+extern	uint16_t backlight_off_time;
+extern	uint8_t light_para_ok;
 
-extern	BYTE recei_monitor[8];
-extern	BYTE display_STN_mode;
+extern	uint8_t recei_monitor[8];
+extern	uint8_t display_STN_mode;
 
-extern	BYTE const tKeyCode[];
+extern	uint8_t const tKeyCode[];
 extern	struct{
-	BYTE KeyScanEn 	:1; 	//����ɨ��������־
-	BYTE KeyTrue 		:1; 	//������Ч��־
-	BYTE LKeyScanEnd :1; 	//������ɨ�������־
-	BYTE LongKeyEn 	:1; 	//��������Ч��־
-	BYTE KeyAnswer 	:1; 	//������Ӧ��־
-	BYTE KeyRepeat 	:1; 	//�ظ�����ʱ
-	BYTE KeyRepeatEn :1; 	//��ס��1��������ظ�
+	uint8_t KeyScanEn 	:1; 	//����ɨ��������־
+	uint8_t KeyTrue 		:1; 	//������Ч��־
+	uint8_t LKeyScanEnd :1; 	//������ɨ�������־
+	uint8_t LongKeyEn 	:1; 	//��������Ч��־
+	uint8_t KeyAnswer 	:1; 	//������Ӧ��־
+	uint8_t KeyRepeat 	:1; 	//�ظ�����ʱ
+	uint8_t KeyRepeatEn :1; 	//��ס��1��������ظ�
 }bKey_Fg;
 
 extern	struct {
-	BYTE Time_10ms: 1;		//10ms ��־
-	BYTE Time_100ms: 1;		//100ms ��־
-	BYTE Time_500ms: 1;		//500ms ��־
-	BYTE Time_2s: 1;
-	BYTE Time_5s: 1;
-	BYTE Time_alarm_fg: 1;		//˾��������������־
+	uint8_t Time_10ms: 1;		//10ms ��־
+	uint8_t Time_100ms: 1;		//100ms ��־
+	uint8_t Time_500ms: 1;		//500ms ��־
+	uint8_t Time_2s: 1;
+	uint8_t Time_5s: 1;
+	uint8_t Time_alarm_fg: 1;		//˾��������������־
 }bTime;
 
 

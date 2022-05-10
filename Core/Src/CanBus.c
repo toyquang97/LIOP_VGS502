@@ -33,8 +33,7 @@ void Init_Can(void)
 			tx[i][j] = 0;
 	}
 
-
-		CAN_FilterTypeDef sFilterConfig;
+	CAN_FilterTypeDef sFilterConfig;
 	/*------------filter bank 1----------*/
 	sFilterConfig.FilterBank = 1;
 	sFilterConfig.FilterIdHigh = PDO_OUT << 8;
@@ -54,6 +53,7 @@ void Init_Can(void)
 	sFilterConfig.FilterFIFOAssignment = CAN_FilterFIFO1;
 	sFilterConfig.FilterBank = 2;
 	sFilterConfig.FilterIdHigh = ((RSDO | (node_id >> 3)) << 8) + (node_id << 5);
+	// sFilterConfig.FilterIdHigh = RSDO << 8;
 	sFilterConfig.FilterIdLow = 0x00;
 	sFilterConfig.FilterMaskIdHigh = 0xF000;
 	sFilterConfig.FilterMaskIdLow = 0x0000;
@@ -98,8 +98,6 @@ void Init_Can(void)
 		Error_Handler();
 	}
 
-	
-
 	sFilterConfig.FilterFIFOAssignment = CAN_FilterFIFO1;
 	sFilterConfig.FilterBank = 5;
 	sFilterConfig.FilterIdHigh = LSS << 8;
@@ -117,7 +115,6 @@ void Init_Can(void)
 		Error_Handler();
 	}
 
-	
 	/* -----------------Filter bank 0---------------*/
 	sFilterConfig.FilterBank = 10;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
@@ -133,8 +130,8 @@ void Init_Can(void)
 
 	HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_RX_FIFO1_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY);
 	HAL_CAN_Start(&hcan);
-	
-	#if 0
+
+#if 0
 	uint8_t i, j;
 
 	rc = 0;       							  //clear all CAN variables
@@ -216,10 +213,24 @@ void Init_Can(void)
 		Error_Handler();
 	}
 
+	sFilterConfig.FilterFIFOAssignment = CAN_FilterFIFO1;
+	sFilterConfig.FilterBank = 5;
+	sFilterConfig.FilterIdHigh = LSS << 8;
+	sFilterConfig.FilterIdLow = 0x00;
+	sFilterConfig.FilterMaskIdHigh = 0xF000;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
+	sFilterConfig.FilterActivation = CAN_FILTER_ENABLE;
+	sFilterConfig.SlaveStartFilterBank = 14;
+
+	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
+	{
+		/* Filter configuration Error */
+		Error_Handler();
+	}
 
 
-
-#if 0
 	RXB0CON 	= 0x20;		//ֻ���մ��б�׼��ʶ������Ч����
 	RXB1CON 	= 0x20;		//ֻ���մ��б�׼��ʶ������Ч����
 
@@ -261,14 +272,12 @@ void Init_Can(void)
 
 	INTCONbits.GIEH		= 1;					// low priority interrupts enable
 #else
-	#warning  add filter and enbale interrupt
+#warning add filter and enbale interrupt
 
-	if (HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING|CAN_IT_RX_FIFO1_MSG_PENDING|CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK)
+	if (HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_RX_FIFO1_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK)
 	{
-
 	}
 	HAL_CAN_Start(&hcan);
-#endif
 #endif
 }
 
@@ -482,7 +491,41 @@ void transmit_in(uint8_t *input)
 		tx[ti][2 + i] = *input++; /* write input function					*/
 	can_transmit();				  /* transmit message						*/
 }
-
+/************************************************************************************************/
+/* transmit load measurement state																*/
+/************************************************************************************************/
+void transmit_load(void)
+{
+	uint8_t i;
+	uint8_t state;
+	state = 0;
+	for (i = 0; i < MAX_IO; i++)
+	{
+		if (inpar[i][IO_BASIC_FUNC] == LOAD_IN) /* load measurement input				*/
+			if (inpar[i][IO_STATE])				/* input is on							*/
+				state |= inpar[i][IO_SUB_FUNC]; /* set load measurement state			*/
+	}
+	while (tc == TX_SIZE)
+		;				  /* wait for TX buffer free				*/
+	tx[ti][0] = FC_3 + 1; /* write function code + data length	*/
+	tx[ti][1] = LOAD_ID;  /* write second part of ID				*/
+	tx[ti][2] = state;	  /* write load measurment state			*/
+	can_transmit();		  /* transmit message						*/
+}
+uint8_t check_for_call(uint8_t value)
+{
+	switch (value)
+	{
+	case (HALL_CALL):			/* standard hall call					*/
+	case (HALL_CALL_SPECIAL):	/* special hall call					*/
+	case (HALL_CALL_ADVANCED):	/* advanced hall call					*/
+	case (HALL_CALL_EMERGENCY): /* emergency hall call					*/
+	case (CAR_CALL):
+		return (1); /* car call								*/
+	default:
+		return (0); /* all other values						*/
+	}
+}
 void sent_heartbeat(void)
 {
 	while (tc == TX_SIZE)
@@ -500,16 +543,16 @@ void sent_heartbeat(void)
 
 void read_rx(void)
 {
-	BYTE type;
-	WORD index;
-	BYTE subindex;
-	BYTE i;
-	BYTE size;
-	BYTE sub;
-	DWORD value;
-	BYTE buffer[8];
-	static BYTE pos = 0;
-	static BYTE cte = 0;
+	uint8_t type;
+	uint16_t index;
+	uint8_t subindex;
+	uint8_t i;
+	uint8_t size;
+	uint8_t sub;
+	uint32_t value;
+	uint8_t buffer[8];
+	static uint8_t pos = 0;
+	//	static uint8_t cte = 0;
 
 	switch (rx[ro][0]) /* message function code				*/
 	{
@@ -531,9 +574,9 @@ void read_rx(void)
 		type = rx[ro][2];				  /* read SDO type						*/
 		switch (type & COMMAND_SPECIFIER) /* check command specifier of SDO		*/
 		{
-		case (INIT_WRITE_REQ):			 /* init write or expedited write		*/
-			index = *(WORD *)&rx[ro][3]; /* read object index					*/
-			subindex = rx[ro][5];		 /* read object subindex					*/
+		case (INIT_WRITE_REQ):				 /* init write or expedited write		*/
+			index = *(uint16_t *)&rx[ro][3]; /* read object index					*/
+			subindex = rx[ro][5];			 /* read object subindex					*/
 			value = search_dict(index, subindex, type, &pos);
 			if (value)			  /* wrong access to object dictionary	*/
 				abort_sdo(value); /* abort SDO transfer					*/
@@ -541,12 +584,12 @@ void read_rx(void)
 			{
 				if (type & EXPEDITED_BIT) /* expedited transfer					*/
 				{
-					value = write_dict(pos, subindex, *(DWORD *)&rx[ro][6]);
+					value = write_dict(pos, subindex, *(uint32_t *)&rx[ro][6]);
 					if (value)			  /* value out of range					*/
 						abort_sdo(value); /* abort SDO transfer					*/
 					else				  /* write ready							*/
 					{
-						sdo_response(INIT_WRITE_RESP, index, subindex, *(DWORD *)&rx[ro][6]);
+						sdo_response(INIT_WRITE_RESP, index, subindex, *(uint32_t *)&rx[ro][6]);
 						if (index == ARROW_MODE)
 						{
 							if (arrowtype == ARROW_SCROLL)
@@ -619,9 +662,9 @@ void read_rx(void)
 			sdo_timer = 0;
 			break;
 
-		case (INIT_READ_REQ):			 /* init read or expedited read			*/
-			index = *(WORD *)&rx[ro][3]; /* read object index					*/
-			subindex = rx[ro][5];		 /* read object subindex					*/
+		case (INIT_READ_REQ):				 /* init read or expedited read			*/
+			index = *(uint16_t *)&rx[ro][3]; /* read object index					*/
+			subindex = rx[ro][5];			 /* read object subindex					*/
 			value = search_dict(index, subindex, type, &pos);
 			if (value)			  /* wrong access to object dictionary	*/
 				abort_sdo(value); /* abort SDO transfer					*/
@@ -810,6 +853,17 @@ void read_rx(void)
 				{
 					id_buff[BUF_TEN] = ((node_id - ESE_ID + 1) / 10) + '0';
 					id_buff[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + '0';
+					for (uint8_t i = 0; i < 36; i++)
+					{
+						if (id_buff[BUF_TEN] == tDisp_FloorAscii[i])
+						{
+							showNodeId[BUF_TEN] = i;
+						}
+						if (id_buff[BUF_UNIT] == tDisp_FloorAscii[i])
+						{
+							showNodeId[BUF_UNIT] = i;
+						}
+					}
 				}
 				else
 				{
@@ -895,14 +949,13 @@ void can_transmit(void)
 	{
 	}
 	CAN_TxHeaderTypeDef CanTxHeader_t;
-	
+
 	uint32_t Txmallbox;
 	// INTCONbits.GIEH	= 0;								/* global interrupts disable			*/
 	CanTxHeader_t.StdId = ((tx[to][0] & 0xF0) << 3) + tx[to][1];
 	CanTxHeader_t.DLC = tx[to][0] & 0x0F; // read data lenght code
 	CanTxHeader_t.IDE = CAN_ID_STD;
 	CanTxHeader_t.RTR = CAN_RTR_DATA;
-
 
 	memcpy(CanTxData_t, (void *)(tx[to] + 2), 8);
 	if (HAL_CAN_AddTxMessage(&hcan, &CanTxHeader_t, CanTxData_t, &Txmallbox) == HAL_OK)
@@ -922,21 +975,6 @@ void can_transmit(void)
 	}
 }
 
-BYTE check_for_call(BYTE value)
-{
-	switch (value)
-	{
-	case (HALL_CALL):			/* standard hall call					*/
-	case (HALL_CALL_SPECIAL):	/* special hall call					*/
-	case (HALL_CALL_ADVANCED):	/* advanced hall call					*/
-	case (HALL_CALL_EMERGENCY): /* emergency hall call					*/
-	case (CAR_CALL):
-		return (1); /* car call								*/
-	default:
-		return (0); /* all other values						*/
-	}
-}
-
 /*=============================  �����Ƿ��ͳ���   ================================*/
 // transmit a message if TX register is free or write message to buffer
 
@@ -944,13 +982,13 @@ uint8_t fire_alarm = 0;
 uint8_t fire_evacuation = 0;
 uint8_t fire_state = 0;
 // set special outputs SPECIAL_FUNC
-void set_output(BYTE *virt)
+void set_output(uint8_t *virt)
 {
-	BYTE i;
-	BYTE iotype;
-	BYTE buf[3] = {0, 0, 0};
-	BYTE sub = 0;
-	WORD index = 0;
+	uint8_t i;
+	uint8_t iotype;
+	uint8_t buf[3] = {0, 0, 0};
+	uint8_t sub = 0;
+	uint16_t index = 0;
 
 	iotype = virt[IO_BASIC_FUNC];
 	if (check_for_call(iotype)) /* car call, hall call or priority call	*/
@@ -1258,11 +1296,11 @@ void set_output(BYTE *virt)
 	}
 	else if (iotype == OPERATION_DATA)
 	{
-		index = ((WORD)virt[IO_SUB_FUNC] << 8) | virt[IO_FLOOR];
+		index = ((uint16_t)virt[IO_SUB_FUNC] << 8) | virt[IO_FLOOR];
 		if (index == BACKLIGHT_MODE)
 		{
 			backlight_func = (virt[IO_STATE] >> 4) & 0x03;
-			backlight_off_time = ((WORD)(virt[IO_STATE] & 0x0F)) * NO_SIGNAL_TIMEOUT;
+			backlight_off_time = ((uint16_t)(virt[IO_STATE] & 0x0F)) * NO_SIGNAL_TIMEOUT;
 			light_para_ok = 1;
 			display_STN_mode = (virt[IO_STATE] >> 6) & 0x03;
 		}
@@ -1295,7 +1333,7 @@ void set_output(BYTE *virt)
 
 void set_io_config(void)
 {
-	BYTE i;
+	uint8_t i;
 	outpush = 0;
 	for (i = 0; i < MAX_IO; i++)
 	{

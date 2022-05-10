@@ -2,9 +2,9 @@
 #ifndef _TYPEDEF_H_
 #define _TYPEDEF_H_
 
-typedef unsigned long		DWORD;
-typedef unsigned int		WORD;
-typedef unsigned char		BYTE;
+//typedef unsigned long		uint32_t;
+//typedef unsigned int		uint16_t;
+//typedef unsigned char		uint8_t;
 typedef signed long			SDWORD;
 typedef signed int			SWORD;
 typedef signed char			SBYTE;

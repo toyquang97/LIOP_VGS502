@@ -4,7 +4,7 @@
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim4;
-BYTE SPI_SendOneByte(BYTE dat)
+uint8_t SPI_SendOneByte(uint8_t dat)
 {
 
 	SCK = 0;
@@ -30,7 +30,7 @@ BYTE SPI_SendOneByte(BYTE dat)
 /************************************************************************************************/
 void SetNodeId(void)
 {
-	static BYTE buffer[3] = {0, 0, 0};
+	static uint8_t buffer[3] = {0, 0, 0};
 
 	if ((disp_id != node_id) || (setid_mode_old != setid_mode))
 	{
@@ -59,8 +59,10 @@ void SetNodeId(void)
 		else
 		{
 			display[BUF_ARROW] = id_buff[BUF_ARROW];
-			display[BUF_TEN] = id_buff[BUF_TEN] - '0';
-			display[BUF_UNIT] = id_buff[BUF_UNIT] - '0';
+			// display[BUF_TEN] = id_buff[BUF_TEN] - '0';
+			// display[BUF_UNIT] = id_buff[BUF_UNIT] - '0';
+			display[BUF_TEN] = showNodeId[BUF_TEN] ;
+			display[BUF_UNIT] = showNodeId[BUF_UNIT] ;
 			display[BUF_MESSAGE] = 0;
 		}
 		disp_id = node_id;
@@ -101,8 +103,8 @@ void SetNodeId(void)
 /************************************************************************************************/
 void TestMode(void)
 {
-	BYTE i;
-	static BYTE oldin = 0;
+	uint8_t i;
+	static uint8_t oldin = 0;
 
 	if (timer_1S5)
 	{
@@ -166,7 +168,7 @@ void TestMode(void)
 							break;
 						}
 						// PIE1bits.TMR1IE	= 1;
-						HAL_TIM_Base_Start_IT(&htim4);
+						//HAL_TIM_Base_Start_IT(&htim4);
 					}
 					else
 					{
@@ -187,8 +189,8 @@ void TestMode(void)
 
 void Display_test(void)
 {
-	BYTE number = 0;
-	BYTE buf[4];
+	uint8_t number = 0;
+	uint8_t buf[4];
 
 	if (hardware_version == G_741_LCD)
 		number = 37;
@@ -273,15 +275,15 @@ void Display_test(void)
 	testno++;
 	flashcontent = display[BUF_ARROW];
 	// PIE1bits.TMR1IE = 1;
-	HAL_TIM_Base_Start_IT(&htim4);
+	//HAL_TIM_Base_Start_IT(&htim4);
 }
 
 void KeyScan(void)
 {
-	BYTE i, j = 0x00;
-	BYTE key_code, value = 0;
+	uint8_t i, j = 0x00;
+	uint8_t key_code, value = 0;
 
-	i = (BYTE)((GPIOB->IDR >> 11) & 0x13);
+	i = (uint8_t)((GPIOB->IDR >> 11) & 0x13);
 	key_code = (i >> 2) | (i & 0x03);
 	if (!key_code)
 	{ //�޼�����
@@ -339,7 +341,7 @@ void KeyScan(void)
 	}
 }
 
-void KeyProg(const BYTE value)
+void KeyProg(const uint8_t value)
 {
 
 	if (!bKey_Fg.KeyTrue)

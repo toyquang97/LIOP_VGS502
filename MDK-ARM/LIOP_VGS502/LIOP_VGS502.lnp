@@ -20,6 +20,7 @@
 "liop_vgs502\stm32f1xx_hal_flash.o"
 "liop_vgs502\stm32f1xx_hal_flash_ex.o"
 "liop_vgs502\stm32f1xx_hal_exti.o"
+"liop_vgs502\stm32f1xx_hal_iwdg.o"
 "liop_vgs502\stm32f1xx_hal_tim.o"
 "liop_vgs502\stm32f1xx_hal_tim_ex.o"
 "liop_vgs502\system_stm32f1xx.o"

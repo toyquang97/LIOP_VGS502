@@ -9,17 +9,17 @@
 /************************************************************************************************/
 const struct _dict
 {
-	WORD object;
-	BYTE sub;
-	BYTE access;
-	BYTE size;
+	uint16_t object;
+	uint8_t sub;
+	uint8_t access;
+	uint8_t size;
 	void * pointer;
 };
 extern const struct _dict dict[];
 
-DWORD read_dict (BYTE pos, BYTE subindex);
-BYTE write_dict (BYTE pos, BYTE subindex, DWORD value);
-DWORD search_dict (WORD index, BYTE subindex, BYTE type, BYTE * pos);
+uint32_t read_dict (uint8_t pos, uint8_t subindex);
+uint8_t write_dict (uint8_t pos, uint8_t subindex, uint32_t value);
+uint32_t search_dict (uint16_t index, uint8_t subindex, uint8_t type, uint8_t * pos);
 
 
 #endif

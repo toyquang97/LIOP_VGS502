@@ -6,15 +6,15 @@
 #define	VGS_502		    0
 #define	G_742_LED		1
 
-extern DWORD const identyty[];
-extern BYTE const version_uea_G741[];
-extern BYTE const version_uea_G742[];
-extern BYTE const hardware_uea_G741[];
-extern BYTE const hardware_uea_G742[];
-extern BYTE const device_name_G741[];
-extern BYTE const device_name_G742[];
-extern WORD const version_fver;
-extern DWORD const version_chksum;
+extern uint32_t const identyty[];
+extern uint8_t const version_uea_G741[];
+extern uint8_t const version_uea_G742[];
+extern uint8_t const hardware_uea_G741[];
+extern uint8_t const hardware_uea_G742[];
+extern uint8_t const device_name_G741[];
+extern uint8_t const device_name_G742[];
+extern uint16_t const version_fver;
+extern uint32_t const version_chksum;
 
 
 

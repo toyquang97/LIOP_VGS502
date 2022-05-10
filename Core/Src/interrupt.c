@@ -11,13 +11,13 @@ extern TIM_HandleTypeDef htim4;
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	BYTE i, j;
-	static BYTE a = 0;
-	BYTE buf[2];
+	uint8_t i, j;
+	static uint8_t a = 0;
+	uint8_t buf[2];
 	SBYTE pos;
-	static BYTE timer_100ms = 0;
-	static BYTE count = 0;
-	static BYTE timer_cnt = 0;
+	static uint8_t timer_100ms = 0;
+	static uint8_t count = 0;
+	static uint8_t timer_cnt = 0;
 	if (htim->Instance == htim2.Instance)
 	{
 		bTime.Time_500ms = 1;
@@ -95,8 +95,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		{
 			input[2] = input[1]; /* shift input variables				*/
 			input[1] = input[0];
-			input[0] = (BYTE)(GPIOB->IDR >> 11) & 0x0F;
-			input[0] = (input[0] ^ 0x0F) & 0x0F; //
+			input[0] = (uint8_t)(GPIOB->IDR >> 11) & 0x0F;
+			input[0] = (input[0] ^ 0x0f) & 0x0F; //
 			// input[0] = PORTC & 0x0F;
 			// input[0] = (input[0] ^ 0xF0) & 0x0F;  //
 			for (i = 0; i < 8; i++)
@@ -225,14 +225,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 #if 0
 void interrupt low_priority InterruptHandlerLow(void)
 {
-	BYTE i, j, arrow_mes;
+	uint8_t i, j, arrow_mes;
 	SBYTE pos;
-	WORD ten, unit;
-	BYTE buf[2];
-	static BYTE timer_100ms = 0;
-	static BYTE count = 0;
-	static BYTE a = 0;
-	static BYTE timer_cnt = 0;
+	uint16_t ten, unit;
+	uint8_t buf[2];
+	static uint8_t timer_100ms = 0;
+	static uint8_t count = 0;
+	static uint8_t a = 0;
+	static uint8_t timer_cnt = 0;
 
 	if (INTCONbits.TMR0IF) /* check for Timer 0 overflow			*/
 	{
@@ -425,11 +425,11 @@ void interrupt low_priority InterruptHandlerLow(void)
 				unit ^= 0xFFFF;
 				arrow_mes ^= 0xFF;
 			}
-			SPI_SendOneByte((BYTE)arrow_mes);
-			SPI_SendOneByte((BYTE)(unit >> 8));
-			SPI_SendOneByte((BYTE)unit);
-			SPI_SendOneByte((BYTE)(ten >> 8));
-			SPI_SendOneByte((BYTE)ten);
+			SPI_SendOneByte((uint8_t)arrow_mes);
+			SPI_SendOneByte((uint8_t)(unit >> 8));
+			SPI_SendOneByte((uint8_t)unit);
+			SPI_SendOneByte((uint8_t)(ten >> 8));
+			SPI_SendOneByte((uint8_t)ten);
 
 			LATCbits.LATC5 = 1;
 			Nop();
