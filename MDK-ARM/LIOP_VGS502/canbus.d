@@ -41,6 +41,7 @@ liop_vgs502\canbus.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 liop_vgs502\canbus.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 liop_vgs502\canbus.o: ../Core/Inc/PicMain.h
 liop_vgs502\canbus.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+liop_vgs502\canbus.o: ../Core/Inc/flash.h
 liop_vgs502\canbus.o: ../Core/Inc/dict.h
 liop_vgs502\canbus.o: ../Core/Inc/version.h
 liop_vgs502\canbus.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

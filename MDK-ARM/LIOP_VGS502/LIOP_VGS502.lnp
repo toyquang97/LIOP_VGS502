@@ -8,6 +8,7 @@
 "liop_vgs502\main.o"
 "liop_vgs502\stm32f1xx_it.o"
 "liop_vgs502\stm32f1xx_hal_msp.o"
+"liop_vgs502\flash.o"
 "liop_vgs502\stm32f1xx_hal_gpio_ex.o"
 "liop_vgs502\stm32f1xx_hal_can.o"
 "liop_vgs502\stm32f1xx_hal.o"

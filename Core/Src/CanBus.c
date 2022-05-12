@@ -128,8 +128,8 @@ void Init_Can(void)
 	sFilterConfig.SlaveStartFilterBank = 14;
 	HAL_CAN_ConfigFilter(&hcan, &sFilterConfig);
 
-	HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_RX_FIFO1_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY);
-	HAL_CAN_Start(&hcan);
+	//HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_RX_FIFO1_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY);
+	//HAL_CAN_Start(&hcan);
 
 #if 0
 	uint8_t i, j;
@@ -322,7 +322,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 			hsetime = HSETIME;							 // reset HSE supervisor time
 		else
 		{
-			hsetime = HSETIME - 10;
+			//hsetime = HSETIME - 10;
 		}
 	}
 	hse_heartbeat = 1;

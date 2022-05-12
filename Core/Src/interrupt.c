@@ -127,7 +127,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		++count;
 		if (hardware_version == VGS_502)
 		{
-			
+			if ((count % 50) == 0)
+			{
+				bTime.Time_100ms = 1;
+			}
 			if ((count % 50) == 0)
 			{
 				display_scantimer = 1;
@@ -173,14 +176,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 				buf[0] |= 0;
 
 			// process data
-			buf[0] |= ((sign[display[BUF_UNIT]][row] >> 3) |  sign[display[BUF_ARROW]][row]); 
-
-			// pos = scrollpos + row;
-			// if ((pos >= 0) && (pos < 4))
-			// 	buf[0] &= (sign[display[BUF_ARROW]][pos]  | 0x07);
-			// else
-			// 	buf[0] &= 0x07;
-			
+			buf[0] |= ((sign[display[BUF_UNIT]][row] >> 3) |  sign[display[BUF_ARROW]][row]); 		
 			buf[1] = (sign[display[BUF_TEN]][row] | ((sign[display[BUF_UNIT]][row] << 5) & 0xE0));  /// 5bit of Ten and 3 bit of unit
 
 			HC959_SEl = 0;
@@ -198,7 +194,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			__NOP();
 			__NOP();
 			__NOP();
-			GPIOB->ODR |= (i & 0xFFFF);
+			GPIOB->ODR |= (i & 0x0F);
 
 		}
 		if (timer_100ms)

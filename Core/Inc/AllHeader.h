@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include "PicMain.h"
 #include "string.h"
-
+#include "flash.h"
 #include "dict.h"
 //#include "eeprom.h"
 #include "version.h"

@@ -66,7 +66,7 @@ void SetNodeId(void)
 			}
 			else
 			{
-				display[BUF_TEN] = 33; //x
+				display[BUF_TEN] = 33;	// x
 				display[BUF_UNIT] = 33; // x
 			}
 		}
@@ -404,12 +404,14 @@ void KeyProg(const uint8_t value)
 					node_id = ESE_ID;
 				preset_node_id = node_id;
 				// write_eeprom (EE_NODEID_ADDR, node_id);
+				Flash_Write_Bytes(DATA_START_ADDRESS, (uint8_t *)&node_id, sizeof(node_id));
 			}
 			else if (setid_mode == 2)
 			{
 				keytimer = 0;
 				preset_node_id = node_id;
 				// write_eeprom (EE_NODEID_ADDR, node_id);
+				Flash_Write_Bytes(DATA_START_ADDRESS, (uint8_t *)&node_id, sizeof(node_id));
 				lss_response(SET_NODE_ID, node_id);
 			}
 		}
@@ -432,12 +434,14 @@ void KeyProg(const uint8_t value)
 				else
 					node_id = ESE_ID;
 				preset_node_id = node_id;
+				Flash_Write_Bytes(DATA_START_ADDRESS, (uint8_t *)&node_id, sizeof(node_id));
 				// write_eeprom (EE_NODEID_ADDR, node_id);
 			}
 			else if (setid_mode == 2)
 			{
 				keytimer = 0;
 				preset_node_id = node_id;
+				Flash_Write_Bytes(DATA_START_ADDRESS, (uint8_t *)&node_id, sizeof(node_id));
 				// write_eeprom (EE_NODEID_ADDR, node_id);
 				lss_response(SET_NODE_ID, node_id);
 			}

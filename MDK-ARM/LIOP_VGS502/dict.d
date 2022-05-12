@@ -40,6 +40,7 @@ liop_vgs502\dict.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 liop_vgs502\dict.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 liop_vgs502\dict.o: ../Core/Inc/PicMain.h
 liop_vgs502\dict.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+liop_vgs502\dict.o: ../Core/Inc/flash.h
 liop_vgs502\dict.o: ../Core/Inc/dict.h
 liop_vgs502\dict.o: ../Core/Inc/version.h
 liop_vgs502\dict.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
