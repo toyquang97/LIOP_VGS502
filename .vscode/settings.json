@@ -4,6 +4,7 @@
         "allheader.h": "c",
         "main.h": "c",
         "picmain.h": "c",
-        "display.h": "c"
+        "display.h": "c",
+        "dwin_app.h": "c"
     }
 }

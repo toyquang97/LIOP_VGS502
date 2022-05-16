@@ -89,8 +89,6 @@ void Error_Handler(void);
 #define NODE_ID_GPIO_Port GPIOB
 #define RESET_LED1_Pin GPIO_PIN_8
 #define RESET_LED1_GPIO_Port GPIOA
-#define RESET_LED2_Pin GPIO_PIN_9
-#define RESET_LED2_GPIO_Port GPIOA
 #define R4_Pin GPIO_PIN_3
 #define R4_GPIO_Port GPIOB
 #define DO_Pin GPIO_PIN_4

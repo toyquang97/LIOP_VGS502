@@ -20,6 +20,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	static uint8_t timer_cnt = 0;
 	if (htim->Instance == htim2.Instance)
 	{
+
 		bTime.Time_500ms = 1;
 		if (sdo_timer) /* check for SDO transfer time out		*/
 			sdo_timer--;
@@ -41,6 +42,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			--can_passive_time;
 		com_can_work++;
 		timer_cnt++;
+		if ((timer_cnt % 2) == 0)
+		{
+			timer_1S5 = 1;
+			bTime.Time_1s = 1;
+		}
+		if ((timer_cnt % 10) == 0)
+		{
+			bTime.Time_5s = 1;
+		}
+			
+		bTime.dwin_500ms = 1;
+
 		if (display[BUF_ARROW] == NO_ARROW)
 		{
 			if ((backlight_time_count++ > backlight_off_time) && (light_para_ok))
@@ -129,12 +142,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		{
 			if ((count % 50) == 0)
 			{
-				bTime.Time_100ms = 1;
+				bTime.dwin_100ms = 1;
 			}
 			if ((count % 50) == 0)
 			{
 				display_scantimer = 1;
 				timer_100ms = 1;
+				bTime.Time_100ms = 1;
 			}
 			if (row < 4) // increment row number
 				row++;

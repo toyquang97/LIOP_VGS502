@@ -31,6 +31,7 @@ liop_vgs502\interrupt.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_iwdg.
 liop_vgs502\interrupt.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 liop_vgs502\interrupt.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 liop_vgs502\interrupt.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+liop_vgs502\interrupt.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 liop_vgs502\interrupt.o: ../Core/Inc/AllHeader.h
 liop_vgs502\interrupt.o: ../Core/Inc/bootloader.h
 liop_vgs502\interrupt.o: ../Core/Inc/canopen.h
@@ -42,5 +43,7 @@ liop_vgs502\interrupt.o: ../Core/Inc/PicMain.h
 liop_vgs502\interrupt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 liop_vgs502\interrupt.o: ../Core/Inc/flash.h
 liop_vgs502\interrupt.o: ../Core/Inc/dict.h
+liop_vgs502\interrupt.o: ../Core/Inc/Dwin_App.h
+liop_vgs502\interrupt.o: ../Core/Inc/Dwin.h
 liop_vgs502\interrupt.o: ../Core/Inc/version.h
 liop_vgs502\interrupt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

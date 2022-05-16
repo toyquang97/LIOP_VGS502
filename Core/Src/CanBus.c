@@ -115,6 +115,18 @@ void Init_Can(void)
 		Error_Handler();
 	}
 
+	sFilterConfig.FilterBank = 6;
+	sFilterConfig.FilterIdHigh = FC_D << 8;
+	sFilterConfig.FilterIdLow = 0x00;
+	sFilterConfig.FilterMaskIdHigh = 0xF000;
+	sFilterConfig.FilterMaskIdLow = 0x0000;
+
+	if (HAL_CAN_ConfigFilter(&hcan, &sFilterConfig) != HAL_OK)
+	{
+		/* Filter configuration Error */
+		Error_Handler();
+	}
+
 	/* -----------------Filter bank 0---------------*/
 	sFilterConfig.FilterBank = 10;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
@@ -128,8 +140,8 @@ void Init_Can(void)
 	sFilterConfig.SlaveStartFilterBank = 14;
 	HAL_CAN_ConfigFilter(&hcan, &sFilterConfig);
 
-	//HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_RX_FIFO1_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY);
-	//HAL_CAN_Start(&hcan);
+	// HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_RX_FIFO1_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY);
+	// HAL_CAN_Start(&hcan);
 
 #if 0
 	uint8_t i, j;
@@ -322,7 +334,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 			hsetime = HSETIME;							 // reset HSE supervisor time
 		else
 		{
-			//hsetime = HSETIME - 10;
+			// hsetime = HSETIME - 10;
 		}
 	}
 	hse_heartbeat = 1;
@@ -851,9 +863,9 @@ void read_rx(void)
 				else if (id_buff[BUF_ARROW] <= 0x20)
 					id_buff[BUF_ARROW] = NO_ARROW;
 				if (id_buff[BUF_TEN] <= 0x20)
-					id_buff[BUF_TEN] = 36 ;
+					id_buff[BUF_TEN] = 36;
 				if (id_buff[BUF_UNIT] <= 0x20)
-					id_buff[BUF_UNIT] = 36 ;
+					id_buff[BUF_UNIT] = 36;
 				break;
 
 			case (DISP_NODE_ID):
@@ -907,8 +919,77 @@ void read_rx(void)
 		type = rx[ro][2];
 		if ((sub == EMS_ID) && (type == 0))
 		{
+			floorDisplay[BUF_ARROW] = rx[ro][6] & 0Xf0;
+			
 			for (i = 0; i < 8; i++)
 				recei_monitor[i] = rx[ro][2 + i];
+
+			displayMessageA = recei_monitor[6];
+			displayMessageB = recei_monitor[7];
+
+			if (((displayMessageA & 0x40) && (displayMessageB & 0x60)) || (displayMessageB & 0x60))
+			{
+				// FIRE CASE
+				display_message |= ERROR_FIRECASE;
+			}
+			else display_message &= ~ERROR_FIRECASE;
+
+			if ((displayMessageA & 0x08) && (displayMessageB & 0x02))
+			{
+				// EMERGENCY
+				display_message |= ERROR_EMERGENCY;
+			}
+			else display_message &= ~ERROR_EMERGENCY;
+
+			if (displayMessageA & 0x10)
+			{
+				// OVERLOAD
+				display_message |= ERROR_OVERLOAD;;
+			}
+			else display_message &= ~ERROR_OVERLOAD;
+
+			if ((displayMessageA & 0x08))
+			{
+				// OUTOFODER
+				display_message |= ERROR_OUTOFORDER;;
+			}
+			else display_message &= ~ERROR_OUTOFORDER;
+
+			if ((displayMessageA & 0x08) && (displayMessageB & 0x04))
+			{
+				// INSPECTION
+				display_message |= ERROR_INSPECTION;;
+			}
+			else display_message &= ~ERROR_INSPECTION;
+			
+			if (displayMessageB & 0x80)
+			{
+				// FULLOAD
+				display_message |= ERROR_FULLLOAD;;
+			}
+			else display_message &= ~ERROR_FULLLOAD;
+
+			if (displayMessageB & 0x01)
+			{
+				// REMOTEOFF
+				display_message |= ERROR_REMOTEOFF;;
+			}
+			else display_message &= ~ERROR_REMOTEOFF;
+
+			if (displayMessageA & 0x80)
+			{
+				// EMERGENCY
+				display_message |= ERROR_ATTENDANCE;;
+			}
+			else display_message &= ~ERROR_ATTENDANCE;
+
+			if ((displayMessageA & 0x20) && displayMessageB == 0)
+			{
+				// EMERGENCY
+				display_message |= ERROR_VIPRUN;;
+			}
+			else display_message &= ~ERROR_VIPRUN;
+
 			if (recei_monitor[7] & 0x80)
 				display[BUF_MESSAGE] |= FULL;
 			else
@@ -920,6 +1001,16 @@ void read_rx(void)
 		}
 		break;
 		//����Ϣ��ʱֻ������ͣ�����״̬��Ϣ		2017-11-15
+	case FC_D: // Clock
+		if (EMS_ID == rx[ro][1])
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				aBCAN_ReceiveBuf_Clock[i] = rx[ro][2 + i];
+				aBCAN_ReceiveBuf_Clock[i + 4] = rx[ro][6 + i];
+			}
+		}
+		break;
 	}
 	if (HAL_CAN_DeactivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_RX_FIFO1_MSG_PENDING) != HAL_OK)
 	{
@@ -993,6 +1084,7 @@ uint8_t fire_alarm = 0;
 uint8_t fire_evacuation = 0;
 uint8_t fire_state = 0;
 // set special outputs SPECIAL_FUNC
+
 void set_output(uint8_t *virt)
 {
 	uint8_t i;
@@ -1057,6 +1149,15 @@ void set_output(uint8_t *virt)
 			// PIE1bits.TMR1IE = 0;			/* disable Timer 2 interrupt			*/
 			buf[BUF_TEN] = virt[IO_DOOR];	/* 1. digit; not CANopen compatible		*/
 			buf[BUF_UNIT] = virt[IO_STATE]; /* 2. digit; not CANopen compatible		*/
+
+			floorDisplay[BUF_TEN] = virt[IO_DOOR];
+			floorDisplay[BUF_UNIT] = virt[IO_STATE];
+			if (!floorDisplay[BUF_TEN]  && !floorDisplay[BUF_UNIT])
+			{
+				floorDisplay[BUF_TEN] = 45;
+				floorDisplay[BUF_UNIT] = 45;
+			}
+			
 			for (i = 0; i < STANDER_FLOOR_NUM + THREE_FLOOR_NUM + 10; i++)
 			{
 				if (buf[BUF_TEN] == tDisp_FloorAscii[i])

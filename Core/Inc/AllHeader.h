@@ -15,6 +15,8 @@
 #include "string.h"
 #include "flash.h"
 #include "dict.h"
+#include "Dwin_App.h"
+#include "Dwin.h"
 //#include "eeprom.h"
 #include "version.h"
 #include <math.h>
