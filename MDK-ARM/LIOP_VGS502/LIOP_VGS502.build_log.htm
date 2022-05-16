@@ -22,27 +22,21 @@ Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
 D:\Task\LIOP_VGS502\MDK-ARM\LIOP_VGS502.uvprojx
-Project File Date:  05/10/2022
+Project File Date:  05/16/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'LIOP_VGS502'
-compiling interrupt.c...
+compiling CanBus.c...
 ../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
   const struct _dict
-..\Core\Src\interrupt.c(118): warning:  #188-D: enumerated type mixed with another type
-  		HAL_GPIO_WritePin(UO_GPIO_Port, UO_Pin, i & 0x01);
-..\Core\Src\interrupt.c(119): warning:  #188-D: enumerated type mixed with another type
-  		HAL_GPIO_WritePin(DO_GPIO_Port, DO_Pin, bit_select(i, 1));
-..\Core\Src\interrupt.c(15): warning:  #177-D: variable "a"  was declared but never referenced
-  	static uint8_t a = 0;
-..\Core\Src\interrupt.c(17): warning:  #177-D: variable "pos"  was declared but never referenced
-  	SBYTE pos;
-..\Core\Src\interrupt.c: 5 warnings, 0 errors
+..\Core\Src\CanBus.c(275): warning:  #1215-D: #warning directive: add filter and enbale interrupt
+  #warning add filter and enbale interrupt
+..\Core\Src\CanBus.c: 2 warnings, 0 errors
 linking...
 Program Size: Code=16680 RO-data=1296 RW-data=188 ZI-data=2708  
 FromELF: creating hex file...
-"LIOP_VGS502\LIOP_VGS502.axf" - 0 Error(s), 5 Warning(s).
+"LIOP_VGS502\LIOP_VGS502.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -66,7 +60,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.5.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

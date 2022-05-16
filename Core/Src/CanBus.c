@@ -917,6 +917,11 @@ void read_rx(void)
 				display[BUF_MESSAGE] |= PARK;
 			else
 				display[BUF_MESSAGE] &= ~PARK;
+			//if ((recei_monitor[6] & 0x08) && (recei_monitor[7] & 0x06))
+			if (((recei_monitor[6] & 0x08) && (recei_monitor[7] & 0x06)) || (recei_monitor[6] & 0x08))
+				OPEN_OUT_OF_ORDER();
+			else
+				CLOSE_OUT_OF_ORDER();				
 		}
 		break;
 		//����Ϣ��ʱֻ������ͣ�����״̬��Ϣ		2017-11-15
@@ -1291,10 +1296,7 @@ void set_output(uint8_t *virt)
 			break;
 
 		case OUT_OF_ORDER:
-			if (virt[IO_STATE])
-				OPEN_OUT_OF_ORDER();
-			else
-				CLOSE_OUT_OF_ORDER();
+
 			break;
 
 		case DOOR_STOP:
