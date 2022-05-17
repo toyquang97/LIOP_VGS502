@@ -265,7 +265,7 @@ int main(void)
 	Flash_Read_Bytes(&node_id, DATA_START_ADDRESS, 1);
 
   disp_lift = LIFT1;
-  if ((node_id > MAX_ESE) || (!node_id))
+  if ((node_id > 127) || (!node_id))
     node_id = ESE_ID;
   ClrWdt();
   nmtstate = BOOT_UP;

@@ -862,17 +862,53 @@ void read_rx(void)
 				id_buff[BUF_ARROW] = NO_ARROW;
 				if (node_id >= ESE_ID && (node_id < ESE_ID + MAX_ESE))
 				{
-					id_buff[BUF_TEN] = ((node_id - ESE_ID + 1) / 10) + '0';
-					id_buff[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + '0';
-					for (uint8_t i = 0; i < 36; i++)
+					if (node_id >= ESE_ID + 110 - 1)
 					{
-						if (id_buff[BUF_TEN] == tDisp_FloorAscii[i])
+						id_buff[BUF_TEN] = 'B';
+						id_buff[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + '0';
+						for (uint8_t i = 0; i < 36; i++)
 						{
-							showNodeId[BUF_TEN] = i;
+							if (id_buff[BUF_TEN] == tDisp_FloorAscii[i])
+							{
+								showNodeId[BUF_TEN] = i;
+							}
+							if (id_buff[BUF_UNIT] == tDisp_FloorAscii[i])
+							{
+								showNodeId[BUF_UNIT] = i;
+							}
 						}
-						if (id_buff[BUF_UNIT] == tDisp_FloorAscii[i])
+					}
+					
+					else if (node_id >= ESE_ID + 100 - 1)
+					{
+						id_buff[BUF_TEN] = 'A';
+						id_buff[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + '0';
+						for (uint8_t i = 0; i < 36; i++)
 						{
-							showNodeId[BUF_UNIT] = i;
+							if (id_buff[BUF_TEN] == tDisp_FloorAscii[i])
+							{
+								showNodeId[BUF_TEN] = i;
+							}
+							if (id_buff[BUF_UNIT] == tDisp_FloorAscii[i])
+							{
+								showNodeId[BUF_UNIT] = i;
+							}
+						}
+					}
+					else
+					{
+						id_buff[BUF_TEN] = ((node_id - ESE_ID + 1) / 10) + '0';
+						id_buff[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + '0';
+						for (uint8_t i = 0; i < 36; i++)
+						{
+							if (id_buff[BUF_TEN] == tDisp_FloorAscii[i])
+							{
+								showNodeId[BUF_TEN] = i;
+							}
+							if (id_buff[BUF_UNIT] == tDisp_FloorAscii[i])
+							{
+								showNodeId[BUF_UNIT] = i;
+							}
 						}
 					}
 				}
