@@ -3,7 +3,7 @@
 <title>Static Call Graph - [LIOP_VGS502\LIOP_VGS502.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image LIOP_VGS502\LIOP_VGS502.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue May 17 11:47:56 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue May 17 14:25:50 2022
 <BR><P>
 <H3>Maximum Stack Usage =        148 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -494,7 +494,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[90]"></a>HAL_CAN_ActivateNotification</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, stm32f1xx_hal_can.o(i.HAL_CAN_ActivateNotification))
-<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<BR><BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;can_transmit
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_Can
 </UL>
@@ -513,7 +513,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[a0]"></a>HAL_CAN_DeactivateNotification</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, stm32f1xx_hal_can.o(i.HAL_CAN_DeactivateNotification))
-<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<BR><BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;can_transmit
 </UL>
 
@@ -685,7 +685,7 @@ Global Symbols
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_output
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 </UL>
 
 <P><STRONG><a name="[54]"></a>HAL_GetTick</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f1xx_hal.o(i.HAL_GetTick))
@@ -760,7 +760,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b4]"></a>HAL_NVIC_SystemReset</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f1xx_hal_cortex.o(i.HAL_NVIC_SystemReset))
-<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<BR><BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 </UL>
 
 <P><STRONG><a name="[79]"></a>HAL_RCC_ClockConfig</STRONG> (Thumb, 280 bytes, Stack size 32 bytes, stm32f1xx_hal_rcc.o(i.HAL_RCC_ClockConfig))
@@ -1040,7 +1040,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;can_transmit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 </UL>
 
 <P><STRONG><a name="[9f]"></a>can_transmit</STRONG> (Thumb, 190 bytes, Stack size 40 bytes, canbus.o(i.can_transmit))
@@ -1052,7 +1052,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;transmit_in
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;transmit_error
-<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sent_heartbeat
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sent_heartbeat
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sdo_segment
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sdo_response
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;abort_sdo
@@ -1086,7 +1086,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;KeyProg
 </UL>
 
-<P><STRONG><a name="[44]"></a>main</STRONG> (Thumb, 746 bytes, Stack size 0 bytes, main.o(i.main))
+<P><STRONG><a name="[44]"></a>main</STRONG> (Thumb, 702 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 148<LI>Call Chain = main &rArr; read_rx &rArr; sdo_segment &rArr; can_transmit &rArr; HAL_CAN_AddTxMessage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start_IT
@@ -1107,8 +1107,8 @@ Global Symbols
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;transmit_in
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;transmit_error
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_io_config
-<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sent_heartbeat
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sent_heartbeat
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;abort_sdo
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Init_Can
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TestMode
@@ -1122,10 +1122,10 @@ Global Symbols
 <P><STRONG><a name="[b2]"></a>read_dict</STRONG> (Thumb, 156 bytes, Stack size 20 bytes, dict.o(i.read_dict))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = read_dict
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 </UL>
 
-<P><STRONG><a name="[a7]"></a>read_rx</STRONG> (Thumb, 1886 bytes, Stack size 72 bytes, canbus.o(i.read_rx))
+<P><STRONG><a name="[a8]"></a>read_rx</STRONG> (Thumb, 1886 bytes, Stack size 72 bytes, canbus.o(i.read_rx))
 <BR><BR>[Stack]<UL><LI>Max Depth = 148<LI>Call Chain = read_rx &rArr; sdo_segment &rArr; can_transmit &rArr; HAL_CAN_AddTxMessage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;write_dict
@@ -1149,7 +1149,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;can_transmit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 </UL>
 
 <P><STRONG><a name="[b3]"></a>sdo_segment</STRONG> (Thumb, 114 bytes, Stack size 16 bytes, canbus.o(i.sdo_segment))
@@ -1157,16 +1157,16 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;can_transmit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 </UL>
 
 <P><STRONG><a name="[af]"></a>search_dict</STRONG> (Thumb, 124 bytes, Stack size 20 bytes, dict.o(i.search_dict))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = search_dict
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 </UL>
 
-<P><STRONG><a name="[a8]"></a>sent_heartbeat</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, canbus.o(i.sent_heartbeat))
+<P><STRONG><a name="[a7]"></a>sent_heartbeat</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, canbus.o(i.sent_heartbeat))
 <BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = sent_heartbeat &rArr; can_transmit &rArr; HAL_CAN_AddTxMessage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;can_transmit
@@ -1178,7 +1178,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = set_io_config
 </UL>
 <BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 </UL>
 
 <P><STRONG><a name="[ae]"></a>set_output</STRONG> (Thumb, 1294 bytes, Stack size 32 bytes, canbus.o(i.set_output))
@@ -1187,7 +1187,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_for_call
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 </UL>
 
 <P><STRONG><a name="[a9]"></a>transmit_error</STRONG> (Thumb, 116 bytes, Stack size 8 bytes, canbus.o(i.transmit_error))
@@ -1209,7 +1209,7 @@ Global Symbols
 <P><STRONG><a name="[b0]"></a>write_dict</STRONG> (Thumb, 240 bytes, Stack size 40 bytes, dict.o(i.write_dict))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = write_dict
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
+<BR>[Called By]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_rx
 </UL>
 <P>
 <H3>

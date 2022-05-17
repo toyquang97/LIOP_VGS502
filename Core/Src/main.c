@@ -260,27 +260,25 @@ int main(void)
   ClrWdt();
   hardware_version = VGS_502;
 
-  // node_id = read_eeprom(EE_NODEID_ADDR);
-  //node_id = 0x10;
 	Flash_Read_Bytes(&node_id, DATA_START_ADDRESS, 1);
 
   disp_lift = LIFT1;
-  if ((node_id > 127) || (!node_id))
+  if ((node_id > MAX_ESE) || (!node_id))
     node_id = ESE_ID;
   ClrWdt();
   nmtstate = BOOT_UP;
-  nmtwait = node_id;
-  preset_node_id = node_id; //�洢֮ǰ��ID
-  nmtwait = (nmtwait * 20 + 1000) / 3 + 600;
-  if (node_id == ESE_ID)
-    nmtwait = 1000 / 3 + 600;
+  //nmtwait = node_id;
+  preset_node_id = node_id;
+  // nmtwait = (nmtwait * 20 + 1000) / 3 + 600;
+  // if (node_id == ESE_ID)
+  //   nmtwait = 1000 / 3 + 600;
 
   init_userpara();
 
   ClrWdt();
 
-  while (nmtwait)
-    ClrWdt();
+  // while (nmtwait)
+  //   ClrWdt();
   Init_Can();
   HAL_Delay(5);
   heartbeat = HEARTBEATTIME;
@@ -289,6 +287,11 @@ int main(void)
   while (nmtstate == PRE_OP)
   { //�ȴ������������ָ��
     ClrWdt();
+    if ((!heartbeat) && (hse_heartbeat) && (!can_inittime)) // time to send heartbeat message
+    {
+      heartbeat = HEARTBEATTIME;
+      sent_heartbeat();
+    }
     if (rc)      // Message in receive buffer
       read_rx(); // read and handle message
     if (sdo_index && !sdo_timer)
@@ -302,11 +305,7 @@ int main(void)
       hsecheck = false;
       check_hse(0); // check if a HSE is not available
     }
-    if ((!heartbeat) && (hse_heartbeat) && (!can_inittime)) // time to send heartbeat message
-    {
-      heartbeat = HEARTBEATTIME;
-      sent_heartbeat();
-    }
+    
 
     if (errorcode)
     {                    // error occured
