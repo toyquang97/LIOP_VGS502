@@ -150,7 +150,8 @@ void init_userpara(void)
   display[BUF_TEN] = 14;
   display[BUF_UNIT] = 15;
   display[BUF_MESSAGE] = 0;
-
+	floorDisplay[BUF_TEN]  = 45;
+	floorDisplay[BUF_UNIT] = 45;
   heartbeat = HEARTBEATTIME;
   display_timer = 0;
   keytimer = 0;

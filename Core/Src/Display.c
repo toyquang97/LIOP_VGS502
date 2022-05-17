@@ -28,11 +28,12 @@ uint8_t SPI_SendOneByte(uint8_t dat)
 /************************************************************************************************/
 /* 	Set node ID												                        			*/
 /************************************************************************************************/
-
+uint8_t bufferShowSetNodeId[4] = {0};
 void SetNodeId(void)
 {
 	static uint8_t buffer[3] = {0, 0, 0};
-	uint8_t bufferShowSetNodeId[4] = {0};
+	static uint8_t buffer_dwin[3] = {0, 0, 0};
+	
 	if ((disp_id != node_id) || (setid_mode_old != setid_mode))
 	{
 		if ((setid_mode == 1) || (setid_mode == 4))
@@ -41,10 +42,10 @@ void SetNodeId(void)
 			display[BUF_MESSAGE] = 0;
 			if (node_id >= ESE_ID && node_id < ESE_ID + MAX_ESE)
 			{
-				// display[BUF_TEN] = (((node_id - ESE_ID + 1) / 10) % 10);
-				// display[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10);
 				bufferShowSetNodeId[BUF_TEN] = (((node_id - ESE_ID + 1) / 10) % 10) + 48;
 				bufferShowSetNodeId[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + 48;
+				floorDisplay[BUF_TEN]  = bufferShowSetNodeId[BUF_TEN];
+				floorDisplay[BUF_UNIT] = bufferShowSetNodeId[BUF_UNIT];
 				for (uint8_t i = 0; i < 36; i++)
 				{
 					if (bufferShowSetNodeId[BUF_TEN] == tDisp_FloorAscii[i])
@@ -59,9 +60,12 @@ void SetNodeId(void)
 				if ((node_id - ESE_ID + 1) >= 100)
 				{
 					if (hardware_version == G_741_LCD)
+					{
 						display[BUF_ARROW] = DIRECTION_UP;
-					else
+						floorDisplay[BUF_ARROW] = 78;}
+					else{
 						display[BUF_ARROW] = '1' - '0';
+						floorDisplay[BUF_ARROW] = 0;}
 				}
 			}
 			else
@@ -77,6 +81,10 @@ void SetNodeId(void)
 			// display[BUF_UNIT] = id_buff[BUF_UNIT] - '0';
 			display[BUF_TEN] = showNodeId[BUF_TEN];
 			display[BUF_UNIT] = showNodeId[BUF_UNIT];
+
+			floorDisplay[BUF_TEN] = id_buff[BUF_TEN];
+			floorDisplay[BUF_UNIT] = id_buff[BUF_UNIT];
+
 			display[BUF_MESSAGE] = 0;
 		}
 		disp_id = node_id;
@@ -84,16 +92,22 @@ void SetNodeId(void)
 		buffer[BUF_ARROW] = display[BUF_ARROW];
 		buffer[BUF_TEN] = display[BUF_TEN];
 		buffer[BUF_UNIT] = display[BUF_UNIT];
+
+		buffer_dwin[BUF_TEN] = floorDisplay[BUF_TEN];
+		buffer_dwin[BUF_UNIT] = floorDisplay[BUF_UNIT];
 	}
 
 	if (!flashtimer)
 	{
 		// INTCONbits.TMR0IE = 0;
-		// HAL_TIM_Base_Stop_IT(&htim2);
+		//HAL_TIM_Base_Stop_IT(&htim2);
 
 		flashtimer = 3;
 		if ((display[BUF_ARROW] != NO_ARROW) || (display[BUF_TEN] != NO_ARROW) || (display[BUF_UNIT] != NO_ARROW))
 		{
+			floorDisplay[BUF_TEN] = 0;
+			floorDisplay[BUF_UNIT] = 0;
+
 			display[BUF_ARROW] = NO_ARROW;
 			display[BUF_TEN] = NO_ARROW;
 			display[BUF_UNIT] = NO_ARROW;
@@ -101,13 +115,16 @@ void SetNodeId(void)
 		}
 		else
 		{
+			floorDisplay[BUF_TEN] = buffer_dwin[BUF_TEN];
+			floorDisplay[BUF_UNIT] = buffer_dwin[BUF_UNIT];
+
 			display[BUF_ARROW] = buffer[BUF_ARROW];
 			display[BUF_TEN] = buffer[BUF_TEN];
 			display[BUF_UNIT] = buffer[BUF_UNIT];
 			display[BUF_MESSAGE] = 0;
 		}
 		// INTCONbits.TMR0IE = 1;
-		// HAL_TIM_Base_Start_IT(&htim2);
+		//HAL_TIM_Base_Start_IT(&htim2);
 	}
 }
 

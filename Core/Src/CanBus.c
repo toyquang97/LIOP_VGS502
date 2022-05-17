@@ -874,17 +874,53 @@ void read_rx(void)
 				id_buff[BUF_ARROW] = NO_ARROW;
 				if (node_id >= ESE_ID && (node_id < ESE_ID + MAX_ESE))
 				{
-					id_buff[BUF_TEN] = ((node_id - ESE_ID + 1) / 10) + '0';
-					id_buff[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + '0';
-					for (uint8_t i = 0; i < 36; i++)
+					if (node_id >= ESE_ID + 110 - 1)
 					{
-						if (id_buff[BUF_TEN] == tDisp_FloorAscii[i])
+						id_buff[BUF_TEN] = 'B';
+						id_buff[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + '0';
+						for (uint8_t i = 0; i < 36; i++)
 						{
-							showNodeId[BUF_TEN] = i;
+							if (id_buff[BUF_TEN] == tDisp_FloorAscii[i])
+							{
+								showNodeId[BUF_TEN] = i;
+							}
+							if (id_buff[BUF_UNIT] == tDisp_FloorAscii[i])
+							{
+								showNodeId[BUF_UNIT] = i;
+							}
 						}
-						if (id_buff[BUF_UNIT] == tDisp_FloorAscii[i])
+					}
+					
+					else if (node_id >= ESE_ID + 100 - 1)
+					{
+						id_buff[BUF_TEN] = 'A';
+						id_buff[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + '0';
+						for (uint8_t i = 0; i < 36; i++)
 						{
-							showNodeId[BUF_UNIT] = i;
+							if (id_buff[BUF_TEN] == tDisp_FloorAscii[i])
+							{
+								showNodeId[BUF_TEN] = i;
+							}
+							if (id_buff[BUF_UNIT] == tDisp_FloorAscii[i])
+							{
+								showNodeId[BUF_UNIT] = i;
+							}
+						}
+					}
+					else
+					{
+						id_buff[BUF_TEN] = ((node_id - ESE_ID + 1) / 10) + '0';
+						id_buff[BUF_UNIT] = ((node_id - ESE_ID + 1) % 10) + '0';
+						for (uint8_t i = 0; i < 36; i++)
+						{
+							if (id_buff[BUF_TEN] == tDisp_FloorAscii[i])
+							{
+								showNodeId[BUF_TEN] = i;
+							}
+							if (id_buff[BUF_UNIT] == tDisp_FloorAscii[i])
+							{
+								showNodeId[BUF_UNIT] = i;
+							}
 						}
 					}
 				}
@@ -920,7 +956,7 @@ void read_rx(void)
 		if ((sub == EMS_ID) && (type == 0))
 		{
 			floorDisplay[BUF_ARROW] = rx[ro][6] & 0Xf0;
-			
+
 			for (i = 0; i < 8; i++)
 				recei_monitor[i] = rx[ro][2 + i];
 
@@ -932,63 +968,79 @@ void read_rx(void)
 				// FIRE CASE
 				display_message |= ERROR_FIRECASE;
 			}
-			else display_message &= ~ERROR_FIRECASE;
+			else
+				display_message &= ~ERROR_FIRECASE;
 
 			if ((displayMessageA & 0x08) && (displayMessageB & 0x02))
 			{
 				// EMERGENCY
 				display_message |= ERROR_EMERGENCY;
 			}
-			else display_message &= ~ERROR_EMERGENCY;
+			else
+				display_message &= ~ERROR_EMERGENCY;
 
 			if (displayMessageA & 0x10)
 			{
 				// OVERLOAD
-				display_message |= ERROR_OVERLOAD;;
+				display_message |= ERROR_OVERLOAD;
+				;
 			}
-			else display_message &= ~ERROR_OVERLOAD;
+			else
+				display_message &= ~ERROR_OVERLOAD;
 
 			if ((displayMessageA & 0x08))
 			{
 				// OUTOFODER
-				display_message |= ERROR_OUTOFORDER;;
+				display_message |= ERROR_OUTOFORDER;
+				;
 			}
-			else display_message &= ~ERROR_OUTOFORDER;
+			else
+				display_message &= ~ERROR_OUTOFORDER;
 
 			if ((displayMessageA & 0x08) && (displayMessageB & 0x04))
 			{
 				// INSPECTION
-				display_message |= ERROR_INSPECTION;;
+				display_message |= ERROR_INSPECTION;
+				;
 			}
-			else display_message &= ~ERROR_INSPECTION;
-			
+			else
+				display_message &= ~ERROR_INSPECTION;
+
 			if (displayMessageB & 0x80)
 			{
 				// FULLOAD
-				display_message |= ERROR_FULLLOAD;;
+				display_message |= ERROR_FULLLOAD;
+				;
 			}
-			else display_message &= ~ERROR_FULLLOAD;
+			else
+				display_message &= ~ERROR_FULLLOAD;
 
 			if (displayMessageB & 0x01)
 			{
 				// REMOTEOFF
-				display_message |= ERROR_REMOTEOFF;;
+				display_message |= ERROR_REMOTEOFF;
+				;
 			}
-			else display_message &= ~ERROR_REMOTEOFF;
+			else
+				display_message &= ~ERROR_REMOTEOFF;
 
 			if (displayMessageA & 0x80)
 			{
 				// EMERGENCY
-				display_message |= ERROR_ATTENDANCE;;
+				display_message |= ERROR_ATTENDANCE;
+				;
 			}
-			else display_message &= ~ERROR_ATTENDANCE;
+			else
+				display_message &= ~ERROR_ATTENDANCE;
 
 			if ((displayMessageA & 0x20) && displayMessageB == 0)
 			{
 				// EMERGENCY
-				display_message |= ERROR_VIPRUN;;
+				display_message |= ERROR_VIPRUN;
+				;
 			}
-			else display_message &= ~ERROR_VIPRUN;
+			else
+				display_message &= ~ERROR_VIPRUN;
 
 			if (recei_monitor[7] & 0x80)
 				display[BUF_MESSAGE] |= FULL;
@@ -1152,12 +1204,12 @@ void set_output(uint8_t *virt)
 
 			floorDisplay[BUF_TEN] = virt[IO_DOOR];
 			floorDisplay[BUF_UNIT] = virt[IO_STATE];
-			if (!floorDisplay[BUF_TEN]  && !floorDisplay[BUF_UNIT])
+			if (!floorDisplay[BUF_TEN] && !floorDisplay[BUF_UNIT])
 			{
 				floorDisplay[BUF_TEN] = 45;
 				floorDisplay[BUF_UNIT] = 45;
 			}
-			
+
 			for (i = 0; i < STANDER_FLOOR_NUM + THREE_FLOOR_NUM + 10; i++)
 			{
 				if (buf[BUF_TEN] == tDisp_FloorAscii[i])
