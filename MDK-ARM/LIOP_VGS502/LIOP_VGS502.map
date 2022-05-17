@@ -1631,30 +1631,30 @@ Image Symbol Table
     i.init_userpara                          0x080032e8   Section        0  main.o(i.init_userpara)
     i.lss_response                           0x080033c4   Section        0  canbus.o(i.lss_response)
     i.main                                   0x08003428   Section        0  main.o(i.main)
-    i.read_dict                              0x0800379c   Section        0  dict.o(i.read_dict)
-    i.read_rx                                0x0800383c   Section        0  canbus.o(i.read_rx)
-    i.sdo_response                           0x080040e8   Section        0  canbus.o(i.sdo_response)
-    i.sdo_segment                            0x0800418c   Section        0  canbus.o(i.sdo_segment)
-    i.search_dict                            0x0800420c   Section        0  dict.o(i.search_dict)
-    i.sent_heartbeat                         0x08004298   Section        0  canbus.o(i.sent_heartbeat)
-    i.set_io_config                          0x080042e4   Section        0  canbus.o(i.set_io_config)
-    i.set_output                             0x08004358   Section        0  canbus.o(i.set_output)
-    i.showMessageWarning                     0x080048c8   Section        0  dwin_app.o(i.showMessageWarning)
-    i.transmit_error                         0x08004938   Section        0  canbus.o(i.transmit_error)
-    i.transmit_in                            0x080049c0   Section        0  canbus.o(i.transmit_in)
-    i.write_dict                             0x08004a18   Section        0  dict.o(i.write_dict)
-    .constdata                               0x08004b20   Section      294  display.o(.constdata)
-    .constdata                               0x08004c46   Section      352  display.o(.constdata)
-    .constdata                               0x08004da6   Section        6  version.o(.constdata)
-    .constdata                               0x08004dac   Section        6  version.o(.constdata)
-    .constdata                               0x08004db2   Section        6  version.o(.constdata)
-    .constdata                               0x08004db8   Section        6  version.o(.constdata)
-    .constdata                               0x08004dbe   Section        6  version.o(.constdata)
-    .constdata                               0x08004dc4   Section        6  version.o(.constdata)
-    .constdata                               0x08004dcc   Section      324  dict.o(.constdata)
-    .constdata                               0x08004f10   Section        4  main.o(.constdata)
-    .constdata                               0x08004f14   Section       16  system_stm32f1xx.o(.constdata)
-    .constdata                               0x08004f24   Section        8  system_stm32f1xx.o(.constdata)
+    i.read_dict                              0x08003770   Section        0  dict.o(i.read_dict)
+    i.read_rx                                0x08003810   Section        0  canbus.o(i.read_rx)
+    i.sdo_response                           0x080040bc   Section        0  canbus.o(i.sdo_response)
+    i.sdo_segment                            0x08004160   Section        0  canbus.o(i.sdo_segment)
+    i.search_dict                            0x080041e0   Section        0  dict.o(i.search_dict)
+    i.sent_heartbeat                         0x0800426c   Section        0  canbus.o(i.sent_heartbeat)
+    i.set_io_config                          0x080042b8   Section        0  canbus.o(i.set_io_config)
+    i.set_output                             0x0800432c   Section        0  canbus.o(i.set_output)
+    i.showMessageWarning                     0x0800489c   Section        0  dwin_app.o(i.showMessageWarning)
+    i.transmit_error                         0x0800490c   Section        0  canbus.o(i.transmit_error)
+    i.transmit_in                            0x08004994   Section        0  canbus.o(i.transmit_in)
+    i.write_dict                             0x080049ec   Section        0  dict.o(i.write_dict)
+    .constdata                               0x08004af4   Section      294  display.o(.constdata)
+    .constdata                               0x08004c1a   Section      352  display.o(.constdata)
+    .constdata                               0x08004d7a   Section        6  version.o(.constdata)
+    .constdata                               0x08004d80   Section        6  version.o(.constdata)
+    .constdata                               0x08004d86   Section        6  version.o(.constdata)
+    .constdata                               0x08004d8c   Section        6  version.o(.constdata)
+    .constdata                               0x08004d92   Section        6  version.o(.constdata)
+    .constdata                               0x08004d98   Section        6  version.o(.constdata)
+    .constdata                               0x08004da0   Section      324  dict.o(.constdata)
+    .constdata                               0x08004ee4   Section        4  main.o(.constdata)
+    .constdata                               0x08004ee8   Section       16  system_stm32f1xx.o(.constdata)
+    .constdata                               0x08004ef8   Section        8  system_stm32f1xx.o(.constdata)
     .data                                    0x20000000   Section       19  display.o(.data)
     oldin                                    0x20000000   Data           1  display.o(.data)
     buffer                                   0x20000001   Data           3  display.o(.data)
@@ -1968,34 +1968,34 @@ Image Symbol Table
     dwinWriteData                            0x08003299   Thumb Code    76  dwin.o(i.dwinWriteData)
     init_userpara                            0x080032e9   Thumb Code   198  main.o(i.init_userpara)
     lss_response                             0x080033c5   Thumb Code    92  canbus.o(i.lss_response)
-    main                                     0x08003429   Thumb Code   844  main.o(i.main)
-    read_dict                                0x0800379d   Thumb Code   156  dict.o(i.read_dict)
-    read_rx                                  0x0800383d   Thumb Code  2148  canbus.o(i.read_rx)
-    sdo_response                             0x080040e9   Thumb Code   150  canbus.o(i.sdo_response)
-    sdo_segment                              0x0800418d   Thumb Code   114  canbus.o(i.sdo_segment)
-    search_dict                              0x0800420d   Thumb Code   124  dict.o(i.search_dict)
-    sent_heartbeat                           0x08004299   Thumb Code    58  canbus.o(i.sent_heartbeat)
-    set_io_config                            0x080042e5   Thumb Code   108  canbus.o(i.set_io_config)
-    set_output                               0x08004359   Thumb Code  1366  canbus.o(i.set_output)
-    showMessageWarning                       0x080048c9   Thumb Code   112  dwin_app.o(i.showMessageWarning)
-    transmit_error                           0x08004939   Thumb Code   116  canbus.o(i.transmit_error)
-    transmit_in                              0x080049c1   Thumb Code    76  canbus.o(i.transmit_in)
-    write_dict                               0x08004a19   Thumb Code   240  dict.o(i.write_dict)
-    tDisp_FloorAscii                         0x08004b20   Data          37  display.o(.constdata)
-    tFloor_Tab                               0x08004b46   Data         256  display.o(.constdata)
-    sign                                     0x08004c46   Data         352  display.o(.constdata)
-    version_uea_G741                         0x08004da6   Data           6  version.o(.constdata)
-    version_uea_G742                         0x08004dac   Data           6  version.o(.constdata)
-    hardware_uea_G741                        0x08004db2   Data           6  version.o(.constdata)
-    device_name_G741                         0x08004db8   Data           6  version.o(.constdata)
-    hardware_uea_G742                        0x08004dbe   Data           6  version.o(.constdata)
-    device_name_G742                         0x08004dc4   Data           6  version.o(.constdata)
-    dict                                     0x08004dcc   Data         324  dict.o(.constdata)
-    tKeyCode                                 0x08004f10   Data           4  main.o(.constdata)
-    AHBPrescTable                            0x08004f14   Data          16  system_stm32f1xx.o(.constdata)
-    APBPrescTable                            0x08004f24   Data           8  system_stm32f1xx.o(.constdata)
-    Region$$Table$$Base                      0x08004f2c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08004f4c   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x08003429   Thumb Code   800  main.o(i.main)
+    read_dict                                0x08003771   Thumb Code   156  dict.o(i.read_dict)
+    read_rx                                  0x08003811   Thumb Code  2148  canbus.o(i.read_rx)
+    sdo_response                             0x080040bd   Thumb Code   150  canbus.o(i.sdo_response)
+    sdo_segment                              0x08004161   Thumb Code   114  canbus.o(i.sdo_segment)
+    search_dict                              0x080041e1   Thumb Code   124  dict.o(i.search_dict)
+    sent_heartbeat                           0x0800426d   Thumb Code    58  canbus.o(i.sent_heartbeat)
+    set_io_config                            0x080042b9   Thumb Code   108  canbus.o(i.set_io_config)
+    set_output                               0x0800432d   Thumb Code  1366  canbus.o(i.set_output)
+    showMessageWarning                       0x0800489d   Thumb Code   112  dwin_app.o(i.showMessageWarning)
+    transmit_error                           0x0800490d   Thumb Code   116  canbus.o(i.transmit_error)
+    transmit_in                              0x08004995   Thumb Code    76  canbus.o(i.transmit_in)
+    write_dict                               0x080049ed   Thumb Code   240  dict.o(i.write_dict)
+    tDisp_FloorAscii                         0x08004af4   Data          37  display.o(.constdata)
+    tFloor_Tab                               0x08004b1a   Data         256  display.o(.constdata)
+    sign                                     0x08004c1a   Data         352  display.o(.constdata)
+    version_uea_G741                         0x08004d7a   Data           6  version.o(.constdata)
+    version_uea_G742                         0x08004d80   Data           6  version.o(.constdata)
+    hardware_uea_G741                        0x08004d86   Data           6  version.o(.constdata)
+    device_name_G741                         0x08004d8c   Data           6  version.o(.constdata)
+    hardware_uea_G742                        0x08004d92   Data           6  version.o(.constdata)
+    device_name_G742                         0x08004d98   Data           6  version.o(.constdata)
+    dict                                     0x08004da0   Data         324  dict.o(.constdata)
+    tKeyCode                                 0x08004ee4   Data           4  main.o(.constdata)
+    AHBPrescTable                            0x08004ee8   Data          16  system_stm32f1xx.o(.constdata)
+    APBPrescTable                            0x08004ef8   Data           8  system_stm32f1xx.o(.constdata)
+    Region$$Table$$Base                      0x08004f00   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08004f20   Number         0  anon$$obj.o(Region$$Table)
     bufferShowSetNodeId                      0x20000007   Data           4  display.o(.data)
     display                                  0x2000000b   Data           4  display.o(.data)
     showNodeId                               0x2000000f   Data           4  display.o(.data)
@@ -2113,9 +2113,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00005030, Max: 0x00010000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00005004, Max: 0x00010000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00004f4c, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00004f20, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2318,77 +2318,77 @@ Memory Map of the image
     0x08003298   0x08003298   0x00000050   Code   RO          853    i.dwinWriteData     dwin.o
     0x080032e8   0x080032e8   0x000000dc   Code   RO          568    i.init_userpara     main.o
     0x080033c4   0x080033c4   0x00000064   Code   RO          269    i.lss_response      canbus.o
-    0x08003428   0x08003428   0x00000374   Code   RO          569    i.main              main.o
-    0x0800379c   0x0800379c   0x000000a0   Code   RO          407    i.read_dict         dict.o
-    0x0800383c   0x0800383c   0x000008ac   Code   RO          270    i.read_rx           canbus.o
-    0x080040e8   0x080040e8   0x000000a4   Code   RO          271    i.sdo_response      canbus.o
-    0x0800418c   0x0800418c   0x00000080   Code   RO          272    i.sdo_segment       canbus.o
-    0x0800420c   0x0800420c   0x0000008c   Code   RO          408    i.search_dict       dict.o
-    0x08004298   0x08004298   0x0000004c   Code   RO          273    i.sent_heartbeat    canbus.o
-    0x080042e4   0x080042e4   0x00000074   Code   RO          274    i.set_io_config     canbus.o
-    0x08004358   0x08004358   0x00000570   Code   RO          275    i.set_output        canbus.o
-    0x080048c8   0x080048c8   0x00000070   Code   RO          891    i.showMessageWarning  dwin_app.o
-    0x08004938   0x08004938   0x00000088   Code   RO          276    i.transmit_error    canbus.o
-    0x080049c0   0x080049c0   0x00000058   Code   RO          277    i.transmit_in       canbus.o
-    0x08004a18   0x08004a18   0x00000108   Code   RO          409    i.write_dict        dict.o
-    0x08004b20   0x08004b20   0x00000126   Data   RO           19    .constdata          display.o
-    0x08004c46   0x08004c46   0x00000160   Data   RO           20    .constdata          display.o
-    0x08004da6   0x08004da6   0x00000006   Data   RO          224    .constdata          version.o
-    0x08004dac   0x08004dac   0x00000006   Data   RO          225    .constdata          version.o
-    0x08004db2   0x08004db2   0x00000006   Data   RO          226    .constdata          version.o
-    0x08004db8   0x08004db8   0x00000006   Data   RO          227    .constdata          version.o
-    0x08004dbe   0x08004dbe   0x00000006   Data   RO          228    .constdata          version.o
-    0x08004dc4   0x08004dc4   0x00000006   Data   RO          229    .constdata          version.o
-    0x08004dca   0x08004dca   0x00000002   PAD
-    0x08004dcc   0x08004dcc   0x00000144   Data   RO          410    .constdata          dict.o
-    0x08004f10   0x08004f10   0x00000004   Data   RO          571    .constdata          main.o
-    0x08004f14   0x08004f14   0x00000010   Data   RO         3571    .constdata          system_stm32f1xx.o
-    0x08004f24   0x08004f24   0x00000008   Data   RO         3572    .constdata          system_stm32f1xx.o
-    0x08004f2c   0x08004f2c   0x00000020   Data   RO         3814    Region$$Table       anon$$obj.o
+    0x08003428   0x08003428   0x00000348   Code   RO          569    i.main              main.o
+    0x08003770   0x08003770   0x000000a0   Code   RO          407    i.read_dict         dict.o
+    0x08003810   0x08003810   0x000008ac   Code   RO          270    i.read_rx           canbus.o
+    0x080040bc   0x080040bc   0x000000a4   Code   RO          271    i.sdo_response      canbus.o
+    0x08004160   0x08004160   0x00000080   Code   RO          272    i.sdo_segment       canbus.o
+    0x080041e0   0x080041e0   0x0000008c   Code   RO          408    i.search_dict       dict.o
+    0x0800426c   0x0800426c   0x0000004c   Code   RO          273    i.sent_heartbeat    canbus.o
+    0x080042b8   0x080042b8   0x00000074   Code   RO          274    i.set_io_config     canbus.o
+    0x0800432c   0x0800432c   0x00000570   Code   RO          275    i.set_output        canbus.o
+    0x0800489c   0x0800489c   0x00000070   Code   RO          891    i.showMessageWarning  dwin_app.o
+    0x0800490c   0x0800490c   0x00000088   Code   RO          276    i.transmit_error    canbus.o
+    0x08004994   0x08004994   0x00000058   Code   RO          277    i.transmit_in       canbus.o
+    0x080049ec   0x080049ec   0x00000108   Code   RO          409    i.write_dict        dict.o
+    0x08004af4   0x08004af4   0x00000126   Data   RO           19    .constdata          display.o
+    0x08004c1a   0x08004c1a   0x00000160   Data   RO           20    .constdata          display.o
+    0x08004d7a   0x08004d7a   0x00000006   Data   RO          224    .constdata          version.o
+    0x08004d80   0x08004d80   0x00000006   Data   RO          225    .constdata          version.o
+    0x08004d86   0x08004d86   0x00000006   Data   RO          226    .constdata          version.o
+    0x08004d8c   0x08004d8c   0x00000006   Data   RO          227    .constdata          version.o
+    0x08004d92   0x08004d92   0x00000006   Data   RO          228    .constdata          version.o
+    0x08004d98   0x08004d98   0x00000006   Data   RO          229    .constdata          version.o
+    0x08004d9e   0x08004d9e   0x00000002   PAD
+    0x08004da0   0x08004da0   0x00000144   Data   RO          410    .constdata          dict.o
+    0x08004ee4   0x08004ee4   0x00000004   Data   RO          571    .constdata          main.o
+    0x08004ee8   0x08004ee8   0x00000010   Data   RO         3571    .constdata          system_stm32f1xx.o
+    0x08004ef8   0x08004ef8   0x00000008   Data   RO         3572    .constdata          system_stm32f1xx.o
+    0x08004f00   0x08004f00   0x00000020   Data   RO         3814    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08004f4c, Size: 0x00000bc0, Max: 0x00005000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08004f20, Size: 0x00000bc0, Max: 0x00005000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08004f4c   0x00000013   Data   RW           22    .data               display.o
-    0x20000013   0x08004f5f   0x00000001   PAD
-    0x20000014   0x08004f60   0x0000003e   Data   RW          280    .data               canbus.o
-    0x20000052   0x08004f9e   0x00000003   Data   RW          450    .data               interrupt.o
-    0x20000055   0x08004fa1   0x00000003   PAD
-    0x20000058   0x08004fa4   0x00000048   Data   RW          572    .data               main.o
-    0x200000a0   0x08004fec   0x00000001   Data   RW          573    .data               main.o
-    0x200000a1   0x08004fed   0x00000001   Data   RW          574    .data               main.o
-    0x200000a2   0x08004fee   0x00000001   Data   RW          575    .data               main.o
-    0x200000a3   0x08004fef   0x00000001   Data   RW          576    .data               main.o
-    0x200000a4   0x08004ff0   0x00000001   Data   RW          577    .data               main.o
-    0x200000a5   0x08004ff1   0x00000001   Data   RW          579    .data               main.o
-    0x200000a6   0x08004ff2   0x00000001   Data   RW          580    .data               main.o
-    0x200000a7   0x08004ff3   0x00000001   Data   RW          581    .data               main.o
-    0x200000a8   0x08004ff4   0x00000001   Data   RW          582    .data               main.o
-    0x200000a9   0x08004ff5   0x00000001   Data   RW          584    .data               main.o
-    0x200000aa   0x08004ff6   0x00000001   Data   RW          587    .data               main.o
-    0x200000ab   0x08004ff7   0x00000001   Data   RW          588    .data               main.o
-    0x200000ac   0x08004ff8   0x00000001   Data   RW          589    .data               main.o
-    0x200000ad   0x08004ff9   0x00000001   Data   RW          590    .data               main.o
-    0x200000ae   0x08004ffa   0x00000001   Data   RW          592    .data               main.o
-    0x200000af   0x08004ffb   0x00000001   Data   RW          594    .data               main.o
-    0x200000b0   0x08004ffc   0x00000002   Data   RW          595    .data               main.o
-    0x200000b2   0x08004ffe   0x00000002   Data   RW          596    .data               main.o
-    0x200000b4   0x08005000   0x00000001   Data   RW          597    .data               main.o
-    0x200000b5   0x08005001   0x00000001   Data   RW          598    .data               main.o
-    0x200000b6   0x08005002   0x00000004   Data   RW          599    .data               main.o
-    0x200000ba   0x08005006   0x00000008   Data   RW          600    .data               main.o
-    0x200000c2   0x0800500e   0x00000001   Data   RW          601    .data               main.o
-    0x200000c3   0x0800500f   0x00000001   Data   RW          892    .data               dwin_app.o
-    0x200000c4   0x08005010   0x00000001   Data   RW          893    .data               dwin_app.o
-    0x200000c5   0x08005011   0x00000003   PAD
-    0x200000c8   0x08005014   0x0000000c   Data   RW          894    .data               dwin_app.o
-    0x200000d4   0x08005020   0x0000000c   Data   RW         1259    .data               stm32f1xx_hal.o
-    0x200000e0   0x0800502c   0x00000004   Data   RW         3573    .data               system_stm32f1xx.o
+    0x20000000   0x08004f20   0x00000013   Data   RW           22    .data               display.o
+    0x20000013   0x08004f33   0x00000001   PAD
+    0x20000014   0x08004f34   0x0000003e   Data   RW          280    .data               canbus.o
+    0x20000052   0x08004f72   0x00000003   Data   RW          450    .data               interrupt.o
+    0x20000055   0x08004f75   0x00000003   PAD
+    0x20000058   0x08004f78   0x00000048   Data   RW          572    .data               main.o
+    0x200000a0   0x08004fc0   0x00000001   Data   RW          573    .data               main.o
+    0x200000a1   0x08004fc1   0x00000001   Data   RW          574    .data               main.o
+    0x200000a2   0x08004fc2   0x00000001   Data   RW          575    .data               main.o
+    0x200000a3   0x08004fc3   0x00000001   Data   RW          576    .data               main.o
+    0x200000a4   0x08004fc4   0x00000001   Data   RW          577    .data               main.o
+    0x200000a5   0x08004fc5   0x00000001   Data   RW          579    .data               main.o
+    0x200000a6   0x08004fc6   0x00000001   Data   RW          580    .data               main.o
+    0x200000a7   0x08004fc7   0x00000001   Data   RW          581    .data               main.o
+    0x200000a8   0x08004fc8   0x00000001   Data   RW          582    .data               main.o
+    0x200000a9   0x08004fc9   0x00000001   Data   RW          584    .data               main.o
+    0x200000aa   0x08004fca   0x00000001   Data   RW          587    .data               main.o
+    0x200000ab   0x08004fcb   0x00000001   Data   RW          588    .data               main.o
+    0x200000ac   0x08004fcc   0x00000001   Data   RW          589    .data               main.o
+    0x200000ad   0x08004fcd   0x00000001   Data   RW          590    .data               main.o
+    0x200000ae   0x08004fce   0x00000001   Data   RW          592    .data               main.o
+    0x200000af   0x08004fcf   0x00000001   Data   RW          594    .data               main.o
+    0x200000b0   0x08004fd0   0x00000002   Data   RW          595    .data               main.o
+    0x200000b2   0x08004fd2   0x00000002   Data   RW          596    .data               main.o
+    0x200000b4   0x08004fd4   0x00000001   Data   RW          597    .data               main.o
+    0x200000b5   0x08004fd5   0x00000001   Data   RW          598    .data               main.o
+    0x200000b6   0x08004fd6   0x00000004   Data   RW          599    .data               main.o
+    0x200000ba   0x08004fda   0x00000008   Data   RW          600    .data               main.o
+    0x200000c2   0x08004fe2   0x00000001   Data   RW          601    .data               main.o
+    0x200000c3   0x08004fe3   0x00000001   Data   RW          892    .data               dwin_app.o
+    0x200000c4   0x08004fe4   0x00000001   Data   RW          893    .data               dwin_app.o
+    0x200000c5   0x08004fe5   0x00000003   PAD
+    0x200000c8   0x08004fe8   0x0000000c   Data   RW          894    .data               dwin_app.o
+    0x200000d4   0x08004ff4   0x0000000c   Data   RW         1259    .data               stm32f1xx_hal.o
+    0x200000e0   0x08005000   0x00000004   Data   RW         3573    .data               system_stm32f1xx.o
     0x200000e4        -       0x00000290   Zero   RW          279    .bss                canbus.o
     0x20000374        -       0x000001c8   Zero   RW          570    .bss                main.o
-    0x2000053c   0x08005030   0x00000004   PAD
+    0x2000053c   0x08005004   0x00000004   PAD
     0x20000540        -       0x00000020   Zero   RW         1963    .bss                stm32f1xx_hal_flash.o
     0x20000560        -       0x00000060   Zero   RW         3686    .bss                c_w.l(libspace.o)
     0x200005c0        -       0x00000200   Zero   RW            2    HEAP                startup_stm32f103xb.o
@@ -2409,7 +2409,7 @@ Image component sizes
        704         22          0         14          0       7038   dwin_app.o
        162         10          0          0          0       2299   flash.o
       1160        178          0          3          0       1760   interrupt.o
-      1948        124          4        107        456      12386   main.o
+      1904        124          4        107        456      12358   main.o
         64         26        236          0       1536        780   startup_stm32f103xb.o
        164         28          0         12          0       5645   stm32f1xx_hal.o
       1656          0          0          0          0      11697   stm32f1xx_hal_can.o
@@ -2427,7 +2427,7 @@ Image component sizes
          0          0         36          0          0        935   version.o
 
     ----------------------------------------------------------------------
-     18366       1402       1304        228       2684     586341   Object Totals
+     18322       1402       1304        228       2684     586313   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         38          0          2          7          4          0   (incl. Padding)
 
@@ -2480,15 +2480,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     18996       1418       1304        228       2780     580301   Grand Totals
-     18996       1418       1304        228       2780     580301   ELF Image Totals
-     18996       1418       1304        228          0          0   ROM Totals
+     18952       1418       1304        228       2780     580273   Grand Totals
+     18952       1418       1304        228       2780     580273   ELF Image Totals
+     18952       1418       1304        228          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                20300 (  19.82kB)
+    Total RO  Size (Code + RO Data)                20256 (  19.78kB)
     Total RW  Size (RW Data + ZI Data)              3008 (   2.94kB)
-    Total ROM Size (Code + RO Data + RW Data)      20528 (  20.05kB)
+    Total ROM Size (Code + RO Data + RW Data)      20484 (  20.00kB)
 
 ==============================================================================
 

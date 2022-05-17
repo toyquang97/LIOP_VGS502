@@ -274,18 +274,18 @@ int main(void)
     node_id = ESE_ID;
   ClrWdt();
   nmtstate = BOOT_UP;
-  nmtwait = node_id;
+  //nmtwait = node_id;
   preset_node_id = node_id; //�洢֮ǰ��ID
-  nmtwait = (nmtwait * 20 + 1000) / 3 + 600;
-  if (node_id == ESE_ID)
-    nmtwait = 1000 / 3 + 600;
+  // nmtwait = (nmtwait * 20 + 1000) / 3 + 600;
+  // if (node_id == ESE_ID)
+  //   nmtwait = 1000 / 3 + 600;
 
   init_userpara();
 
   ClrWdt();
 
-  while (nmtwait)
-    ClrWdt();
+  // while (nmtwait)
+  //   ClrWdt();
   Init_Can();
   HAL_Delay(5);
   heartbeat = HEARTBEATTIME;
