@@ -50,6 +50,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		if ((timer_cnt % 10) == 0)
 		{
 			bTime.Time_5s = 1;
+			if ((timer_cnt % 30) == 0)
+			{
+				bTime.Time_10s = 1;
+			}
 		}
 			
 		bTime.dwin_500ms = 1;

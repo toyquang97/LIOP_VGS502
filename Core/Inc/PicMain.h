@@ -220,6 +220,7 @@ struct
 	uint8_t Time_1s : 1;	// 500ms ��־
 	uint8_t Time_2s : 1;
 	uint8_t Time_5s : 1;
+	uint8_t Time_10s: 1;
 	uint8_t Time_alarm_fg : 1; //˾��������������־
 	uint8_t dwin_500ms : 1;	   //˾��������������־
 	uint8_t dwin_100ms : 1;	   //˾��������������־
@@ -336,6 +337,7 @@ extern struct
 	uint8_t Time_1s : 1;	// 500ms ��־
 	uint8_t Time_2s : 1;
 	uint8_t Time_5s : 1;
+	uint8_t Time_10s: 1;
 	uint8_t Time_alarm_fg : 1; //˾��������������־
 	uint8_t dwin_500ms : 1;	   //˾��������������־
 	uint8_t dwin_100ms : 1;	   //˾��������������־

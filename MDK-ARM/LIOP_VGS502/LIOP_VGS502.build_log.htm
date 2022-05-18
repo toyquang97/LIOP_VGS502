@@ -27,101 +27,18 @@ Project File Date:  05/17/2022
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'LIOP_VGS502'
-compiling dict.c...
-../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
-  const struct _dict
-..\Core\Src\dict.c(178): warning:  #111-D: statement is unreachable
-  							subindex_exists = 1;					/* object exists,but access not valid	*/
-..\Core\Src\dict.c: 2 warnings, 0 errors
-compiling version.c...
-../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
-  const struct _dict
-..\Core\Src\version.c: 1 warning, 0 errors
-compiling flash.c...
-../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
-  const struct _dict
-..\Core\Src\flash.c: 1 warning, 0 errors
-compiling main.c...
-../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
-  const struct _dict
-../Core/Src/main.c(374): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "char *"
-        Dwin_Change_Current_FloorName(floorDisplay);
-../Core/Src/main.c(516): warning:  #188-D: enumerated type mixed with another type
-    hcan.Init.TimeTriggeredMode = DISABLE;
-../Core/Src/main.c(517): warning:  #188-D: enumerated type mixed with another type
-    hcan.Init.AutoBusOff = DISABLE;
-../Core/Src/main.c(518): warning:  #188-D: enumerated type mixed with another type
-    hcan.Init.AutoWakeUp = DISABLE;
-../Core/Src/main.c(519): warning:  #188-D: enumerated type mixed with another type
-    hcan.Init.AutoRetransmission = DISABLE;
-../Core/Src/main.c(520): warning:  #188-D: enumerated type mixed with another type
-    hcan.Init.ReceiveFifoLocked = DISABLE;
-../Core/Src/main.c(521): warning:  #188-D: enumerated type mixed with another type
-    hcan.Init.TransmitFifoPriority = DISABLE;
-../Core/Src/main.c: 8 warnings, 0 errors
-compiling interrupt.c...
-../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
-  const struct _dict
-..\Core\Src\interrupt.c(131): warning:  #188-D: enumerated type mixed with another type
-  		HAL_GPIO_WritePin(UO_GPIO_Port, UO_Pin, i & 0x01);
-..\Core\Src\interrupt.c(132): warning:  #188-D: enumerated type mixed with another type
-  		HAL_GPIO_WritePin(DO_GPIO_Port, DO_Pin, bit_select(i, 1));
-..\Core\Src\interrupt.c(15): warning:  #177-D: variable "a"  was declared but never referenced
-  	static uint8_t a = 0;
-..\Core\Src\interrupt.c(17): warning:  #177-D: variable "pos"  was declared but never referenced
-  	SBYTE pos;
-..\Core\Src\interrupt.c: 5 warnings, 0 errors
-compiling Display.c...
-../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
-  const struct _dict
-..\Core\Src\Display.c: 1 warning, 0 errors
-compiling CanBus.c...
-../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
-  const struct _dict
-..\Core\Src\CanBus.c(287): warning:  #1215-D: #warning directive: add filter and enbale interrupt
-  #warning add filter and enbale interrupt
-..\Core\Src\CanBus.c: 2 warnings, 0 errors
-compiling stm32f1xx_hal_gpio_ex.c...
-compiling stm32f1xx_hal.c...
-compiling stm32f1xx_hal_can.c...
-compiling stm32f1xx_it.c...
-../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
-  const struct _dict
-..\Core\Src\stm32f1xx_it.c: 1 warning, 0 errors
-compiling stm32f1xx_hal_msp.c...
-../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
-  const struct _dict
-../Core/Src/stm32f1xx_hal_msp.c: 1 warning, 0 errors
-compiling Dwin.c...
-../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
-  const struct _dict
-..\Core\Src\Dwin.c: 1 warning, 0 errors
 compiling Dwin_App.c...
 ../Core/Inc/dict.h(10): warning:  #21-D: type qualifiers are meaningless in this declaration
   const struct _dict
-..\Core\Src\Dwin_App.c(253): warning:  #177-D: variable "Message_Time"  was declared but never referenced
+..\Core\Src\Dwin_App.c(232): warning:  #177-D: variable "Message_Time"  was declared but never referenced
   	static uint32_t Message_Time = 0;
-..\Core\Src\Dwin_App.c(255): warning:  #177-D: variable "Buf"  was declared but never referenced
+..\Core\Src\Dwin_App.c(234): warning:  #177-D: variable "Buf"  was declared but never referenced
   	uint8_t Buf[100] = {0};
 ..\Core\Src\Dwin_App.c: 3 warnings, 0 errors
-compiling stm32f1xx_hal_rcc_ex.c...
-compiling stm32f1xx_hal_gpio.c...
-compiling stm32f1xx_hal_rcc.c...
-compiling stm32f1xx_hal_cortex.c...
-compiling stm32f1xx_hal_dma.c...
-compiling stm32f1xx_hal_pwr.c...
-compiling stm32f1xx_hal_flash.c...
-compiling stm32f1xx_hal_iwdg.c...
-compiling stm32f1xx_hal_exti.c...
-compiling stm32f1xx_hal_flash_ex.c...
-compiling system_stm32f1xx.c...
-compiling stm32f1xx_hal_uart.c...
-compiling stm32f1xx_hal_tim_ex.c...
-compiling stm32f1xx_hal_tim.c...
 linking...
-Program Size: Code=18952 RO-data=1304 RW-data=228 ZI-data=2780  
+Program Size: Code=19104 RO-data=1304 RW-data=228 ZI-data=2780  
 FromELF: creating hex file...
-"LIOP_VGS502\LIOP_VGS502.axf" - 0 Error(s), 26 Warning(s).
+"LIOP_VGS502\LIOP_VGS502.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -145,7 +62,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.5.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:18
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

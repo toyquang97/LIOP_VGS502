@@ -72,7 +72,7 @@
 #define POSITION_X 15
 #define POSITION_Y 433
 
-#define MAX_PAGE 5
+#define MAX_PAGE 8
 
 
 #ifdef _DWIN_C_
@@ -116,7 +116,7 @@ uint16_t volatile display_message = 0;
 char  Textmessage[27]       = "Welcome To Zeit Elevator!";
 
 
-
+void initImage(void);
 void audioFun(void);
 void changLocationHeight(uint16_t add);
 void dwinSendSpeed(uint16_t add, uint8_t *pData, uint8_t len);
@@ -140,7 +140,7 @@ extern uint16_t volatile display_message;
 extern void audioFun(void);
 extern void dwinUpdateImageFloor(uint16_t spAddressUint, uint16_t spAddressTen);
 
-
+extern void initImage(void);
 extern void dwinSendSpeed(uint16_t add, uint8_t *pData, uint8_t len);
 extern void dwinSendPosition(uint16_t add, uint8_t *pData, uint8_t len);
 extern void Dwin_Change_Current_FloorName(char *flName);

@@ -289,7 +289,7 @@ int main(void)
   Init_Can();
   HAL_Delay(5);
   heartbeat = HEARTBEATTIME;
-
+  //initImage();
   nmtstate = PRE_OP;
   while (nmtstate == PRE_OP)
   { //�ȴ������������ָ��
@@ -374,7 +374,11 @@ int main(void)
       Dwin_Change_Current_FloorName(floorDisplay);
       bTime.dwin_500ms = 0;
     }
-
+     if(bTime.Time_10s)
+		{
+      Dwin_switch_to_next_page();
+      bTime.Time_10s = 0;
+    }
     if (display_scantimer)
     {
       KeyScan();

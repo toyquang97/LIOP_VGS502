@@ -14,14 +14,9 @@ extern uint8_t Callstatus_old[8];
 
 extern UART_HandleTypeDef huart1;
 
-
-
-
-
-
 void dwinUpdateImageFloor(uint16_t spAddressTen, uint16_t spAddressUint)
 {
-	uint8_t bufferTen[2]  = {0};
+	uint8_t bufferTen[2] = {0};
 	uint8_t bufferUint[2] = {0};
 	static uint8_t bufferDataOld[2] = {0};
 	bufferTen[1] = display[BUF_TEN];
@@ -96,11 +91,7 @@ void showMessageWarning(_IconShow_e index)
 		bufferData[0] = 0;
 		bufferData[1] = index - 2;
 	}
-	// else if (index == normalLogo)
-	// {
-	// 	bufferData[0] = 0;
-	// 	bufferData[1] = index;
-	// }
+
 	dwinWriteData(ICON_WARNING, bufferData, 2);
 }
 
@@ -119,35 +110,23 @@ void Dwin_Change_Current_FloorName(char *flName)
 
 	if ((Buf[1] == 0x20) || (Buf[1] == 0x00))
 	{
-		tmp = DEAFAULT_FLOOR_NAME_X_UINT - 85;	
+		tmp = DEAFAULT_FLOOR_NAME_X_UINT - 85;
 		changeLocationTEXT(FLOORNAME_SP_UNIT + DWIN_POSITION, tmp, DEAFAULT_FLOOR_NAME_Y_UNIT);
 	}
-	// else if ((display[BUF_TEN] == '1'))
-	// {
-	// 	changeLocationTEXT(0x5201, (uint16_t)500, (uint16_t)175);
-	// 	changeLocationTEXT(0x5221, FLOOR_NAME_X + 5, FLOOR_NAME_Y);
-
-	// }
-	// else if ((display[BUF_TEN] == 'J') && (display[BUF_UNIT] == 'X'))
-	// {
-	// 	changeLocationTEXT(0x5201, (uint16_t)445, (uint16_t)175);
-	// 	changeLocationTEXT(0x5221, FLOOR_NAME_X - 10, FLOOR_NAME_Y);
-
-	// }
-	// else if ((display[BUF_TEN] != '1') && ((display[BUF_TEN] != 0x20) || (display[BUF_TEN] != 0x00)))
-	// {
-	// 	changeLocationTEXT(0x5201, (uint16_t)495, (uint16_t)175);
-	// 	changeLocationTEXT(0x5221, FLOOR_NAME_X + 30, FLOOR_NAME_Y);
-
-	// }
 	else
 	{
 		changeLocationTEXT(FLOORNAME_SP_TEN + DWIN_POSITION, DEAFAULT_FLOOR_NAME_X_TEN, DEAFAULT_FLOOR_NAME_Y_TEN);
-		changeLocationTEXT(FLOORNAME_SP_UNIT+ DWIN_POSITION, DEAFAULT_FLOOR_NAME_X_UINT,DEAFAULT_FLOOR_NAME_Y_UNIT);
+		changeLocationTEXT(FLOORNAME_SP_UNIT + DWIN_POSITION, DEAFAULT_FLOOR_NAME_X_UINT, DEAFAULT_FLOOR_NAME_Y_UNIT);
 	}
-
-	
-
+}
+void initImage(void)
+{
+	uint8_t Buf[20] = {0};
+	Buf[0] = 0x5A;
+	Buf[1] = 0x01;
+	Buf[2] = 0x00;
+	Buf[3] = 109;
+	dwinWriteData(0X0084, Buf, 4);
 }
 
 void Dwin_switch_to_next_page(void)
@@ -158,7 +137,7 @@ void Dwin_switch_to_next_page(void)
 	Buf[1] = 0x01;
 	Buf[2] = 0x00;
 	Buf[3] = PageCnt;
-	Dwin_Write_VP(0X0084, Buf, 2);
+	dwinWriteData(0X0084, Buf, 4);
 	PageCnt++;
 	if (PageCnt == MAX_PAGE)
 	{
@@ -174,28 +153,31 @@ void Dwin_update_time(void)
 	Buf[1] = aBCAN_ReceiveBuf_Clock[2];
 	if (Buf[1] >= 12)
 	{
-		Buf[1]-= 12;
+		Buf[1] -= 12;
 	}
-	dwinWriteData(TIME_VP , Buf, 2); // set time
-	Buf[0] = 0;
-	Buf[1] = aBCAN_ReceiveBuf_Clock[1]  ;
-	
-	dwinWriteData(TIME_VP+1 , Buf, 2); // set time
+	if (aBCAN_ReceiveBuf_Clock[1] <= 10)
+	{
+		Buf[1] *=  5;
+	}
+	else
+		Buf[1] = Buf[1] * 5 + (unsigned char)((aBCAN_ReceiveBuf_Clock[1] / 10) - 1);
 
-	
+	dwinWriteData(TIME_VP, Buf, 2); // set hour
+
+	Buf[0] = 0;
+	Buf[1] = aBCAN_ReceiveBuf_Clock[1];
+
+	dwinWriteData(TIME_VP + 1, Buf, 2); // set minute
+
 	// Buf[10] = 0;
 	Buf[0] = 0;
 	Buf[1] = aBCAN_ReceiveBuf_Clock[3];
-	dwinWriteData(0x1280 , Buf, 2); // set time
+
+	dwinWriteData(0x1280, Buf, 2); // set date
 
 	Buf[0] = 0;
-	Buf[1] = (aBCAN_ReceiveBuf_Clock[4] >> 3)  ;
-	dwinWriteData(0x1320 , Buf, 2); // set time
-	// Buf[4] = (aBCAN_ReceiveBuf_Clock[4] >> 3) % 10 + 0x30;
-	// Buf[5] = '.';
-	// Buf[6] = aBCAN_ReceiveBuf_Clock[5] / 10 + 0x30;
-	// Buf[7] = aBCAN_ReceiveBuf_Clock[5] % 10 + 0x30;
-	// Dwin_Write_VP(DATE_VP, Buf, 4); // set time
+	Buf[1] = (aBCAN_ReceiveBuf_Clock[4] >> 3);
+	dwinWriteData(0x1320, Buf, 2); // set months
 }
 
 void DWIN_Arrow_Process(void)
@@ -244,23 +226,16 @@ void DWIN_Arrow_Process(void)
 	Dwin_Write_VP(ARROW_ICON_SP + 6, (uint8_t *)&Buf, 3);
 }
 
-
-
-
 static uint16_t display_message_old = 1;
 void DWIN_Message_Process(void)
 {
 	static uint32_t Message_Time = 0;
-	
+
 	uint8_t Buf[100] = {0};
 	if (display_message_old == display_message)
 		return;
-	// if (display_message_old == display_message && display_message_old == 0)
-	// {
-	// 	messageInCase(normalMode);
-	// }
-	// display_message_old = 1;
-	
+
+
 	if (display_message_old != display_message)
 	{
 		display_message_old = display_message;
@@ -311,7 +286,7 @@ void DWIN_Message_Process(void)
 		}
 		else
 		{
-			changeLocationTEXT(ICON_WARNING_SP + DWIN_POSITION, DEAFAULT_ICON_X , DEAFAULT_ICON_Y); // logo
+			changeLocationTEXT(ICON_WARNING_SP + DWIN_POSITION, DEAFAULT_ICON_X, DEAFAULT_ICON_Y); // logo
 			showMessageWarning(normalLogo);
 		}
 	}
@@ -381,5 +356,3 @@ void DWIN_Message_Process(void)
 		Keytimout = 0 - 1;
 	}
 #endif
-
-
